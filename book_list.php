@@ -50,6 +50,7 @@ include "./lib/db.php";
   }
     while($booklist = $sql->fetch_array()){
       $filtered = array(
+        'book_id' => htmlspecialchars($booklist['book_id']),
         'title' => htmlspecialchars($booklist['title']),
         'author' => htmlspecialchars($booklist['author']),
         'publisher' => htmlspecialchars($booklist['publisher']),
@@ -66,6 +67,7 @@ include "./lib/db.php";
         <th>The_Day</th>
         <th>Genre</th>
         <th>Image</th>
+        <th>이 책의 관한 서평</th>
       </tr>
       <tr class="value">
         <td><p><?= $filtered['title'] ?></p></td>
@@ -74,6 +76,7 @@ include "./lib/db.php";
         <td><p><?= $filtered['the_date'] ?></p></td>
         <td><p><?= $filtered['genre'] ?></p></td>
         <td><p><img src="./file/<?= $filtered['file'] ?>" alt="이미지 없음"></p></td>
+        <td><a href="./review.php?id=<?= $filtered['book_id'] ?>">보기</a> </td>
       </tr>
       </table>
     <?php   } ?>
