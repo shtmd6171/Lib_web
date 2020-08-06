@@ -5,7 +5,7 @@ $user_id = $_POST['user_id'];
 $review_id = $_POST['review_id'];
 $comm_description = $_POST['desc'];
 
-if(isset($user_id)&&isset($review_id)&&isset($comm_description)){
+if(!($user_id==""||$review_id==""||$comm_description=="")){
 $sql = mq("insert into comment (comm_description,review_id,user_id) values('".$comm_description."','".$review_id."','".$user_id."')");
  echo "<script>window.location = 'review_board.php?review=$review_id'</script>";
 } else {
