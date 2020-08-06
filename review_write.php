@@ -1,7 +1,7 @@
 <?php
 include "./lib/db.php";
 $book_id = $_GET['id'];
-$user_id = 1; // 로그인 없어서 임시
+$user_id = $_SESSION['user_id']; 
 
 ?>
 
