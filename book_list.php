@@ -1,12 +1,19 @@
 <?php
 include "./lib/db.php";
+$user_id = $_SESSION['user_id'];
+
+$sql = mq("select * from user where user_id ='".$user_id."'");
+$codecheck = $sql->fetch_array();
 ?>
 
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="./javascr/onClickFunc.js"></script>
     <title></title>
+
   </head>
   <body>
     <h1>BOOK LIST</h1>
@@ -19,6 +26,11 @@ include "./lib/db.php";
       </select>
       <input type="text" name="search" placeholder="검색내용">
       <input type="submit" value="검색">
+      <button class="mine wb"><a href="./log/logout.php">로그아웃</a></button>
+      <?php if($codecheck['code'] == 'A') {?>
+
+      <button class="mine wb"><a href="./wirte.php">책 등록하기</a></button>
+      <?php } ?>
     </form>
     <div>
       <table>
