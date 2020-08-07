@@ -4,6 +4,8 @@ $user_id = $_SESSION['user_id'];
 
 $sql = mq("select * from user where user_id ='".$user_id."'");
 $codecheck = $sql->fetch_array();
+
+$name = $codecheck['name'];
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +20,13 @@ $codecheck = $sql->fetch_array();
   <body>
     <h1>BOOK LIST</h1>
 
+    <?php if($codecheck['code'] == 'A'):?>
+    <?php echo $name."(관리자님) 환영합니다."; ?>
+
+    <?php else : ?>
+    <?php echo $name."(님) 환영합니다."; ?>
+    <?php endif; ?>
+
     <form method="post">
       <select name="selected">
         <option value="title">제목</option>
@@ -27,6 +36,7 @@ $codecheck = $sql->fetch_array();
       <input type="text" name="search" placeholder="검색내용">
       <input type="submit" value="검색">
       <button class="mine wb"><a href="./log/logout.php">로그아웃</a></button>
+      <button class="mine wb"><a href="./branch_hak/member_page_ok.php">마이 페이지</a></button>
       <?php if($codecheck['code'] == 'A') {?>
 
       <button class="mine wb"><a href="./wirte.php">책 등록하기</a></button>
