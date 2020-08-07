@@ -21,7 +21,7 @@ include "../lib/db.php";
 						<tr>
 							<td>Id</td>
 							<td colspan="9">
-								<input type="email" size="35" name="email" placeholder="이메일" required>
+								<input type="email" id="uid" size="35" name="email" placeholder="이메일" required>
 							</td>
 							<td><div id="chk"/>duplication</td>
 						</tr>

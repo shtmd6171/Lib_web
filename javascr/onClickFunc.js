@@ -13,7 +13,7 @@
         id = "check.php?userid="+id;
         window.open(id,"_blank","width=300,height=100");
         }else{
-          alert("아이디를 입력세요");
+          alert("이메일을 입력세요");
         }
     });
 
