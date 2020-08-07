@@ -1,6 +1,14 @@
 <?php
 include "./lib/db.php";
 $book_id = $_GET['id'];
+$user_id = $_SESSION['user_id'];
+
+$sql = mq("select * from user where user_id ='".$user_id."'");
+$codecheck = $sql->fetch_array();
+
+$sql = mq("select * from book_review where user_id ='".$user_id."'");
+$reviewcheck = $sql->fetch_array();
+
 ?>
 
 <!DOCTYPE html>
@@ -60,16 +68,17 @@ $book_id = $_GET['id'];
       if(isset($book_id)&&(!(isset($_POST['selected'])))) {
       $sql = mq("select * from book_review, user where book_id='".$book_id."'
       AND book_review.user_id = user.user_id");
-    } else if(isset($book_id)&&((isset($_POST['selected'])))) {
-      $sql = mq("select * from book_review, user where book_id='".$book_id."'
-      AND book_review.user_id = user.user_id AND ".$_POST['selected']." LIKE '%".$_POST['search']."%'");
-    }
+      } else if(isset($book_id)&&((isset($_POST['selected'])))) {
+        $sql = mq("select * from book_review, user where book_id='".$book_id."'
+        AND book_review.user_id = user.user_id AND ".$_POST['selected']." LIKE '%".$_POST['search']."%'");
+      }
 
       while($reviewlist = $sql->fetch_array()){
         $filtered = array(
           'review_id' => htmlspecialchars($reviewlist['review_id']),
           'review_title' => htmlspecialchars($reviewlist['review_title']),
           'review_desc' => htmlspecialchars($reviewlist['review_desc']),
+          'user_id' => htmlspecialchars($reviewlist['user_id']),
           'name' => htmlspecialchars($reviewlist['name'])
         );?>
         <br>
@@ -85,6 +94,11 @@ $book_id = $_GET['id'];
           <td><p><?= $filtered['review_desc'] ?></p></td>
           <td><p><?= $filtered['name'] ?></p></td>
           <td><a href="./review_board.php?review=<?= $filtered['review_id'] ?>">보기</a> </td>
+          <!-- 자신 것만 수정 삭제 -->
+          <?php if($codecheck['user_id'] == $reviewcheck['user_id'] && $filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A') {?>
+          <td><a href="./review_board.php?review=<?= $filtered['review_id'] ?>">수정</a> </td>
+          <td><a href="./review_board.php?review=<?= $filtered['review_id'] ?>">삭제</a> </td>
+          <?php } ?>
         </tr>
         </table>
       <?php } ?>
