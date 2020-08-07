@@ -28,8 +28,8 @@ $codecheck = $sql->fetch_array();
       <input type="submit" value="검색">
       <button class="mine wb"><a href="./log/logout.php">로그아웃</a></button>
       <?php if($codecheck['code'] == 'A') {?>
-
       <button class="mine wb"><a href="./wirte.php">책 등록하기</a></button>
+      <button class="mine wb"><a href="./user_management.php">유저관리</a></button>
       <?php } ?>
     </form>
     <div>
