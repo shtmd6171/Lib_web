@@ -89,6 +89,12 @@ $codecheck = $sql->fetch_array();
         <td><p><?= $filtered['genre'] ?></p></td>
         <td><p><img src="./file/<?= $filtered['file'] ?>" alt="이미지 없음"></p></td>
         <td><a href="./review.php?id=<?= $filtered['book_id'] ?>">보기</a> </td>
+        <?php if($codecheck['code'] == 'A') {?>
+        <td><a href="./book_update.php?id=<?= $filtered['book_id'] ?>">업데이트</a></td>
+        <?php } ?>
+        <?php if($codecheck['code'] == 'A') {?>
+        <td><a href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a></td>
+        <?php } ?>
       </tr>
       </table>
     <?php   } ?>
