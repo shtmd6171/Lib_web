@@ -7,7 +7,11 @@ $sql = mq("select * from user where user_id ='".$user_id."'");
 $codecheck = $sql->fetch_array();
 
 $sql = mq("select * from book_review where user_id ='".$user_id."'");
-$reviewcheck = $sql->fetch_array();
+if($sql->num_rows == 0) {
+  $reviewcheck = NULL;
+} else {
+  $reviewcheck = $sql->fetch_array();
+}
 
 ?>
 
@@ -95,10 +99,13 @@ $reviewcheck = $sql->fetch_array();
           <td><p><?= $filtered['name'] ?></p></td>
           <td><a href="./review_board.php?review=<?= $filtered['review_id'] ?>">보기</a> </td>
           <!-- 자신 것만 수정 삭제 -->
-          <?php if($codecheck['user_id'] == $reviewcheck['user_id'] && $filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A') {?>
-          <td><a href="./review_board.php?review=<?= $filtered['review_id'] ?>">수정</a> </td>
-          <td><a href="./review_board.php?review=<?= $filtered['review_id'] ?>">삭제</a> </td>
-          <?php } ?>
+          <?php
+          if($reviewcheck != NULL) {
+          if($codecheck['user_id'] == $reviewcheck['user_id'] && $filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A') {?>
+          <td><a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a> </td>
+          <td><a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a> </td>
+          <?php  }
+          } ?>
         </tr>
         </table>
       <?php } ?>

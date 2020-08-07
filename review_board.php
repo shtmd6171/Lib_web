@@ -1,7 +1,19 @@
 <?php
 include_once "./lib/db.php";
 
+$user_id = $_SESSION['user_id'];
 $review_id = $_GET['review'];
+
+$sql = mq("select * from user where user_id ='".$user_id."'");
+$codecheck = $sql->fetch_array();
+
+$sql = mq("select * from book_review where user_id ='".$user_id."'");
+if($sql->num_rows == 0) {
+  $reviewcheck = NULL;
+} else {
+  $reviewcheck = $sql->fetch_array();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +80,6 @@ $review_id = $_GET['review'];
           if(isset($review_id)) {
           $sql = mq("select * from comment, user where review_id='".$review_id."'
             AND comment.user_id = user.user_id");
-
           } else {
           // TO DO
           }
@@ -90,6 +101,13 @@ $review_id = $_GET['review'];
             <?php } ?>
 
             <p class="comment">댓글 게시하기</p>
+            <?php
+            if($reviewcheck != NULL) {
+            if($codecheck['user_id'] == $reviewcheck['user_id'] && $filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A') {?>
+            <td><a href="./review_update.php?review=<?= $_GET['review'] ?>">수정</a> </td>
+            <td><a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a> </td>
+            <?php  }
+            } ?>
             <form action="comment_process.php" method="post">
               <input type="hidden" name="review_id" value="<?= $filtered['review_id'] ?>">
               <input type="hidden" name="user_id" value="<?= $filtered['user_id'] ?>">
