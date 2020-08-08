@@ -1,5 +1,5 @@
 <?php
-include "./lib/db.php";
+include "../lib/db.php";
 
 $book_id = $_POST['book_id'];
 $review_id = $_POST['review_id'];
