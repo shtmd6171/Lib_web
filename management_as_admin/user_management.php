@@ -1,6 +1,9 @@
 <?php
-include_once "./lib/db.php";
-include_once "./log/password.php";
+/* 이 곳은 관리자만 볼 수 있는 페이지이다.
+이 페이지에서는 관리자가 유저의 정보를 관리할 수 있다. */
+
+include_once "../lib/db.php";
+include_once "../log/password.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +11,6 @@ include_once "./log/password.php";
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style media="screen">
       td {
         width: 90%;
