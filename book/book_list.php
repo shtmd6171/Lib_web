@@ -85,23 +85,28 @@ $name = $codecheck['name'];
     </div>
     <?php
     /* 사용자가 탭을 클릭해 URL의 genre 값이 변할 때마다 다른 정보를 보여주기 위한 기능을 구현한다.
-    if조건의 isset($_GET['genre'])란 현재 위치가 메인페이지인지,
-    아니면 탭을 통해 장르를 선택한 페이지인지를 구분하는 역할을 한다.
-    */
+   if조건의 isset($_GET['genre'])란 현재 위치가 메인페이지인지,
+   아니면 탭을 통해 장르를 선택한 페이지인지를 구분하는 역할을 한다.
+   */
     if(isset($_GET['genre'])) {
-    //  만약 장르를 선택한 페이지라면, 해당 장르에 맞는 값만을 현재 페이지에 표시한다.
-    $sql = mq("select * from book where genre='".$_GET['genre']."'");
-    // selected는 위의 form조건에서 사용자가 검색한 내용이 있을때 생성된다.
-  } else if(isset($_POST['selected'])) {
-    // 만약 사용자가 검색을 통해 입력한 값이 있다면 이곳의 조건문을 실행한다.
-    // $_POST['selected']는 book 테이블에도 동일한 속성명을 지닌 title, author, publisher 중 하나일 것이고
-    // $_POST['search']는 내가 검색한 문자열이다.
-    // 난 이것을 통해 title, author, publisher중 하나에서 내가 검색한 문자열을 포함한 내용이 있는지 찾아낸다.
-    $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-  } else {
-    // 만약 $_GET에서 장르값이 없다면 (메인 페이지라면) 전체를 다 불러온다.
-    $sql = mq("select * from book");
-  }
+      //  만약 장르를 선택한 페이지라면, 해당 장르에 맞는 값만을 현재 페이지에 표시한다.
+      $sql = mq("select * from book where genre='".$_GET['genre']."'");
+       if(isset($_POST['selected'])) {
+         // 만약 사용자가 검색을 통해 입력한 값이 있다면 이곳의 조건문을 실행한다.
+         // $_POST['selected']는 book 테이블에도 동일한 속성명을 지닌 title, author, publisher 중 하나일 것이고
+         // $_POST['search']는 내가 검색한 문자열이다.
+         // 난 이것을 통해 title, author, publisher중 하나에서 내가 검색한 문자열을 포함한 내용이 있는지 찾아낸다.
+        $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
+        }
+    // 만약 $_GET에서 장르값이 없다면
+    } else {
+      // 일단 (메인 페이지라면) 전체를 다 불러온다.
+      $sql = mq("select * from book");
+      // 만약 사용자가 메인페이지에서 검색을 통해 입력한 값이 있다면 이곳의 조건문을 실행한다.
+      if(isset($_POST['selected'])) {
+       $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
+        }
+    }
   /* 위의 조건에 따라 sql쿼리가 다르게 생성된다.
   그리고 생성된 $sql를 따라 $booklist를 생성하고 조건에 만족하는 쿼리문을 하나씩 배열에 삽입한다.
   이 때 나는 $filtered라는 새 배열을 만드는데 이 곳에는 $booklist 안에 각 속성 값을 집어넣는다.
