@@ -1,0 +1,7 @@
+CREATE TABLE movie_info (
+name text not null,
+cont_1 text not null,
+cont_2 text not null,
+cont_3 text not null,
+lo_image_link varchar(120) not null,
+m_idx int(10) primary key,
