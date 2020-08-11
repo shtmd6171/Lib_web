@@ -39,6 +39,11 @@ $tel = $codecheck['tel'];
               <input type="password" size="35" name="pwd" placeholder="비밀번호" required></td>
           </tr>
           <tr>
+            <td>Re Pwd</td>
+            <td colspan="9">
+              <input type="password" size="35" name="repwd" placeholder="비밀번호 확인" required></td>
+          </tr>
+          <tr>
             <td>Name</td>
             <td colspan="9">
               <input type="text" size="35" name="name" value="<?php echo $name ?>" required></td>
@@ -58,3 +63,12 @@ $tel = $codecheck['tel'];
               <input type="submit" name="edit" value="수정 완료">
             </td>
       </table>
+    </fieldset>
+
+      <button onclick="goBack()">Go Back</button>
+
+      <script>
+      function goBack() {
+        window.history.back();
+      }
+      </script>

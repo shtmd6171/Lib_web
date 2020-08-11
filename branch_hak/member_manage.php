@@ -47,7 +47,7 @@ $tel = $codecheck['tel'];
                 <tr>
                   <td>Pwd</td>
                   <td colspan="9">
-                    <input type="password" size="35" name="pwd" placeholder="***************" readonly></td>
+                    <input type="password" size="35" name="pwd" placeholder="비밀번호는 비공개 정보입니다." readonly></td>
                 </tr>
                 <tr>
                   <td>Name</td>
@@ -74,13 +74,7 @@ $tel = $codecheck['tel'];
 
             </table>
           </form>
-
-
-
-
-
-
-
+        </fieldset>
 
 
       <?php if($codecheck['code'] == 'A') {?>
@@ -89,6 +83,12 @@ $tel = $codecheck['tel'];
       <?php } ?>
 
     </form>
+    <button onclick="goBack()">Go Back</button>
 
+    <script>
+    function goBack() {
+      window.history.back();
+    }
+    </script>
   </body>
 </html>
