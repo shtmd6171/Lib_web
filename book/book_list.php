@@ -32,7 +32,7 @@ $name = $codecheck['name'];
     <header class="blog-header py-3 sticky-top">
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
-          <a class="text-muted mr-2 d-none d-sm-none d-md-block" href="./book_list.php">MARK</a>
+          <a class="text-muted mr-2 d-none d-sm-none d-md-inline-block" href="./book_list.php">MARK</a>
           <?php if(isset($codecheck)){
           if($codecheck['code'] == 'A') {?>
           <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(admin)"; ?></a>
@@ -66,8 +66,8 @@ $name = $codecheck['name'];
             </div>
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
-           <div class="dropdown show" id="selectedop">
-            <a class="glass" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <div class="dropdown show d-none d-md-inline-block" id="selectedop">
+            <a class="glass " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
                 <circle cx="10.5" cy="10.5" r="7.5"></circle>
                 <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
@@ -132,7 +132,7 @@ $name = $codecheck['name'];
         <div class="collapse navbar-collapse text-center" id="navbarsExample01">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="./book_list.php">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="../branch_hak/member_manage.php">My Page <span class="sr-only">(current)</span></a>
             </li>
             <?php if(!(isset($_SESSION['user_id']))) { ?>
             <li class="nav-item">
