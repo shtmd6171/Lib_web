@@ -66,13 +66,16 @@ $name = $codecheck['name'];
     </div>
     <?php
     if(isset($_GET['genre'])) {
-
-    $sql = mq("select * from book where genre='".$_GET['genre']."'");
-  } else if(isset($_POST['selected'])) {
-    $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-  } else {
-    $sql = mq("select * from book");
-  }
+      $sql = mq("select * from book where genre='".$_GET['genre']."'");
+       if(isset($_POST['selected'])) {
+        $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
+        }
+    } else {
+      $sql = mq("select * from book");
+      if(isset($_POST['selected'])) {
+       $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
+        }
+    }
     while($booklist = $sql->fetch_array()){
       $filtered = array(
         'book_id' => htmlspecialchars($booklist['book_id']),
