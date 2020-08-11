@@ -153,7 +153,10 @@ if($sql->num_rows == 0) {
           } ?>
         </tr>
         </table>
+
+
       <?php } ?>
+      <p><a href="../branch_hak/loan.php?id=<?=$book_id?> ">대여하기</a></p>
       <p><a href="../book/book_list.php">돌아가기</a></p>
   </body>
 </html>

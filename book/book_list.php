@@ -50,6 +50,7 @@ $name = $codecheck['name'];
       <!-- button이 등장하는 이 부분부터는 사실 form문 밖으로 빼버려도 상관없다.
       다만 현재로서는 검색 옆에 밑의 버튼들을 붙여놓기 위해 이 곳에 배치했다. -->
       <button class="mine wb"><a href="../log/logout.php">로그아웃</a></button>
+      <button class="mine wb"><a href="../branch_hak/loanlist.php">대여 페이지</a></button>
       <button class="mine wb"><a href="../branch_hak/member_page_ok.php">마이 페이지</a></button>
       <!-- $codecheck는 위에서도 말했듯, 사용자의 코드를 알기 위해 사용한다고 했다.
        이 if문을 통해 현재 사용자가 관리자인지, 사용자인지 파악한다.

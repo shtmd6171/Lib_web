@@ -19,7 +19,7 @@ $name = $codecheck['name'];
     <title></title>
 
 
-<form id="mform" method="post" action="member_delete_ok.php">
+<form id="mform" method="post" action="./member_delete_ok.php">
 
   <div class="title-container"></div>
     <fieldset class="line">
