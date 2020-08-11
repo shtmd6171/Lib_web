@@ -1,129 +1,236 @@
 <?php
 include "../lib/db.php";
+
+if(isset($_SESSION['user_id'])){
 $user_id = $_SESSION['user_id'];
 
-/* 여기서 $user_id는 현재 로그인한 유저의 user_id(PK)고 그것을 통해, fetch_array를 했다.
-$codecheck 배열에는 현재 로그인한 유저의 관한 정보가 담겨있다.
-$codecheck는 유저의 code를(관리자,유저) 알기 위해 사용될 것이다.
-*/
 $sql = mq("select * from user where user_id ='".$user_id."'");
 $codecheck = $sql->fetch_array();
 
 $name = $codecheck['name'];
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="ko" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="./javascr/onClickFunc.js"></script>
-    <title></title>
+<!doctype html>
+<html lang="ko">
 
-  </head>
-  <body>
-    <h1>BOOK LIST</h1>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="./booklist_lib/myjs.js"></script>
+  <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="./booklist_lib/booklist.css" rel="stylesheet">
+  <link rel="stylesheet" href="../bootstrap/dist/bttn.min.css">
+  <title></title>
+</head>
 
-    <?php if($codecheck['code'] == 'A'):?>
-    <?php echo $name."(관리자님) 환영합니다."; ?>
+<body>
+  <div class="container">
+    <header class="blog-header py-3 sticky-top">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+          <a class="text-muted mr-2 d-none d-sm-none d-md-block" href="./book_list.php">MARK</a>
+          <?php if(isset($codecheck)){
+          if($codecheck['code'] == 'A') {?>
+          <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(admin)"; ?></a>
 
-    <?php else : ?>
-    <?php echo $name."(님) 환영합니다."; ?>
-    <?php endif; ?>
-
-    <!-- 이 부분은  책의 제목, 작가, 출판사를 이용해 검색하는 부분이다.
-    form 타입으로 묶었는데 action은 주지않았다. 즉, $_POST값을 넘겨받는 위치가 여기(book_list.php)란 뜻이다.
-
-    option의 각 value들을 title, author, publisher로 주었는데, 이는 Book 테이블의 각 속성 이름과 같다.
-   이는 SQL쿼리를 실행 할때, 다른 이름으로 치환하지 않고 그대로 삽입하기 위한 편의를 위해 설정하였다.
-
-   search는 내가 검색하려고하는 문자열이 들어오게 된다.
-    -->
-    <form method="post">
-      <select name="selected">
-        <option value="title">제목</option>
-        <option value="author">작가</option>
-        <option value="publisher">출판사</option>
-      </select>
-      <input type="text" name="search" placeholder="검색내용">
-      <input type="submit" value="검색">
-      <!-- button이 등장하는 이 부분부터는 사실 form문 밖으로 빼버려도 상관없다.
-      다만 현재로서는 검색 옆에 밑의 버튼들을 붙여놓기 위해 이 곳에 배치했다. -->
-      <button class="mine wb"><a href="../log/logout.php">로그아웃</a></button>
-      <button class="mine wb"><a href="../branch_hak/member_page_ok.php">마이 페이지</a></button>
-      <!-- $codecheck는 위에서도 말했듯, 사용자의 코드를 알기 위해 사용한다고 했다.
-       이 if문을 통해 현재 사용자가 관리자인지, 사용자인지 파악한다.
-       만약 현재 사용자가 관리자라면 책 등록하기와 유저관리 버튼이 보이고, 실행할 수 있다.  -->
-      <?php if($codecheck['code'] == 'A') {?>
-      <button class="mine wb"><a href="../book/book_wirte.php">책 등록하기</a></button>
-      <button class="mine wb"><a href="../management_as_admin/user_management.php">유저관리</a></button>
-      <?php } ?>
-    </form>
-
-    <div>
-      <table>
-        <tr>
-          <!-- 여기서는 $_GET의 값을 이용한다. 같은 페이지 내에서 URL에 genre(장르)가 변할 때마다 다른 페이지를 보여주게끔 구성하였다.
-          사용자는 각 탭을 클릭할 때마다 URL주소에 genre값이 변하는 것을 볼 수 있고, 나는 이 genre값을 $_GET를 통해 받아낼 것이다.
-          그리고 이 값에 따라 각 페이지에 다른 정보를 보여주게 할 것이다.   -->
-          <td><a href="./book_list.php">메인</a></td>
-          <td><a href="?genre=문학">문학</a></td>
-          <td><a href="?genre=인문/사회">인문/사회</a></td>
-          <td><a href="?genre=자기계발">자기계발</a></td>
-          <td><a href="?genre=비즈니스/경제">비즈니스/경제</a></td>
-          <td><a href="?genre=라이프스타일">라이프스타일</a></td>
-          <td><a href="?genre=만화">만화</a></td>
-          <td><a href="?genre=과학">과학</a></td>
-          <td><a href="?genre=컴퓨터">컴퓨터</a></td>
-          <td><a href="?genre=수험서/자격증">수험서/자격증</a></td>
-          <td><a href="?genre=예술/대중문화">예술/대중문화</a></td>
-          <td><a href="?genre=외국">외국</a></td>
-          <td><a href="?genre=오디오북">오디오북</a></td>
-          <td><a href="?genre=기타">기타</a></td>
-       </tr>
-      </table>
+        <?php } else { ?>
+          <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(user)"; ?></a>
+        <?php }} ?>
+        </div>
+        <div class="col-4 text-center">
+          <a class="text-muted d-none d-md-none d-sm-block" href="./book_list.php">MARK</a>
+          <a class="blog-header-logo text-dark" href="./book_list.php">BOOK</a>
+            <div class="dropdown show mt-2">
+              <a class=" p-2 text-muted d-md-none d-lg-none d-sm-inline-block bttn-stretch bttn-sm bttn-primary" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">genre</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="./book_list.php">메인</a>
+                <a class="dropdown-item" href="?genre=문학">문학</a>
+                <a class="dropdown-item" href="?genre=인문/사회">인문사회</a>
+                <a class="dropdown-item" href="?genre=자기계발">자기계발</a>
+                <a class="dropdown-item" href="?genre=비즈니스/경제">경제</a>
+                <a class="dropdown-item" href="?genre=라이프스타일">라이프</a>
+                <a class="dropdown-item" href="?genre=만화">만화</a>
+                <a class="dropdown-item" href="?genre=과학">과학</a>
+                <a class="dropdown-item" href="?genre=컴퓨터">컴퓨터</a>
+                <a class="dropdown-item" href="?genre=수험서/자격증">수험서</a>
+                <a class="dropdown-item" href="?genre=예술/대중문화">예술</a>
+                <a class="dropdown-item" href="?genre=외국">외국</a>
+                <a class="dropdown-item" href="?genre=오디오북">오디오북</a>
+                <a class="dropdown-item" href="?genre=기타">ETC</a>
+              </div>
+            </div>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+           <div class="dropdown show" id="selectedop">
+            <a class="glass" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
+                <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
+              </svg>
+            </a>
+            <form class="dropdown-menu p-4 " method="post">
+              <div class="form-group">
+                <select class="form-control" name="selected">
+                  <option value="title">제목</option>
+                  <option value="author">작가</option>
+                  <option value="publisher">출판사</option>
+                </select>
+                 <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
+                 <input type="submit" class="form-control" value="검색">
+               </div>
+            </form>
+          </div>
+          <?php if(!(isset($_SESSION['user_id']))) { ?>
+          <span class="dropdown">
+            <a class="btn mr-1 btn-sm btn-outline-secondary d-none d-md-inline-block sign" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign in</a>
+            <form class="dropdown-menu p-4" method="post" action="../log/login_ok.php">
+              <div class="form-group">
+                <label for="exampleDropdownFormEmail2">Email address</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail" name="email" placeholder="email@example.com">
+              </div>
+              <div class="form-group">
+                <label for="exampleDropdownFormPassword2">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword" name="pwd"  placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+            <a class="btn btn-sm btn-outline-secondary d-none d-md-inline-block sign" href="../log/member.php">Sign up</a>
+          <?php } else { ?>
+            <a class="btn mr-1 btn-sm btn-outline-secondary d-none d-md-inline-block sign" href="../log/logout.php">Logout</a>
+          <?php } ?>
+        </span>
+        </div>
+      </div>
+    </header>
+    <div class="nav-scroller py-1">
+      <nav class="nav d-flex justify-content-between">
+        <a class="p-2 text-muted d-none d-md-inline-block" href="./book_list.php">메인</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=문학">문학</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=인문/사회">인문사회</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=자기계발">자기계발</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=비즈니스/경제">경제</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=라이프스타일">라이프</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=만화">만화</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=과학">과학</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=컴퓨터">컴퓨터</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=수험서/자격증">수험서</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=예술/대중문화">예술</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=외국">외국</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=오디오북">오디오북</a>
+        <a class="p-2 text-muted d-none d-md-inline-block" href="?genre=기타">ETC</a>
+      </nav>
     </div>
+    <div class=" py-1 mb-2">
+      <nav class="navbar navbar-light d-flex d-md-none d-lg-none justify-content-center">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse text-center" id="navbarsExample01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="./book_list.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <?php if(!(isset($_SESSION['user_id']))) { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="../log/login.php">Sign In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../log/member.php">Sign Up</a>
+            </li>
+            <?php } else { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="../log/logout.php">Logout</a>
+            </li>
+            <?php } ?>
+          </ul>
+          <form class="flex-inline d-flex justify-content-center my-2" method="post">
+             <div class="col-sm-3">
+               <select class="form-control" name="selected">
+                 <option value="title">제목</option>
+                 <option value="author">작가</option>
+                 <option value="publisher">출판사</option>
+               </select>
+             </div>
+                <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
+             <span class="input-group-submit">
+              <input type="submit" class="form-control" value="검색">
+              </span>
+          </form>
+        </div>
+      </nav>
+    </div>
+    <!-- <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light background">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">ㅇ</h1>
+        <p class="lead font-weight-normal">ㄴㄷㅆ</p>
+      </div>
+    </div> -->
+    <div id="myCarousel" class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light background carousel slide" data-ride="carousel">
+      <!-- ol태그의 class에 carousel-indicators를 넣는다. -->
+      <ol class="carousel-indicators">
+        <!-- li는 이미지 개수만큼 추가하고 data-target은 carousel id를 가르킨다. -->
+        <!-- data-slide-to는 순서대로 0부터 올라가고 0은 active를 설정한다. -->
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <!-- 실제 이미지 아이템 -->
+      <!-- class는 carousel-inner로 설정하고 role은 listbox에서 설정한다. -->
+      <div class="carousel-inner">
+        <!-- 이미지의 개수만큼 item을 만든다. 중요한 포인트는 carousel-indicators의 li 태그 개수와 item의 개수는 일치해야 한다. -->
+        <div class="carousel-item active">
+          <img class="first-slide sliding" src="./booklist_lib/1.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption text-left">
+              <h1>A book that is shut is but a block</h1>
+              <p>Thomas Fuller</p>
+              <p><a class="btn btn-md btn-secondary" href="#" role="button">Taste a book</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img class="second-slide sliding" src="./booklist_lib/2.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>The man who doesn't read good books has no advantage over the man who can't read them</h1>
+              <p>Mark Twain</p>
+              <p><a class="btn btn-md btn-primary" href="../log/member.php" role="button">Sign Up Now</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img class="third-slide sliding" src="./booklist_lib/3.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption text-right">
+              <h1>Live always in the best company <h1 style="color:orange">when you read</h1></h1>
+              <p>Sydney Smith</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <div class="row mb-2">
     <?php
-    /* 사용자가 탭을 클릭해 URL의 genre 값이 변할 때마다 다른 정보를 보여주기 위한 기능을 구현한다.
-   if조건의 isset($_GET['genre'])란 현재 위치가 메인페이지인지,
-   아니면 탭을 통해 장르를 선택한 페이지인지를 구분하는 역할을 한다.
-   */
     if(isset($_GET['genre'])) {
-      //  만약 장르를 선택한 페이지라면, 해당 장르에 맞는 값만을 현재 페이지에 표시한다.
-      $sql = mq("select * from book where genre='".$_GET['genre']."'");
-       if(isset($_POST['selected'])) {
-         // 만약 사용자가 검색을 통해 입력한 값이 있다면 이곳의 조건문을 실행한다.
-         // $_POST['selected']는 book 테이블에도 동일한 속성명을 지닌 title, author, publisher 중 하나일 것이고
-         // $_POST['search']는 내가 검색한 문자열이다.
-         // 난 이것을 통해 title, author, publisher중 하나에서 내가 검색한 문자열을 포함한 내용이 있는지 찾아낸다.
-        $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    // 만약 $_GET에서 장르값이 없다면
-    } else {
-      // 일단 (메인 페이지라면) 전체를 다 불러온다.
-      $sql = mq("select * from book");
-      // 만약 사용자가 메인페이지에서 검색을 통해 입력한 값이 있다면 이곳의 조건문을 실행한다.
-      if(isset($_POST['selected'])) {
-       $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    }
-  /* 위의 조건에 따라 sql쿼리가 다르게 생성된다.
-  그리고 생성된 $sql를 따라 $booklist를 생성하고 조건에 만족하는 쿼리문을 하나씩 배열에 삽입한다.
-  이 때 나는 $filtered라는 새 배열을 만드는데 이 곳에는 $booklist 안에 각 속성 값을 집어넣는다.
-
-  Q.이걸 왜 해?
-  A. 보면 $booklist과는 다르게 htmlspecialchars라는 함수를 사용해 속성 값을 삽입한 것을 볼 수 있다.
-  htmlspecialchars(내용)은 내용값에 html문법이 포함된 문자가 적혀 있을 경우 이를 인식하지 못하게 바꿔주는 역할을 한다.
-
-  예를 들어, 내가 sql문 내부에 '<script>alert('안녕');</script>' 이라는 내용을 삽입해버리면
-  내가 이 내용을 그대로 출력하면, '<script>alert('안녕');</script>'가 문자열로 출력되는게 아니라
-  alert기능에 따라 '안녕'이라고 써있는 팝업 알람을 띄워버리는 대참사가 일어난다.
-  왜냐하면 php내부에서 문자열을 써버릴 경우, html문으로 읽어버리기 때문이다.
-  htmlspecialchars를 사용하게 되면 <, >를 &lt &gt 같은 값으로 바꿔버리기 때문에
-  팝업 알람을 띄우지 않게되는 이유에서이다.
-
-  한마디로, 출력보안을 위한 장치라는 것
-  */
+    $sql = mq("select * from book where genre='".$_GET['genre']."'");
+  } else if(isset($_POST['selected'])) {
+    $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
+  } else {
+    $sql = mq("select * from book");
+  }
     while($booklist = $sql->fetch_array()){
       $filtered = array(
         'book_id' => htmlspecialchars($booklist['book_id']),
@@ -134,48 +241,25 @@ $name = $codecheck['name'];
         'genre' => htmlspecialchars($booklist['genre']),
         'file' => htmlspecialchars($booklist['file'])
       );?>
-      <!-- 이 부분도 잘 보면 while문 내부이다.
-      php문을 바로 위에서 끊어버리긴 했지만 while문의 {}에서 } 를 아직 쓰지않았고,
-      그 말은 } 를 쓰기 전 까지는 그것이 뭐가 됐든 while문 안에서 반복 된다는 뜻이다.
+      <div class="col-md-6">
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <div class="card-body d-flex flex-column align-items-start">
+            <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
+            <h3 class="mb-0">
+              <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
+            </h3>
+            <div class="mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
+            <p class="card-text mb-auto"><?=$filtered['publisher']?>사의 신작</p>
+            <a href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기</a>
+          </div>
+          <img class="card-img-right flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
+        </div>
+      </div>
+  <?php } ?>
+</div>
 
-      그렇기에 우리는 while문 반복 조건(:SQL쿼리 조건에 맞는 값들이 다 나올때까지 배열에 저장하기) 에따라
-      html문도 반복 출력할 수 있고,
-      배열을 하나씩 받아 그 값을 보여주는 html문을 반복적으로 화면에 출력해 줄 수 있는 것이다.
-      -->
-      <table class="list" cellpadding="5" border="1" align="center">
-      <tr class="tltle">
-        <th>Title</th>
-        <th>Author</th>
-        <th>Publisher</th>
-        <th>The_Day</th>
-        <th>Genre</th>
-        <th>Image</th>
-        <th>이 책의 관한 서평</th>
-      </tr>
-      <tr class="value">
-        <!-- <p> 내부에 아까 생성한 $filtered배열의 값들을 하나씩 출력하고 있다. -->
-        <td><p><?= $filtered['title'] ?></p></td>
-        <td><p><?= $filtered['author'] ?></p></td>
-        <td><p><?= $filtered['publisher'] ?></p></td>
-        <td><p><?= $filtered['the_date'] ?></p></td>
-        <td><p><?= $filtered['genre'] ?></p></td>
-        <td><p><img src="../file/<?= $filtered['file'] ?>" alt="이미지 없음" width="200" height="200"></p></td>
-        <!-- 보면 단순히 페이지를 이동하는 href문 뿐만 아니라 URL에 id라는 변수를 통해 $_GET 값으로 넘기는 것을 볼 수 있다.
-        책은 각 book_id(PK)가 존재하고 해당 책이 존재하는 페이지로 이동하면, 그 책의 정보를 가지고 있어야한다.
-         그래야 그 책의 자세한 정보나 수정하거나 삭제하는 기능을 수행할 수 있기 때문이다.  -->
-        <td><a href="../review/review.php?id=<?= $filtered['book_id'] ?>">보기</a> </td>
-        <!-- 책의 관한 정보를 수정하거나 삭제하는 것은 관리자만 할 수 있어야 한다.
-        그렇기 때문에 아까 만든 $codecheck을 통해 현재 사용자가 관리자라면,
-         각 책의 정보를 수정하거나 삭제할 수 있는 기능을 보고, 이용할 수 있다. -->
-        <?php if($codecheck['code'] == 'A') {?>
-        <td><a href="./book_update.php?id=<?= $filtered['book_id'] ?>">업데이트</a></td>
-        <?php } ?>
-        <?php if($codecheck['code'] == 'A') {?>
-        <td><a href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a></td>
-        <?php } ?>
-      </tr>
-      </table>
-      <!-- 여기가 while문의 끝이다. while조건에따라 여기까지의 전체가 반복되는 것이다. -->
-    <?php   } ?>
-  </body>
+  </div>
+
+</body>
+
 </html>
