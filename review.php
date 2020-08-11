@@ -54,6 +54,7 @@ $reviewcheck = $sql->fetch_array();
         <th>The_Day</th>
         <th>Genre</th>
         <th>Image</th>
+        <th>담아두기</th>
       </tr>
       <tr class="value">
         <td><p><?= $filtered['title'] ?></p></td>

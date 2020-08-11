@@ -35,8 +35,10 @@ $name = $codecheck['name'];
       </select>
       <input type="text" name="search" placeholder="검색내용">
       <input type="submit" value="검색">
+      <button class="mine wb"><a href="./branch_hak/loan_reservation.php">대출·예약</a></button>
       <button class="mine wb"><a href="./log/logout.php">로그아웃</a></button>
       <button class="mine wb"><a href="./branch_hak/member_page_ok.php">마이 페이지</a></button>
+
       <?php if($codecheck['code'] == 'A') {?>
 
       <button class="mine wb"><a href="./wirte.php">책 등록하기</a></button>
