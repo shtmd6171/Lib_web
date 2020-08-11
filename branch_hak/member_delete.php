@@ -42,3 +42,13 @@ $name = $codecheck['name'];
               <input type="submit" name="edit" value="탈퇴 하기">
             </td>
       </table>
+    </fieldset>
+  </form>
+
+      <button onclick="goBack()">Go Back</button>
+
+      <script>
+      function goBack() {
+        window.history.back();
+      }
+      </script>
