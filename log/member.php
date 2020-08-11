@@ -8,6 +8,10 @@ include "../lib/db.php";
 	<title></title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/registration.css"/>
+	<!-- onClickFunc.js를 보면 알 수 있듯이(jquery로 작성했다)
+   각 버튼들은 button이나 input 타입이 아니라 div 타입으로 선언 되어 있는 것을 알 수 있다.
+   그리고 div타입은 기본적으로 클릭의 대한 이벤트가 없기때문에  onClickFunc.js내에서
+   div를 클릭 했을 때의 이벤트를 추가한 것이다. -->
 	<script src="../javascr/onClickFunc.js"></script>
 </head>
 <body>
@@ -21,7 +25,7 @@ include "../lib/db.php";
 						<tr>
 							<td>Id</td>
 							<td colspan="9">
-								<input type="email" size="35" name="email" placeholder="이메일" required>
+								<input type="email" id="uid" size="35" name="email" placeholder="이메일" required>
 							</td>
 							<td><div id="chk"/>duplication</td>
 						</tr>
