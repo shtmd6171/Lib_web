@@ -1,0 +1,183 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gaegu&family=Jua&display=swap'); /*한국어 전용*/
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); /*영어 전용*/
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap'); /*일어 전용*/
+/*blog start*/
+.glass {
+  color : black;
+}
+
+#selectedop {
+  font-family: 'Jua', sans-serif;
+}
+
+#myCarousel h1 , .booktitle {
+  font-family: 'Anton', sans-serif;
+}
+
+#myCarousel :not(h1) {
+  font-family: 'Cabin', sans-serif;
+}
+
+header {
+  background-color: white;
+}
+.form-group :not(.searching) {
+ width: 200px;
+}
+
+.searching {
+  width: 50px;
+}
+
+.dropdown .dropdown-item {
+  font-family: 'Jua', sans-serif;
+}
+
+#exampleDropdownFormEmail, #exampleDropdownFormPassword {
+  font-family: 'Cabin', sans-serif;
+}
+
+.dropdown ,.bookauthor  {
+  font-family: 'Cabin', sans-serif;
+}
+
+
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header, .sign  {
+  font-family: 'Anton', sans-serif;
+  font-size: 0.8rem;
+}
+
+.blog-header-logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 2.2rem;
+}
+
+.blog-header-logo:hover {
+  text-decoration: none;
+}
+
+.display-4 {
+  font-size: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .display-4 {
+    font-size: 3rem;
+  }
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+
+/*blog end*/
+
+body {
+  font-family: 'Jua', sans-serif;
+}
+
+.sliding {
+  width : 1000px;
+  height : 600px;
+}
+
+.carousel {
+  margin-bottom: 4rem;
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+.carousel-item {
+  height: 32rem;
+  background-color: #777;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+.dropdown .dropdown-menu a{
+  color: #444444;
+}
+.dropdown .dropdown-item:hover {
+  color: #777777;
+  background-color: #dedede;
+}
+
+.dropdown .dropdown-item:active {color: white;}
+
+
+
+.container {
+  max-width: 1440px;
+}
+
+/* .background {
+  background-image: url( "./hak.jpg" );
+  background-size: 2100px;
+} */
+
+/*
+ * Custom translucent site header
+ */
+
+.site-header {
+  background-color: white;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+
+
+}
+.site-header a {
+  color: steelblue;
+  transition: ease-in-out color .15s;
+}
+.site-header a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.flex-equal > * {
+  -ms-flex: 1;
+  -webkit-box-flex: 1;
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+  }
+}
+@media (min-width: 40em) {
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+.overflow-hidden { overflow: hidden; }
