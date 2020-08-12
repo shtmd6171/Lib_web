@@ -6,7 +6,8 @@ $book_id = $_GET['id'];
 $date = date("Y-m-d H:i:s");
 
 
-$sql = mq("SELECT * from loan, user, book where book.book_id = loan.book_id AND book.book_id = '"$book_id"' AND loan.user_id = user.user_id AND user.user_id = '".$user_id."'");
+$sql = mq("
+);
 $codecheck = $sql->fetch_array();
 
 
