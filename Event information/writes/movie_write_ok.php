@@ -15,11 +15,11 @@ move_uploaded_file($tmpfile,$folder);
 if($name && $cont_1 && $cont_2 && $cont_3 && $o_name ){
 	
 	$sql = mq("insert into movie_info(name,cont_1,cont_2,cont_3,lo_image_link)values('".$name."','".$cont_1."','".$cont_2."','".$cont_3."','".$o_name."')");
-	echo "<script>alert('신청완료.');location.href='/movie_list.php';</script>";
+	echo "<script>alert('행사가 등록되었습니다.');location.href='/movie_list.php';</script>";
 	
 	}else{
 		echo "<script>
-		alert('신청 실패.');</script>";
+		alert('행사 등록이 실패되었습니다.');</script>";
 	}
 ?>
  
