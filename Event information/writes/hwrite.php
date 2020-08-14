@@ -8,7 +8,7 @@
 <body>
   <h3>게시판</h3>
   <div id= "borad write">
-    <h2><a href="/">등록</a></h2>
+    <h2><a href="/">신청</a></h2>
     <div id= write area>
         <form action="hwrite_ok.php" method="post" enctype="multipart/form-data">
          <div>
@@ -16,7 +16,7 @@
          </div>
          <br>
          <div>
-            연락처: <input type="text" size="35" name="cont_2" id="comt" placeholder= "내용2" required>
+            연락처: <input type="text" size="35" name="cont_2" id="cont" placeholder= "내용2" required>
          </div>
          <br>
          <div>
@@ -24,7 +24,7 @@
          </div>
          <br>
          <div class="bt_se">
-            <button type="submit">신청하기</button>   
+           <a href="./movie_list.php"><button>신청하기</button>   
           </div>
         </form>      
     </div>

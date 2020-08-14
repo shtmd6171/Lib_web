@@ -256,7 +256,14 @@ $name = $codecheck['name'];
             </h3>
             <div class="mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
             <p class="card-text mb-auto"><?=$filtered['publisher']?>사의 신작</p>
-            <a href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기</a>
+            <span>
+            <a href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기&nbsp</a>
+            <?php if(isset($codecheck)){
+            if($codecheck['code'] == 'A') {?>
+            <a href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기&nbsp</a>
+            <a href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
+          <?php }} ?>
+           </span>
           </div>
           <img class="card-img-right flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
         </div>
