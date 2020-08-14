@@ -15,6 +15,7 @@ $tel = $codecheck['tel'];
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="./javascr/onClickFunc.js"></script>
     <title></title>
