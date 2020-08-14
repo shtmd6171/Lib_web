@@ -67,7 +67,7 @@ $tel = $codecheck['tel'];
                 </tr>
 
                 <tr>
-                  <td><button class="mine wb"><a href="member_edit.php">회원 수정</a></button>
+                  <td><button class="mine wb"><a href="./member_edit.php">회원 수정</a></button>
                   </td>
                   <td> <button class="mine wb"><a href="./member_delete.php">탈퇴 등록</a></button>
                   </td>
@@ -80,7 +80,7 @@ $tel = $codecheck['tel'];
 
       <?php if($codecheck['code'] == 'A') {?>
 
-      <button class="mine wb"><a href="./wirte.php"> 관리자 권한 회원 탈퇴등록 하기</a></button>
+      <button class="mine wb"><a href=""> 관리자 권한 회원 탈퇴등록 하기</a></button>
       <?php } ?>
 
     </form>
