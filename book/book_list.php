@@ -246,22 +246,22 @@ $name = $codecheck['name'];
         <div class="card d-flex flex-row mb-4 box-shadow h-md-250">
           <div class="card-body d-flex flex-column align-items-start">
             <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
-            <h4 class="card-title">
+            <h3 class="mb-0 card-title">
               <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
-            </h4>
+            </h3>
             <div class="card-subtitle mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
             <p class="card-subtitle card-text mb-auto "><?=$filtered['publisher']?>사의 신작</p>
-            <div class="d-flex flex-row">
+            <span>
               <a class="card-link" href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기</a>
-              <?php if(isset($codecheck)){
-              if($codecheck['code'] == 'A') {?>
-              <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
-              <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
+                <?php if(isset($codecheck)){
+                if($codecheck['code'] == 'A') {?>
+                <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
+                <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
             </div>
           <?php }} ?>
-          </div>            
-              <img class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
-        </div>
+        </span>
+      <img class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
+      </div>
       </div>
   <?php } ?>
   </div>

@@ -40,10 +40,17 @@ body {
   max-width: 1440px;
 }
 
+.glass {
+  color : black;
+}
+
 /* header end */
 
 /* 책 표지 */
 
+.bookcontainer {
+  height : 28rem;
+}
 
 
 .showwindow {
@@ -52,6 +59,7 @@ body {
 }
 
 .bookimg {
+  min-width: 16rem;
   width : 100%;
   height : 100%;
   -webkit-filter: blur(3px);
@@ -65,10 +73,7 @@ body {
   height: 14rem;
 }
 
-.sidebar {
-  width : 100%;
-  height : 100%;
-}
+
 /* 책 표지 end */
 
 
@@ -125,5 +130,6 @@ body {
 .lh-150 { line-height: 1.5; }
 
 .bookdesc {
-  min-width: 16rem;
+  min-width: 10rem;
+  width: 14rem;
 }

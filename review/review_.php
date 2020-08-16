@@ -60,7 +60,7 @@ $name = $codecheck['name'];
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
              <div class="dropdown show d-none d-md-inline-block" id="selectedop">
-              <a class="glass " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="glass" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
                   <circle cx="10.5" cy="10.5" r="7.5"></circle>
                   <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
@@ -120,22 +120,21 @@ $name = $codecheck['name'];
         'file' => htmlspecialchars($booklist['file']));
       ?>
 
-      <div class="nav-scroller bg-white rounded box-shadow my-3">
-        <nav class="nav nav-underline">
-          <a class="nav-link active" href="#">Dashboard</a>
+      <div class="nav-scroller bg-white rounded box-shadow my-3 text-center">
+        <nav class="nav nav-underline mx-auto">
+          <a class="nav-link active" href="#">책 조회</a>
           <a class="nav-link" href="#">
             Favorite
             <span class="badge badge-pill bg-light align-text-bottom">27</span>
           </a>
-          <a class="nav-link" href="#">Explore</a>
-          <a class="nav-link" href="#">Suggestions</a>
+          <a class="nav-link" href="#">행사</a>
         </nav>
       </div>
 
       <!-- tab end -->
 
       <main role="main" class="container">
-        <div class="d-flex flex-row ">
+        <div class="d-flex flex-row bookcontainer">
 
           <div class=" d-flex align-items-center p-3 my-4 rounded box-shadow">
             <div class=" d-flex align-items-center justify-content-center showwindow">
@@ -146,28 +145,32 @@ $name = $codecheck['name'];
 
           <!-- book cover end  -->
 
-            <div class="d-flex flex-column align-items-center p-3 my-4 mx-2 bg-white rounded box-shadow bookdesc">
-              <h4 class="border-bottom border-gray pb-2 mb-0">책 정보</h4>
-              <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-                <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <strong class="d-block text-gray-dark text-center pb-1">제목</strong>
-                  <?= $filtered['title']; ?>
-                </p>
-              </div>
-              <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-                <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
-                <?= $filtered['author']; ?>
-                </p>
-              </div>
-              <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-                <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                  <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
-                <?= $filtered['author']; ?>
-                </p>
+            <div class="d-flex flex-column align-items-center py-2 my-4 mx-2 bg-white rounded box-shadow bookdesc">
+              <h4 class="d-sm-inline-flex border-bottom border-gray pb-2 mb-0">책 정보</h4>
+              <div class="text-center align-items-center justify-content-center my-auto">
+                  <div class="media text-muted pt-3">
+                    <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
+                    <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <strong class="d-block text-gray-dark text-center pb-1">제목</strong>
+                      <?= $filtered['title']; ?>
+                    </p>
+                  </div>
+
+                  <div class="media text-muted pt-3">
+                    <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
+                    <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
+                    <?= $filtered['author']; ?>
+                    </p>
+                  </div>
+
+                  <div class="media text-muted pt-3">
+                    <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
+                    <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <strong class="d-block text-gray-dark text-center pb-1">출판사</strong>
+                    <?= $filtered['publisher']; ?>
+                    </p>
+                  </div>
               </div>
             </div>
 
@@ -182,7 +185,7 @@ $name = $codecheck['name'];
               <div class="row card-body mx-auto">
                 <button class="bttn-jelly bttn-md bttn-warning">대출하기</button>
               </div>
-            <div class="card-footer text-muted">기간 한정!</div>
+            <div class="card-footer text-muted">18일까지 기간 한정!</div>
           </div>
 
           <div class="card text-center col-md-4 d-none d-sm-none d-md-flex box-shadow px-0">
@@ -215,7 +218,10 @@ $name = $codecheck['name'];
                           <?= $filtered['genre']; ?>
                           <hr>
                           <h5>줄거리</h5>
-
+                          줄거리는 없어요
+                          <hr>
+                          <h5>목차</h5>
+                          목차도 없어요
                           <hr>
                         </div>
                         <div class="modal-footer">
@@ -250,22 +256,23 @@ $name = $codecheck['name'];
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark"></strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+              <strong class="d-block text-gray-dark">이 책은 말이죠</strong>
+             책의 관한 내용을 적어봅니다.
             </p>
           </div>
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">@username</strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+              <strong class="d-block text-gray-dark">개노잼임</strong>
+              그냥 그렇던데요
             </p>
           </div>
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">@username</strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+              <strong class="d-block text-gray-dark">(스포주의) 결말의 관한 고찰</strong>
+              Today is gonna be the day That they're gonna throw it back to you By now you should've somehow Realized what you gotta do
+              I don't believe that anybody Feels the way I do, about you now
             </p>
           </div>
           <small class="d-block text-right mt-3">
