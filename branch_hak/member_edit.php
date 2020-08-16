@@ -20,7 +20,7 @@ $tel = $codecheck['tel'];
     <title></title>
 
 
-<form id="mform" method="post" action="./member_edit_ok.php">
+<form id="mform" method="post" action="member_edit_ok.php">
 
   <div class="title-container"></div>
     <fieldset class="line">

@@ -17,7 +17,7 @@
 
     $change = mq("UPDATE user SET pwd = '$hash_pwd', addr = '$addr', name = '$name', tel = '$tel' WHERE user_id = '$user_id'");
 
-    echo "<script>alert('회원정보가 수정되었습니다. 다시 로그인 해주세요.'); location.href='././log/login.php';</script>";
+    echo "<script>alert('회원정보가 수정되었습니다. 다시 로그인 해주세요.'); location.href='../log/login.php';</script>";
 
 
   }else{
