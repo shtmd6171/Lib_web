@@ -1,0 +1,129 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gaegu&family=Jua&display=swap'); /*한국어 전용*/
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); /*영어 전용*/
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap'); /*일어 전용*/
+/*blog start*/
+
+/* header */
+header {
+  background-color: white;
+}
+.form-group :not(.searching) {
+ width: 200px;
+}
+
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-header, .sign  {
+  font-family: 'Anton', sans-serif;
+  font-size: 0.8rem;
+}
+
+.blog-header-logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 2.2rem;
+}
+
+.blog-header-logo:hover {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Jua', sans-serif;
+}
+
+.container {
+  max-width: 1440px;
+}
+
+/* header end */
+
+/* 책 표지 */
+
+
+
+.showwindow {
+  width : 100%;
+  height : 100%;
+}
+
+.bookimg {
+  width : 100%;
+  height : 100%;
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+  position: relative;
+}
+
+.book {
+  position: absolute;
+  width: 12rem;
+  height: 14rem;
+}
+
+.sidebar {
+  width : 100%;
+  height : 100%;
+}
+/* 책 표지 end */
+
+
+
+/*card*/
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, .75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-underline .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
+  color: var(--secondary);
+}
+
+.nav-underline .nav-link:hover {
+
+  color: var(--orange);
+}
+
+.nav-underline .active {
+  font-weight: 500;
+  color: var(--gray-dark);
+}
+
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .09); }
+
+.lh-100 { line-height: 1; }
+.lh-125 { line-height: 1.25; }
+.lh-150 { line-height: 1.5; }
+
+.bookdesc {
+  min-width: 16rem;
+}

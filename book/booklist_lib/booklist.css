@@ -63,16 +63,6 @@ header {
   text-decoration: none;
 }
 
-.display-4 {
-  font-size: 2.5rem;
-}
-
-@media (min-width: 768px) {
-  .display-4 {
-    font-size: 3rem;
-  }
-}
-
 .nav-scroller {
   position: relative;
   z-index: 2;
@@ -85,6 +75,19 @@ header {
 
 body {
   font-family: 'Jua', sans-serif;
+}
+
+.carousel-indicators > li{
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+    text-indent: 0;
+    cursor: pointer;
+    background-color: #bbb;
+}
+
+.carousel-indicators .active{
+    background-color: orange;
 }
 
 .sliding {
