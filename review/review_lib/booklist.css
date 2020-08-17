@@ -9,6 +9,11 @@
 header {
   background-color: white;
 }
+
+#selectedop {
+  font-family: 'Jua', sans-serif;
+}
+
 .form-group :not(.searching) {
  width: 200px;
 }
@@ -73,7 +78,6 @@ body {
   height: 14rem;
 }
 
-
 /* 책 표지 end */
 
 
@@ -130,6 +134,11 @@ body {
 .lh-150 { line-height: 1.5; }
 
 .bookdesc {
-  min-width: 10rem;
+  min-width: 9.7rem;
   width: 14rem;
+}
+
+.redirectioning a {
+  color: white;
+  text-decoration: none;
 }

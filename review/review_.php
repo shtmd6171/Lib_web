@@ -1,26 +1,26 @@
 <?php
-include "../lib/db.php";
+include_once "../lib/db.php";
 
 $book_id = $_GET['id'];
 if(isset($_SESSION['user_id'])) {
-$user_id = $_SESSION['user_id'];
+  $user_id = $_SESSION['user_id'];
 
-$sql = mq("select * from book where book_id ='".$book_id."'");
-$book = $sql->fetch_array();
+  $sql = mq("select * from book where book_id ='".$book_id."'");
+  $book = $sql->fetch_array();
 
-$sql = mq("select * from user where user_id ='".$user_id."'");
-$codecheck = $sql->fetch_array();
+  $sql = mq("select * from user where user_id ='".$user_id."'");
+  $codecheck = $sql->fetch_array();
 
-$sql = mq("select * from book_review where user_id ='".$user_id."'");
-
-if($sql->num_rows == 0) {
-  $reviewcheck = NULL;
-} else {
-  $reviewcheck = $sql->fetch_array();
-}
-
-$name = $codecheck['name'];
-}
+  $sql = mq("select * from book_review where user_id ='".$user_id."'");
+    if($sql->num_rows == 0) {
+      $reviewcheck = NULL;
+    } else {
+      $reviewcheck = $sql->fetch_array();
+    }
+  $name = $codecheck['name'];
+  } else {
+    $reviewcheck = NULL;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -69,9 +69,9 @@ $name = $codecheck['name'];
               <form class="dropdown-menu p-4 " method="post">
                 <div class="form-group">
                   <select class="form-control" name="selected">
-                    <option value="title">제목</option>
-                    <option value="author">작가</option>
-                    <option value="publisher">출판사</option>
+                    <option value="review_title">제목</option>
+                    <option value="review_desc">내용</option>
+                    <option value="name">작성자</option>
                   </select>
                    <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
                    <input type="submit" class="form-control" value="검색">
@@ -133,7 +133,7 @@ $name = $codecheck['name'];
 
       <!-- tab end -->
 
-      <main role="main" class="container">
+      <main role="main" class="container-fulid">
         <div class="d-flex flex-row bookcontainer">
 
           <div class=" d-flex align-items-center p-3 my-4 rounded box-shadow">
@@ -183,7 +183,7 @@ $name = $codecheck['name'];
           <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
             <div class="card-header">이 책을 읽어볼까요?</div>
               <div class="row card-body mx-auto">
-                <button class="bttn-jelly bttn-md bttn-warning">대출하기</button>
+                <button class="bttn-jelly bttn-md bttn-warning redirectioning">대출하기</button>
               </div>
             <div class="card-footer text-muted">18일까지 기간 한정!</div>
           </div>
@@ -191,10 +191,10 @@ $name = $codecheck['name'];
           <div class="card text-center col-md-4 d-none d-sm-none d-md-flex box-shadow px-0">
             <div class="card-header">책 줄거리가 궁금한가요?</div>
               <div class="row card-body mx-auto">
-                <button class="bttn-jelly bttn-md bttn-danger" data-toggle="modal" data-target="#exampleModalLong">상세보기</button>
+                <button class="bttn-jelly bttn-md bttn-danger redirectioning" data-toggle="modal" data-target="#exampleModalLong">상세보기</button>
                   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                      <div class="modal-content">
+                      <div class="modal-content sidebars">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalLongTitle">책 정보</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -236,7 +236,7 @@ $name = $codecheck['name'];
             <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
               <div class="card-header">이 책을 평가해주세요</div>
                 <div class="row card-body mx-auto">
-                  <button class="bttn-jelly bttn-md bttn-warning">서평쓰기</button>
+                  <button class="bttn-jelly bttn-md bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">서평쓰기</a></button>
                 </div>
               <div class="card-footer text-muted">27개의 서평이 있습니다</div>
             </div>
@@ -253,32 +253,45 @@ $name = $codecheck['name'];
         <!-- 서평  -->
         <div class="my-3 p-3 bg-white rounded box-shadow">
           <h4 class="border-bottom border-gray pb-2 mb-0">서평</h4>
+        <?php
+          if(isset($book_id)&&(!(isset($_POST['selected'])))) {
+          $sql = mq("select * from book_review, user where book_id='".$book_id."'
+          AND book_review.user_id = user.user_id");
+          } else if(isset($book_id)&&((isset($_POST['selected'])))) {
+            $sql = mq("select * from book_review, user where book_id='".$book_id."'
+            AND book_review.user_id = user.user_id AND ".$_POST['selected']." LIKE '%".$_POST['search']."%'");
+          }
+          while($reviewlist = $sql->fetch_array()){
+            $filtered = array(
+              'review_id' => htmlspecialchars($reviewlist['review_id']),
+              'review_title' => htmlspecialchars($reviewlist['review_title']),
+              'review_desc' => htmlspecialchars($reviewlist['review_desc']),
+              'user_id' => htmlspecialchars($reviewlist['user_id']),
+              'name' => htmlspecialchars($reviewlist['name'])
+            );?>
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">이 책은 말이죠</strong>
-             책의 관한 내용을 적어봅니다.
+              <strong class="d-block text-gray-dark"><?= $filtered['review_title']; ?></strong>
+              <?= $filtered['review_desc'];
+                if($reviewcheck != NULL) {
+                  if($filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A'  ) { ?>
+                    <a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a>
+                    <a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a>
+                  <?php  }
+                } else if ($reviewcheck == NULL ) {
+                  if($codecheck['code'] == 'A'  ) { ?>
+                    <a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a>
+                    <a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a>
+                  <?php } }?>
             </p>
           </div>
-          <div class="media text-muted pt-3">
-            <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">개노잼임</strong>
-              그냥 그렇던데요
-            </p>
-          </div>
-          <div class="media text-muted pt-3">
-            <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">(스포주의) 결말의 관한 고찰</strong>
-              Today is gonna be the day That they're gonna throw it back to you By now you should've somehow Realized what you gotta do
-              I don't believe that anybody Feels the way I do, about you now
-            </p>
-          </div>
+          <?php } ?>
           <small class="d-block text-right mt-3">
-            <a href="#">All updates</a>
+            <a href="#">전체보기</a>
           </small>
         </div>
+
       </main>
     </div>
     </div>
