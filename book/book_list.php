@@ -36,6 +36,7 @@ $name = $codecheck['name'];
           <?php if(isset($codecheck)){
           if($codecheck['code'] == 'A') {?>
           <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(admin)"; ?></a>
+          <a class="text-muted d-none d-md-inline-block" href="./book_wirte.php">책 등록</a>
 
         <?php } else { ?>
           <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(user)"; ?></a>
