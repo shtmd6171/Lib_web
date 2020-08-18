@@ -43,7 +43,7 @@ if(isset($_SESSION['user_id'])) {
       <header class="blog-header py-3 sticky-top w-100">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted mr-2 d-none d-sm-none d-md-inline-block" href="./book_list.php">MARK</a>
+            <a class="text-muted mr-2 d-none d-sm-none d-md-inline-block" href="../book/book_list.php">MARK</a>
             <?php if(isset($codecheck)){
             if($codecheck['code'] == 'A') {?>
             <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(admin)"; ?></a>
@@ -55,8 +55,8 @@ if(isset($_SESSION['user_id'])) {
           <?php  } ?>
           </div>
           <div class="col-4 text-center">
-            <a class="text-muted d-none d-md-none d-sm-block" href="./book_list.php">MARK</a>
-            <a class="blog-header-logo text-dark" href="./book_list.php">BOOK</a>
+            <a class="text-muted d-none d-md-none d-sm-block" href="../book/book_list.php">MARK</a>
+            <a class="blog-header-logo text-dark" href="../book/book_list.php">BOOK</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
              <div class="dropdown show d-none d-md-inline-block" id="selectedop">
