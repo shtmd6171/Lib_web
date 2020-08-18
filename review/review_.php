@@ -20,6 +20,7 @@ if(isset($_SESSION['user_id'])) {
   $name = $codecheck['name'];
   } else {
     $reviewcheck = NULL;
+    $codecheck = NULL;
   }
 ?>
 
@@ -279,7 +280,7 @@ if(isset($_SESSION['user_id'])) {
                     <a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a>
                     <a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a>
                   <?php  }
-                } else if ($reviewcheck == NULL ) {
+                } else if ($reviewcheck == NULL && $codecheck != NULL ) {
                   if($codecheck['code'] == 'A'  ) { ?>
                     <a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a>
                     <a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a>
