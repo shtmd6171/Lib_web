@@ -27,3 +27,11 @@ else {
     echo "대출 리스트가 존재하지 않습니다.";
  }
 ?>
+
+<button onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
