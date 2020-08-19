@@ -10,9 +10,15 @@
 아래 while문부터는 댓글의 대한 출력을 나타낸다.
 */
 include_once "../lib/db.php";
+// ini_set('display_errors','0'); //비 로그인시 나오는 에러 무시 -학현-
 
-$user_id = $_SESSION['user_id'];
+
+
 $review_id = $_GET['review'];
+
+if(isset($user_id)){
+  $user_id = $_SESSION['user_id'];
+
 
 $sql = mq("select * from user where user_id ='".$user_id."'");
 $codecheck = $sql->fetch_array();
@@ -22,6 +28,10 @@ if($sql->num_rows == 0) {
   $reviewcheck = NULL;
 } else {
   $reviewcheck = $sql->fetch_array();
+}
+} else{
+  $reviewcheck = NULL;
+  $codecheck = NULL;
 }
 
 ?>
@@ -80,8 +90,10 @@ if($sql->num_rows == 0) {
           // TO DO
           }
 
+
           while($commentlist = $sql->fetch_array()){
             $commfiltered = array(
+              'comment_id' => htmlspecialchars($commentlist['comment_id']),
               'comm_description' => htmlspecialchars($commentlist['comm_description']),
               'name' => htmlspecialchars($commentlist['name']));?>
 
@@ -92,6 +104,12 @@ if($sql->num_rows == 0) {
                 <td><p><?= $commfiltered['comm_description'] ?></p></td>
                 <th>Writer</th>
                 <td><p><?= $commfiltered['name'] ?></p></td>
+                <?php
+                if($codecheck !=NULL){
+                if(isset($user_id)|| $codecheck['code'] == 'A') {?>
+                <td><a href="../branch_hak/comment_update.php?comment=<?= $commfiltered['comment_id'] ?>">수정</a> </td>
+                <td><a href="../branch_hak/comment_delete_process.php?comment=<?= $commfiltered['comment_id']  ?>">삭제</a> </td>
+              <?php }} ?>
               </tr>
               </table>
             <?php } ?>
