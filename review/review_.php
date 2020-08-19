@@ -134,7 +134,7 @@ if(isset($_SESSION['user_id'])) {
 
       <!-- tab end -->
 
-      <main role="main" class="container-fulid">
+      <main role="main" class="container">
         <div class="d-flex flex-row bookcontainer">
 
           <div class=" d-flex align-items-center p-3 my-4 rounded box-shadow">
@@ -145,33 +145,35 @@ if(isset($_SESSION['user_id'])) {
           </div>
 
           <!-- book cover end  -->
+            <div class="d-none d-md-inline my-auto">
+              <div class="d-flex flex-column align-items-center py-2 my-4 mx-2 bg-white rounded box-shadow bookdesc">
+                <h4 class="d-sm-inline-flex border-bottom border-gray pb-2 mb-0">책 정보</h4>
+                <div class="text-center align-items-center justify-content-center my-auto">
+                    <div class="media text-muted pt-3">
+                      <p class=" pb-3 mb-0 lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark text-center pb-1">제목</strong>
+                        <?= $filtered['title']; ?>
+                      </p>
+                    </div>
 
-            <div class="d-flex flex-column align-items-center py-2 my-4 mx-2 bg-white rounded box-shadow bookdesc">
-              <h4 class="d-sm-inline-flex border-bottom border-gray pb-2 mb-0">책 정보</h4>
-              <div class="text-center align-items-center justify-content-center my-auto">
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=e83e8c&fg=e83e8c&size=1" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                      <strong class="d-block text-gray-dark text-center pb-1">제목</strong>
-                      <?= $filtered['title']; ?>
-                    </p>
-                  </div>
+                    <div class="media text-muted pt-3">
+                      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
+                      <?= $filtered['author']; ?>
+                      </p>
+                    </div>
 
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                      <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
-                    <?= $filtered['author']; ?>
-                    </p>
-                  </div>
+                    <div class="media text-muted pt-3">
+                      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark text-center pb-1">출판사</strong>
+                      <?= $filtered['publisher']; ?>
+                      </p>
+                    </div>
 
-                  <div class="media text-muted pt-3">
-                    <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-                      <strong class="d-block text-gray-dark text-center pb-1">출판사</strong>
-                    <?= $filtered['publisher']; ?>
-                    </p>
-                  </div>
+                    <div class="my-4">
+                      <button class="bttn-jelly bttn-sm bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">리뷰쓰기</a></button>
+                    </div>
+                </div>
               </div>
             </div>
 
@@ -235,11 +237,11 @@ if(isset($_SESSION['user_id'])) {
             </div>
 
             <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
-              <div class="card-header">이 책을 평가해주세요</div>
+              <div class="card-header">이 책을 구매 해볼까요?</div>
                 <div class="row card-body mx-auto">
-                  <button class="bttn-jelly bttn-md bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">서평쓰기</a></button>
+                  <button class="bttn-jelly bttn-md bttn-warning redirectioning "><a href="">구매하기</a></button>
                 </div>
-              <div class="card-footer text-muted">27개의 서평이 있습니다</div>
+              <div class="card-footer text-muted">27명이 이 책을 구입했습니다</div>
             </div>
 
             <div class="card text-center col-md-4 col-sm-12 d-sm-flex d-md-none d-lg-none box-shadow px-0">
@@ -272,13 +274,16 @@ if(isset($_SESSION['user_id'])) {
             );?>
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
               <strong class="d-block text-gray-dark"><?= $filtered['review_title']; ?></strong>
               <?= $filtered['review_desc'];
                 if($reviewcheck != NULL) {
                   if($filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A'  ) { ?>
-                    <a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a>
-                    <a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a>
+                    <div class="text-right border-bottom mt-auto">
+                      <strong class="d-flex-column text-gray-dark"></strong>
+                      <a href="./review_update.php?review=<?= $filtered['review_id'] ?>">수정</a>
+                      <a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a>
+                    </div>
                   <?php  }
                 } else if ($reviewcheck == NULL && $codecheck != NULL ) {
                   if($codecheck['code'] == 'A'  ) { ?>
