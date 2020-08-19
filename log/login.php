@@ -13,37 +13,19 @@ include "../lib/db.php";
 <head>
     <meta charset="utf-8"/>
     <title></title>
-    <!-- 합쳐지고 최소화된 최신 CSS -->
-    <link
+	<link
         rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <!-- 부가적인 테마 -->
-    <link
+        href="../css/bootstrap.css">
+	<link
         rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <script
-        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-        crossorigin="anonymous"></script>
-
-    <!--<link rel="stylesheet" type="text/css" href="../css/mystyle.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="../css/maintitle.css" />-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        href="../css/bootstrap-theme.css">
+	<script
+        src="../css/js/bootstrap.js"></script>
     <script src="../javascr/onClickFunc.js"></script>
 	<style>
-	
+		.flex_container {
+  		display: flex;
+		}
 	</style>
 </head>
 <br>
