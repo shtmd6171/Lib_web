@@ -186,7 +186,7 @@ if(isset($_SESSION['user_id'])) {
           <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
             <div class="card-header">이 책을 읽어볼까요?</div>
               <div class="row card-body mx-auto">
-                <button class="bttn-jelly bttn-md bttn-warning redirectioning">대출하기</button>
+                <button class="bttn-jelly bttn-md bttn-warning redirectioning">대여하기</button>
               </div>
             <div class="card-footer text-muted">18일까지 기간 한정!</div>
           </div>
@@ -220,8 +220,8 @@ if(isset($_SESSION['user_id'])) {
                           <h5>장르</h5>
                           <?= $filtered['genre']; ?>
                           <hr>
-                          <h5>줄거리</h5>
-                          줄거리는 없어요
+                          <h5>소개</h5>
+                          소개는 없어요
                           <hr>
                           <h5>목차</h5>
                           목차도 없어요
@@ -255,7 +255,7 @@ if(isset($_SESSION['user_id'])) {
 
         <!-- 서평  -->
         <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h4 class="border-bottom border-gray pb-2 mb-0">서평</h4>
+          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰</h4>
         <?php
           if(isset($book_id)&&(!(isset($_POST['selected'])))) {
           $sql = mq("select * from book_review, user where book_id='".$book_id."'
