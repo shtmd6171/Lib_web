@@ -6,6 +6,9 @@
     $(".m").on('click',function() {
       $(location).attr('href',"./member.php" );
     });
+    $(".f").on('click',function() {
+      $(location).attr('href',"../branch_hak/account_find.php" );
+    });
 
     $("#chk").on('click',function(){
       var id = $("#uid").val();

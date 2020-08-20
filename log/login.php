@@ -1,7 +1,7 @@
 <!--https://jeonghwan-kim.github.io/dev/2020/03/09/flex.html
 Todo 플렉스 관련 글 보고 레이아웃 구성 정리하기
 	 정렬 맞추기
-	 버튼 디자인	
+	 버튼 디자인
 	 폰트 통일
 	 이미지
 -->
@@ -43,7 +43,7 @@ include "../lib/db.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../javascr/onClickFunc.js"></script>
 	<style>
-	
+
 	</style>
 </head>
 <br>
@@ -65,8 +65,8 @@ include "../lib/db.php";
 						<td>
 							<div class="form-group">
             				<label for="inputEmail">Email address</label>
-            				<input  type="email" 
-									class="form-control" 
+            				<input  type="email"
+									class="form-control"
 									name="email">
 							</div>
 						</td>
@@ -87,8 +87,8 @@ include "../lib/db.php";
 						<td>
 							<div class="form-group">
             				<label for="inputPwd">Password</label>
-            				<input  type="password" 
-									class="form-control" 
+            				<input  type="password"
+									class="form-control"
 									name="pwd">
 							</div>
 						</td>
@@ -109,7 +109,6 @@ include "../lib/db.php";
 
 					<tr>
 						<td align="center" colspan="5">
-							<div>
 							<div type="button" class="btn btn-outline-secondary s" id="btn">Sign in</div>
 							 <!--class="mine s" id="btn">Sign in</div> -->
 						</td>
@@ -118,8 +117,12 @@ include "../lib/db.php";
 							<div type="button" class="btn btn-outline-secondary m">Create Account</div>
 						</td>
 					</tr>
+          <tr>
+            <td align="center" colspan="10">
+              <div type="button" class="btn btn-outline-secondary f"><small>Forgot password?</small></div>
+            </td>
+          </tr>
 				</table>
 			</form>
-	</div>
 </body>
 </html>
