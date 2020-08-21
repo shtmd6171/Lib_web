@@ -7,7 +7,7 @@
       $(location).attr('href',"./member.php" );
     });
     $(".f").on('click',function() {
-      $(location).attr('href',"../branch_hak/account_find.php" );
+      $(location).attr('href',"../branch_hak/password_find.php" );
     });
 
     $("#chk").on('click',function(){
