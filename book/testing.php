@@ -47,6 +47,6 @@ while($booklist = $sql->fetch_array()){
  for ($i=1; $i <= $allcount; $i++) {
     if($i <= ceil($allcount/3)) {
    ?>
-   <span onclick="paging('<?= $i ?>')"><?= $i ?></span>
+   <span onclick="paging('<?=$i?>')"><?=$i?></span>
 
  <?php } } ?>

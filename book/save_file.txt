@@ -1,7 +1,7 @@
 <?php
 if(isset($_GET['genre'])) {
   $sql = mq("select * from book where genre='".$_GET['genre']."'");
-   if(isset($_POST['selected'])) {
+   if(isset($_POST['selected']))  {
     $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
     }
 } else {

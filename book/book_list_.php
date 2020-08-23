@@ -70,13 +70,13 @@ $name = $codecheck['name'];
       $(function() {
         $.get("./testing.php",
              {page : 1},
-             function(data) { $("#list").html(data); });
+             function(data){ $("#list").html(data); });
       });
 
       function paging(number) {
         $.get("./testing.php",
              {page : number},
-             function(data) { $("#list").html(data); });
+             function(data){ $("#list").html(data); });
       }
     </script>
       <div id="list"></div>
