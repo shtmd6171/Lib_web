@@ -2,8 +2,10 @@
 include "../lib/db.php";
 ?>
 
+<!DOCTYPE html>
 <head>
 	<meta charset="utf-8" />
+	<meta name = "google-signin-client_id"content = "802907034805-ckgp6p4h7di1vbp8g2c2s0v2mmhbmpap.apps.googleusercontent.com">
 	<title></title>
 	<!-- 합쳐지고 최소화된 최신 CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -16,6 +18,8 @@ include "../lib/db.php";
 	<!--<link rel="stylesheet" type="text/css" href="../css/maintitle.css" />-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="../javascr/onClickFunc.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
 	<br>
 	<br>
