@@ -64,54 +64,21 @@ $name = $codecheck['name'];
        </tr>
       </table>
     </div>
-    <?php
-    if(isset($_GET['genre'])) {
-      $sql = mq("select * from book where genre='".$_GET['genre']."'");
-       if(isset($_POST['selected'])) {
-        $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    } else {
-      $sql = mq("select * from book");
-      if(isset($_POST['selected'])) {
-       $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    }
-    while($booklist = $sql->fetch_array()){
-      $filtered = array(
-        'book_id' => htmlspecialchars($booklist['book_id']),
-        'title' => htmlspecialchars($booklist['title']),
-        'author' => htmlspecialchars($booklist['author']),
-        'publisher' => htmlspecialchars($booklist['publisher']),
-        'the_date' => htmlspecialchars($booklist['the_date']),
-        'genre' => htmlspecialchars($booklist['genre']),
-        'file' => htmlspecialchars($booklist['file'])
-      );?>
-      <table class="list" cellpadding="5" border="1" align="center">
-      <tr class="tltle">
-        <th>Title</th>
-        <th>Author</th>
-        <th>Publisher</th>
-        <th>The_Day</th>
-        <th>Genre</th>
-        <th>Image</th>
-        <th>이 책의 관한 서평</th>
-      </tr>
-      <tr class="value">
-        <td><p><?= $filtered['title'] ?></p></td>
-        <td><p><?= $filtered['author'] ?></p></td>
-        <td><p><?= $filtered['publisher'] ?></p></td>
-        <td><p><?= $filtered['the_date'] ?></p></td>
-        <td><p><?= $filtered['genre'] ?></p></td>
-        <td><p><img src="../file/<?= $filtered['file'] ?>" alt="이미지 없음" width="200" height="200"></p></td>
-        <td><a href="../review/review.php?id=<?= $filtered['book_id'] ?>">보기</a> </td>
-        <?php if($codecheck['code'] == 'A') {?>
-        <td><a href="./book_update.php?id=<?= $filtered['book_id'] ?>">업데이트</a></td>
-        <?php } ?>
-        <?php if($codecheck['code'] == 'A') {?>
-        <td><a href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a></td>
-        <?php } ?>
-      </tr>
-      </table>
-    <?php   } ?>
+
+
+    <script type="text/javascript">
+      $(function() {
+        $.get("./testing.php",
+             {page : 1},
+             function(data){ $("#list").html(data); });
+      });
+
+      function paging(number) {
+        $.get("./testing.php",
+             {page : number},
+             function(data){ $("#list").html(data); });
+      }
+    </script>
+      <div id="list"></div>
   </body>
 </html>
