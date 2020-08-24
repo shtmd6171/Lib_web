@@ -1,5 +1,6 @@
 <?php
 include "../lib/db.php";
+header('Cache-Control: no-cache, must-revalidate');
   //  user 테이블의 eamil 필드와 입력받은 email이 같으면 해당 email 필드 값 전부 조회
   $sql = mq("select * FROM user WHERE email ='".$_POST['email']."'");
   $usercheck = $sql->fetch_array();
@@ -40,7 +41,8 @@ include "../lib/db.php";
               $sql = mq("UPDATE user SET pwd ='".$hash_pwd."' WHERE email ='".$_POST['email']."'");
               echo "<script>alert('수정 되었습니다. 다시 로그인해주세요.'); location.href='../log/login.php';</script>";
             }else {
-              echo "<script>alert('입력하신 비밀번호를 똑같이 작성해주세요.'); location.href='./password_edit.php';</script>";
+              echo "<script>alert('입력하신 비밀번호를 똑같이 작성해주세요.'); location.reload(); history.back();  </script>";
+                echo "<script>location.replace('./password_edit.php');</script>";
 
             }
           }
