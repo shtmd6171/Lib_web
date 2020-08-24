@@ -109,7 +109,6 @@ include "../lib/db.php";
 
 					<tr>
 						<td align="center" colspan="5">
-							<div>
 							<div type="button" class="btn btn-outline-secondary s" id="btn">Sign in</div>
 							 <!--class="mine s" id="btn">Sign in</div> -->
 						</td>
@@ -118,8 +117,12 @@ include "../lib/db.php";
 							<div type="button" class="btn btn-outline-secondary m">Create Account</div>
 						</td>
 					</tr>
+          <tr>
+            <td align="center" colspan="10">
+              <div type="button" class="btn btn-outline-secondary f"><small>Forgot password?</small></div>
+            </td>
+          </tr>
 				</table>
 			</form>
-	</div>
 </body>
 </html>

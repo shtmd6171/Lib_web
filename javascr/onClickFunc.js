@@ -6,6 +6,9 @@
     $(".m").on('click',function() {
       $(location).attr('href',"./member.php" );
     });
+    $(".f").on('click',function() {
+      $(location).attr('href',"../branch_hak/password_find.php" );
+    });
 
     $("#chk").on('click',function(){
       var id = $("#uid").val();
@@ -13,7 +16,7 @@
         id = "check.php?userid="+id;
         window.open(id,"_blank","width=300,height=100");
         }else{
-          alert("이메일을 입력세요");
+          alert("이메일을 입력하세요.");
         }
     });
 
