@@ -16,7 +16,7 @@ include "../lib/db.php";
     <title></title>
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../css/bootstrap-theme.css">
-	<script src="../css/js/bootstrap.js"></script>
+	<!-- <script src="../css/js/bootstrap.js"></script> -->
 	<!-- <script src="../javascr/onClickFunc.js"></script> -->
 
 	<style>
@@ -33,7 +33,7 @@ include "../lib/db.php";
 
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
 			<div class="col -sm 6 login-section-wrapper">
 				<div class="login-wrapper my -auto">
@@ -48,8 +48,8 @@ include "../lib/db.php";
 							<input type="password" name="pwd" id="pwd" class="form-control">
 						</div>
 						<div>
-							<button class="s"> Sign in</button>
-							<button class="s"> Create account</button>
+							<input type="submit" value="sign in" class="btn btn-outline-primary">
+							<a class="btn btn-outline-primary" href="../log/member.php">Create account</a>	
 						</div>
 					</form>
 				</div>

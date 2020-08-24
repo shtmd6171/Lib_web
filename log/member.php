@@ -7,7 +7,9 @@ include "../lib/db.php";
 	<meta charset="utf-8" />
 	<title></title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/registration.css"/>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/bootstrap-theme.css">
+	<script src="../css/js/bootstrap.js"></script>
 	<!-- onClickFunc.js를 보면 알 수 있듯이(jquery로 작성했다)
    각 버튼들은 button이나 input 타입이 아니라 div 타입으로 선언 되어 있는 것을 알 수 있다.
    그리고 div타입은 기본적으로 클릭의 대한 이벤트가 없기때문에  onClickFunc.js내에서
@@ -15,8 +17,49 @@ include "../lib/db.php";
 	<script src="../javascr/onClickFunc.js"></script>
 </head>
 <body>
-	<div id="login_box">
-	<form id="mform" method="post" action="member_ok.php">
+	<div>
+		<form class="mform" method="post" action="member_ok.php">
+			<h1>Membership Registration</h1>
+			<div>
+			<tr>
+				<td>id</td>
+				<td><input type="email"></td>
+			</tr>
+			</div>
+			<div></div>	
+			<tr>
+				<td>password</td>
+				<td><input type="password"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>name</td>
+				<td><input type="text"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>address</td>
+				<td><input type="text"></td>
+			</tr>
+			</div><div></div>
+			<tr>
+				<td>tell</td>
+				<td><input type="text"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>gender</td>
+				<td><input type="radio" name="male" value="male">male</td>
+				<td><input type="radio" name="female" value="female">female</td>
+			</tr>
+			</div><div>
+			<tr>
+				<td><button>gogo</button></td>
+				<td><button class="re">back</button></td>
+			</tr>
+			</div>
+		</form>
+	<!-- <form id="mform" method="post" action="member_ok.php">
 		<h1>Membership Registration</h1>
 		<div class="title-container"></div>
 			<fieldset class="line">
@@ -78,7 +121,7 @@ include "../lib/db.php";
 						<div class="mine b" type="submit"/>Back
 
 		</fieldset>
-	</form>
+	</form> -->
 	</div>
 </body>
 </html>
