@@ -1,13 +1,42 @@
 <?php
 include "../lib/db.php";
-
-$page = $_GET['page'];
+$page = $_POST['page'];
+$genre = $_POST['genre'];
 if($page == "") {
   $page = 1;
 }
 $from = ($page -1)*3;
-$sql = mq("select * from book limit $from, 3");
-$count = mq("select count(*) from book");
+
+if($genre != "NONE" && $_POST['selectedone']=="NONE" && $_POST['searchedone']=="NONE") {
+  $sql = mq("select * from book where genre='".$_POST['genre']."' limit $from, 3");
+  $count = mq("select count(*) from book where genre='".$_POST['genre']."'");
+  echo "1";
+  echo $_POST['selectedone'];
+  echo $_POST['searchedone'];
+}
+if($genre != "NONE" && $_POST['selectedone']!="NONE" && $_POST['searchedone']!="NONE")  {
+    $sql = mq("select * from book where genre='".$_POST['genre']."' AND ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%'");
+    $count = mq("select count(*) from book where genre='".$_POST['genre']."' AND ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%'");
+    echo "2";
+    echo $_POST['selectedone'];
+    echo $_POST['searchedone'];
+}
+if($genre == "NONE" && $_POST['selectedone']=="NONE" && $_POST['searchedone']=="NONE") {
+  $sql = mq("select * from book limit $from, 3 ");
+  $count = mq("select count(*) from book");
+  echo "3";
+  echo $_POST['selectedone'];
+  echo $_POST['searchedone'];
+}
+if($genre == "NONE" && $_POST['selectedone']!="NONE" && $_POST['searchedone']!="NONE") {
+   $sql = mq("select * from book where ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%' limit $from, 3");
+   $count = mq("select count(*) from book where ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%'");
+  echo "4";
+  echo $_POST['selectedone'];
+  echo $_POST['searchedone'];
+}
+
+
 $bookcount = $count->fetch_array();
 $allcount = $bookcount['count(*)'];
 
@@ -20,10 +49,12 @@ while($booklist = $sql->fetch_array()){
     'the_date' => htmlspecialchars($booklist['the_date']),
     'genre' => htmlspecialchars($booklist['genre']),
     'file' => htmlspecialchars($booklist['file'])
-  );?>
+  );
+?>
   <table class="list" cellpadding="5" border="1" align="center">
+
   <tr class="tltle">
-    <th>Title</th>
+    <th>Title </th>
     <th>Author</th>
     <th>Publisher</th>
     <th>The_Day</th>
@@ -39,7 +70,7 @@ while($booklist = $sql->fetch_array()){
     <td><p><?= $filtered['genre'] ?></p></td>
     <td><p><img src="../file/<?= $filtered['file'] ?>" alt="이미지 없음" width="200" height="200"></p></td>
     <td><a href="../review/review.php?id=<?= $filtered['book_id'] ?>">보기</a> </td>
-    <?php } ?>
+  <?php  } ?>
   </tr>
   </table>
 

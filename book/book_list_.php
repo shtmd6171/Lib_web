@@ -64,18 +64,20 @@ $name = $codecheck['name'];
        </tr>
       </table>
     </div>
-
+<?php if(!(isset($_GET['genre']))){$_GET['genre'] = "NONE";}
+if(!(isset($_POST['selected']))){$_POST['selected'] = "NONE";}
+if(!(isset($_POST['search']))){$_POST['search'] = "NONE";} ?>
 
     <script type="text/javascript">
       $(function() {
-        $.get("./testing.php",
-             {page : 1},
+        $.post("./testing.php",
+             {page : 1, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>"},
              function(data){ $("#list").html(data); });
       });
 
       function paging(number) {
-        $.get("./testing.php",
-             {page : number},
+        $.post("./testing.php",
+             {page : number, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>"},
              function(data){ $("#list").html(data); });
       }
     </script>
