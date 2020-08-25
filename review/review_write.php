@@ -33,6 +33,13 @@ $user_id = $_SESSION['user_id'];
       </p>
       <p>
         <input type="text" name="review_title" placeholder="title">
+        <select name="review_rating" value="">
+          <option value="5">5점</option>
+          <option value="4">4점</option>
+          <option value="3">3점</option>
+          <option value="2">2점</option>
+          <option value="1">1점</option>
+        </select>
       </p>
       <p>
        <textarea name="review_desc" rows="12" cols="80" placeholder="description"></textarea>
