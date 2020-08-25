@@ -2,7 +2,7 @@
 <!doctype html>
 <head>
 <meta charset="UTF-8">
-<title>영화 목록</title>
+<title>이벤트 목록</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 </head>
@@ -11,17 +11,17 @@
    </div>
 
 <div id="movie_info_area"> 
-  <h1>행사목록</h1>
-  <h4>행사를 등록 및 관리하는 페이지 입니다.</h4>
+  <h1>이벤트 목록</h1>
+  <h4>이벤트를 등록 및 관리하는 페이지 입니다.</h4>
     <table class="list-table">
       <thead>
           <tr>
               <th width="70">순서</th>
-                <th width="150">행사이름</th>
-                <th width="120">행사 일</th>
-                <th width="100">참가신청</th>
-                <th width="100">행사장소</th>
-            <th width="100">포스터</th>
+                <th width="150">이벤트 이름</th>
+                <th width="120">작성자</th>
+                <th width="100">이벤트 기간</th>
+                <th width="100">이벤트 내용</th>
+            <th width="100">첨부파일</th>
             
             </tr>
         </thead>
