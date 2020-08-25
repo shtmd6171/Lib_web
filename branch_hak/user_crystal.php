@@ -22,23 +22,14 @@ $tel = $codecheck['tel'];
 
   </head>
   <body>
-    <div class="container">
-    <div class="row">
-                <div class="col-md-2 m">
-                  <?php if($codecheck['code'] == 'A'):?>
-                  <?php echo $name."(관리자님) 환영합니다."; ?>
+    <h1>MemberShip Page</h1>
 
-                  <?php else : ?>
-                  <?php echo $name."(님) 환영합니다."; ?>
-                  <?php endif; ?>
-                </div>
-                    <div class="col-md-8">
-                    </div>
-                <div class="col-md-2 m">
-                    수정수정
-                </div>
-            </div>
+    <?php if($codecheck['code'] == 'A'):?>
+    <?php echo $name."(관리자님) 환영합니다."; ?>
 
+    <?php else : ?>
+    <?php echo $name."(님) 환영합니다."; ?>
+    <?php endif; ?>
 
 
       <form id="mform" method="post">
@@ -74,11 +65,14 @@ $tel = $codecheck['tel'];
                   <td colspan="9">
                     <input type="text" size="35" name="tel" placeholder="<?php echo $tel ?>" readonly></td>
                 </tr>
+
                 <tr>
-                  <td><button class="mine wb"><a href="./member_edit.php">회원 수정</a></button>
+                  <td><button class="mine wb"><a href="member_edit.php">회원 수정</a></button>
                   </td>
                   <td> <button class="mine wb"><a href="./member_delete.php">탈퇴 등록</a></button>
                   </td>
+
+
             </table>
           </form>
         </fieldset>
@@ -86,7 +80,7 @@ $tel = $codecheck['tel'];
 
       <?php if($codecheck['code'] == 'A') {?>
 
-      <button class="mine wb"><a href=""> 관리자 권한 회원 탈퇴등록 하기</a></button>
+      <button class="mine wb"><a href="./wirte.php"> 관리자 권한 회원 탈퇴등록 하기</a></button>
       <?php } ?>
 
     </form>
@@ -97,6 +91,5 @@ $tel = $codecheck['tel'];
       window.history.back();
     }
     </script>
-    </div>
   </body>
 </html>
