@@ -41,7 +41,9 @@ $name = $codecheck['name'];
         <?php } else { ?>
           <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(user)"; ?></a>
         <?php } ?>
-          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/loanlist.php">LOAN LIST</a>
+          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/loan_list.php">LOAN LIST</a>
+          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/purchase_list.php">PURCHASE LIST</a>
+          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/favorite_list.php">FAVORITE LIST</a>
         <?php  } ?>
         </div>
         <div class="col-4 text-center">
