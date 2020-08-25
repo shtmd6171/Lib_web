@@ -53,6 +53,8 @@ if(isset($_SESSION['user_id'])) {
             <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(user)"; ?></a>
           <?php } ?>
             <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/loanlist.php">LOAN LIST</a>
+            <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/purchase_list.php">PURCHASE LIST</a>
+            <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/favorite_list.php">FAVORITE LIST</a>
           <?php  } ?>
           </div>
           <div class="col-4 text-center">
@@ -171,8 +173,15 @@ if(isset($_SESSION['user_id'])) {
                     </div>
 
                     <div class="my-4">
+                      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
                       <button class="bttn-jelly bttn-sm bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">리뷰쓰기</a></button>
+                    </p>
                     </div>
+
+                    <div class="my-4">
+                      <button class="bttn-jelly bttn-md bttn-danger redirectioning" data-toggle="modal" ><a href="../branch_hak/favorite.php?id=<?= $filtered['book_id']?>">찜하기</a></button>
+                    </div>
+
                 </div>
               </div>
             </div>
@@ -186,7 +195,7 @@ if(isset($_SESSION['user_id'])) {
           <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
             <div class="card-header">이 책을 읽어볼까요?</div>
               <div class="row card-body mx-auto">
-                <button class="bttn-jelly bttn-md bttn-warning redirectioning">대여하기</button>
+              <button class="bttn-jelly bttn-md bttn-warning redirectioning" onclick="location.href='../branch_hak/loan.php?id=<?=$book_id?>'" >대여하기</button>
               </div>
             <div class="card-footer text-muted">18일까지 기간 한정!</div>
           </div>
@@ -239,7 +248,8 @@ if(isset($_SESSION['user_id'])) {
             <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
               <div class="card-header">이 책을 구매 해볼까요?</div>
                 <div class="row card-body mx-auto">
-                  <button class="bttn-jelly bttn-md bttn-warning redirectioning "><a href="">구매하기</a></button>
+                  <button class="bttn-jelly bttn-md bttn-warning redirectioning" onclick="location.href='../branch_hak/purchase.php?id=<?=$book_id?>'" >구매하기</a></button>
+
                 </div>
               <div class="card-footer text-muted">27명이 이 책을 구입했습니다</div>
             </div>
@@ -254,8 +264,14 @@ if(isset($_SESSION['user_id'])) {
         </div>
 
         <!-- 서평  -->
+        <?php
+        $sql = mq("select * from book_review where book_id ='".$book_id."'");
+        $review_write_check= $sql->num_rows;
+        $sql = mq("select ROUND(AVG(review_rating),2) as result from book_review where book_id ='".$book_id."'");
+        $review_rating_avg = $sql->fetch_array();?>
+
         <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰</h4>
+          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰&nbsp;<small>(<?=$review_rating_avg['result']?>/ 5.00)&nbsp;<small><?=$review_write_check?>명참여</small></samll></h4>
         <?php
           if(isset($book_id)&&(!(isset($_POST['selected'])))) {
           $sql = mq("select * from book_review, user where book_id='".$book_id."'
@@ -270,12 +286,13 @@ if(isset($_SESSION['user_id'])) {
               'review_title' => htmlspecialchars($reviewlist['review_title']),
               'review_desc' => htmlspecialchars($reviewlist['review_desc']),
               'user_id' => htmlspecialchars($reviewlist['user_id']),
-              'name' => htmlspecialchars($reviewlist['name'])
+              'name' => htmlspecialchars($reviewlist['name']),
+              'review_rating' => htmlspecialchars($reviewlist['review_rating'])
             );?>
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
             <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark"><?= $filtered['review_title']; ?></strong>
+              <strong class="d-block text-gray-dark"><?= $filtered['review_title']; ?>&nbsp;<small><?=$filtered['review_rating'];?>점</small></strong>
               <?= $filtered['review_desc'];
                 if($reviewcheck != NULL) {
                   if($filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A'  ) { ?>
