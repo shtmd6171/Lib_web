@@ -8,28 +8,37 @@
 include "../lib/db.php";
 // 현재 접속한 사용자의 아이디와 책의 아이디를 얻는다.
 $book_id = $_GET['id'];
-$user_id = $_SESSION['user_id'];
+if(isset($_SESSION['user_id']))
+{
+  $user_id = $_SESSION['user_id'];
 
-// 관리자, 사용자 구분을 위해 현재 사용자의 정보가 담긴 $codecheck 배열을 만든다.
-$sql = mq("select * from user where user_id ='".$user_id."'");
-$codecheck = $sql->fetch_array();
 
-// 현재 접속한 사용자가 작성한 서평은, 사용자 본인이 수정하거나 삭제할 수 있어야 한다.
-// 이것을 위해, 현재 접속한 사용자가 이 책의 관한 서평이 있는지 없는지 알아낸다.
-$sql = mq("select * from book_review where user_id ='".$user_id."'");
-/*만약 서평을 적지 않았을 경우 NULL 값으로 채워줘야한다.
- 그렇지 않을경우 $reviewcheck의 배열을 사용하는 부분에서 오류가 출력된다.
+    // 관리자, 사용자 구분을 위해 현재 사용자의 정보가 담긴 $codecheck 배열을 만든다.
+    $sql = mq("select * from user where user_id ='".$user_id."'");
+    $codecheck = $sql->fetch_array();
 
- Q.왜요?
- A. 우선적으로, 사용자가 작성한 서평이 있다는 가정으로 sql문을 동작하기 때문에
- 없을 경우 false가 반환되므로 $sql->fetch_array()를 실행하지 못해 오류가 나오는 것
-*/
-if($sql->num_rows == 0) {
-  $reviewcheck = NULL;
-} else {
-  $reviewcheck = $sql->fetch_array();
+    // 현재 접속한 사용자가 작성한 서평은, 사용자 본인이 수정하거나 삭제할 수 있어야 한다.
+    // 이것을 위해, 현재 접속한 사용자가 이 책의 관한 서평이 있는지 없는지 알아낸다.
+    $sql = mq("select * from book_review where user_id ='".$user_id."'");
+    /*만약 서평을 적지 않았을 경우 NULL 값으로 채워줘야한다.
+     그렇지 않을경우 $reviewcheck의 배열을 사용하는 부분에서 오류가 출력된다.
+
+     Q.왜요?
+     A. 우선적으로, 사용자가 작성한 서평이 있다는 가정으로 sql문을 동작하기 때문에
+     없을 경우 false가 반환되므로 $sql->f etch_array()를 실행하지 못해 오류가 나오는 것
+    */
+
+    if($sql->num_rows == 0) {
+      $reviewcheck = NULL;
+    } else {
+      $reviewcheck = $sql->fetch_array();
+    }
 }
 
+else
+{
+  $reviewcheck = NULL;
+}
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +162,10 @@ if($sql->num_rows == 0) {
           } ?>
         </tr>
         </table>
+
+
       <?php } ?>
+      <p><a href="../branch_hak/loan.php?id=<?=$book_id?> ">대여하기</a></p>
       <p><a href="../book/book_list.php">돌아가기</a></p>
   </body>
 </html>

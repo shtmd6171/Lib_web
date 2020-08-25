@@ -36,10 +36,15 @@ $name = $codecheck['name'];
           <?php if(isset($codecheck)){
           if($codecheck['code'] == 'A') {?>
           <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(admin)"; ?></a>
+          <a class="text-muted d-none d-md-inline-block" href="./book_wirte.php">책 등록</a>
 
         <?php } else { ?>
           <a class="text-muted d-none d-md-inline-block" href="../branch_hak/member_manage.php"><?php echo $name."(user)"; ?></a>
-        <?php }} ?>
+        <?php } ?>
+          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/loan_list.php">LOAN LIST</a>
+          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/purchase_list.php">PURCHASE LIST</a>
+          <a class="text-muted d-none d-md-inline-block pl-2" href="../branch_hak/favorite_list.php">FAVORITE LIST</a>
+        <?php  } ?>
         </div>
         <div class="col-4 text-center">
           <a class="text-muted d-none d-md-none d-sm-block" href="./book_list.php">MARK</a>
@@ -163,12 +168,7 @@ $name = $codecheck['name'];
         </div>
       </nav>
     </div>
-    <!-- <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light background">
-      <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">ㅇ</h1>
-        <p class="lead font-weight-normal">ㄴㄷㅆ</p>
-      </div>
-    </div> -->
+
     <div id="myCarousel" class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light background carousel slide" data-ride="carousel">
       <!-- ol태그의 class에 carousel-indicators를 넣는다. -->
       <ol class="carousel-indicators">
@@ -180,7 +180,7 @@ $name = $codecheck['name'];
       </ol>
       <!-- 실제 이미지 아이템 -->
       <!-- class는 carousel-inner로 설정하고 role은 listbox에서 설정한다. -->
-      <div class="carousel-inner">
+      <div class="carousel-inner ">
         <!-- 이미지의 개수만큼 item을 만든다. 중요한 포인트는 carousel-indicators의 li 태그 개수와 item의 개수는 일치해야 한다. -->
         <div class="carousel-item active">
           <img class="first-slide sliding" src="./booklist_lib/1.jpg" alt="First slide">
@@ -245,23 +245,29 @@ $name = $codecheck['name'];
         'genre' => htmlspecialchars($booklist['genre']),
         'file' => htmlspecialchars($booklist['file'])
       );?>
-      <div class="col-md-6">
-        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+      <div class="col-sm-12 col-md-6">
+        <div class="card d-flex flex-row mb-4 box-shadow h-md-250">
           <div class="card-body d-flex flex-column align-items-start">
             <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
-            <h3 class="mb-0">
+            <h3 class="mb-0 card-title">
               <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
             </h3>
-            <div class="mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
-            <p class="card-text mb-auto"><?=$filtered['publisher']?>사의 신작</p>
-            <a href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기</a>
-          </div>
-          <img class="card-img-right flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
-        </div>
+            <div class="card-subtitle mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
+            <p class="card-subtitle card-text mb-auto "><?=$filtered['publisher']?>사의 신작</p>
+            <span>
+              <a class="card-link" href="../review/review_.php?id=<?= $filtered['book_id']?>">읽어보기</a>
+                <?php if(isset($codecheck)){
+                if($codecheck['code'] == 'A') {?>
+                <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
+                <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
+          <?php }} ?>
+        </span>
+      </div>
+      <img class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
+      </div>
       </div>
   <?php } ?>
-</div>
-
+  </div>
   </div>
 
 </body>

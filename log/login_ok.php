@@ -33,7 +33,7 @@
 		$_SESSION['user_id'] = $member["user_id"];
 		// code가 U일 경우에는 일반 사용자로 인식한다. 그와 반대로 A일 경우에는 관리자로 인식한다.
 		// 사실, 출력 결과의 차이는 alert이 다르게 뜨는게 전부지만.. 실제론 다른페이지로 접속하게 해야한다.
-		if($code == 'U')  {
+		if($code == 'U' || $code == 'M')  {
 			echo "<script>alert('로그인되었습니다.'); location.href='../book/book_list.php';</script>";
 		} else {
 			echo "<script>alert('관리자로 로그인되었습니다.'); location.href='../book/book_list.php';</script>";

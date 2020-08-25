@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>게시판</title>
+  <title>이벤트 등록</title>
 </head>
 <body>
-  <h3>게시판</h3>
+  <h3>이벤트 등록 페이지/h3>
   <div id= "borad write">
     <h2><a href="/">등록</a></h2>
     <div id= write area>
@@ -16,23 +16,23 @@
          </div>
          <br>
          <div>
-            행사일: <input type="text" size="40" name="cont_1" id="cont" placeholder= "내용1" required>
+            작성자: <input type="text" size="40" name="cont_1" id="cont" placeholder= "작성자" required>
          </div>
          <br>
          <div>
-            참가신청일: <input type="text" size="35" name="cont_2" id="comt" placeholder= "내용2" required>
+            이벤트 기간: <input type="dete" size="35" name="cont_2" id="cont" placeholder= "" required>
          </div>
          <br>
          <div>
-            장소: <textarea name="cont_3" ></textarea>
+            이벤트 내용: <textarea name="cont_3" ></textarea>
          </div>
          <br>
          <div>
-            파일: <input type="file" name="lo_image_link" value="1">
+            첨부 파일: <input type="file" name="lo_image_link" value="1">
          </div>
          <br>
          <div class="bt_se">
-            <button type="submit">글 작성</button>   
+            <button type="submit">이벤트 등록</button>   
           </div>
         </form>      
     </div>

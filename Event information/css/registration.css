@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two');
+
+h1 {
+  -webkit-animation-duration : 2s;
+  -webkit-animation-name : slidein;
+  -webkit-animation-fill-mode : both;
+}
+
+@-webkit-keyframes slidein {
+  0% { color:#dddddd; font-size: 100%; }
+  100% {  font-size: 200%;  }
+}
+
+
+table {
+  font-family: 'Lobster Two', cursive;
+  table-layout: fixed;
+}
+
+#login_box {
+  font-family: 'Lobster Two', cursive;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  text-align: center;
+  border: 4px solid #dddddd;
+}
+
+#chk {
+  border : 1px solid black;
+  width: 80px;
+  background: #dddddd;
+  cursor: pointer;
+}
+
+.line {
+  border: 1.5px solid #dddddd;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+.mine {
+  color: #343434;
+  font-family: 'Lobster Two', cursive;
+  font-size: 20px;
+  text-align: center;
+  transition-property: color, font-size, text-align;
+  transition-duration: 2s, 2s, 2s;
+}
+.mine:hover {
+  color: #343434;
+  font-family: 'Lobster Two', cursive;
+  font-size: 35px;
+  text-align: center;
+  cursor:  pointer;
+}

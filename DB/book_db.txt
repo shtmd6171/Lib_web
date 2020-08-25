@@ -50,3 +50,22 @@ comm_description varchar(80) NOT NULL,
 review_id int(20) NOT NULL,
 user_id int(20) NOT NULL,
 PRIMARY KEY (comment_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+# 2020년 8월 25일 테이블 수정 내용은 "DB_IMG_alter.png"의 빨간 테두리를 참고해주세요.
+
+# 구매 테이블을 추가 생성했습니다.
+CREATE TABLE purchase (
+book_id int(20) NOT NULL,
+user_id int(20) NOT NULL,
+purchase_date date NOT NULL,
+PRIMARY KEY (book_id, user_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+# 찜 테이블을 추가 생성했습니다.
+CREATE TABLE Favorite (
+book_id int(20) NOT NULL,
+user_id int(20) NOT NULL,
+Favorite_date date NOT NULL,
+PRIMARY KEY (book_id, user_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+# book_review 테이블에 review_rating의 필드값을 추가 했습니다.
+ALTER TABLE `book_review` ADD `review_rating` INT(1) NOT NULL AFTER `user_id`;

@@ -1,7 +1,7 @@
 <!--https://jeonghwan-kim.github.io/dev/2020/03/09/flex.html
 Todo 플렉스 관련 글 보고 레이아웃 구성 정리하기
 	 정렬 맞추기
-	 버튼 디자인	
+	 버튼 디자인
 	 폰트 통일
 	 이미지
 	 2020.08.21 15:52 push
@@ -57,5 +57,6 @@ include "../lib/db.php";
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

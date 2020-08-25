@@ -1,46 +1,24 @@
-<?php
-/* 이 곳은 서평의 자세한 정보를 보기 위한 페이지이다.
-이 페이지에서는 서평 정보를 한 페이지 전체에 걸쳐 확인할 수 있으며
-서평을 수정, 식제할 수 있다.
-또한 작성된 댓글을 보거나 작성할 수 있다.
-
-이 페이지의 원리는 review.php와 거의 흡사하므로 주석은 자세히 달지 않는다.
-전체적인 개요는..
-처음 sql문에서는 서평의 정보를
-아래 while문부터는 댓글의 대한 출력을 나타낸다.
-*/
-include_once "../lib/db.php";
-// ini_set('display_errors','0'); //비 로그인시 나오는 에러 무시 -학현-
-
-
-
-$review_id = $_GET['review'];
-
-if(isset($user_id)){
-  $user_id = $_SESSION['user_id'];
-
-
-$sql = mq("select * from user where user_id ='".$user_id."'");
-$codecheck = $sql->fetch_array();
-
-$sql = mq("select * from book_review where user_id ='".$user_id."'");
-if($sql->num_rows == 0) {
-  $reviewcheck = NULL;
-} else {
-  $reviewcheck = $sql->fetch_array();
-}
-} else{
-  $reviewcheck = NULL;
-  $codecheck = NULL;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        // $(".comment").on('click',function() {
+        //   var value = $(".comment").text();
+        //   if(value == "댓글 게시하기") {
+        //   value = $(".comment").text("댓글 닫기");
+        //   $(".comment_write").html('');
+        // } else {
+        //   $(".comment_write").html('');
+        //   value = $(".comment").text("댓글 게시하기");
+        // }
+        // });
+      });
+
+    </script>
     <style media="screen">
       td {
         width: 90%;
@@ -81,19 +59,16 @@ if($sql->num_rows == 0) {
       </tr>
       </table>
       <?php
-          // 현재 댓글 정보를 불러오는데, 댓글을 작성한 사용자의 ID가 아닌
-          // name을 불러오기 위해서 join을 통해 sql문을 생성했다.
           if(isset($review_id)) {
           $sql = mq("select * from comment, user where review_id='".$review_id."'
             AND comment.user_id = user.user_id");
+
           } else {
           // TO DO
           }
 
-
           while($commentlist = $sql->fetch_array()){
             $commfiltered = array(
-              'comment_id' => htmlspecialchars($commentlist['comment_id']),
               'comm_description' => htmlspecialchars($commentlist['comm_description']),
               'name' => htmlspecialchars($commentlist['name']));?>
 
@@ -104,28 +79,12 @@ if($sql->num_rows == 0) {
                 <td><p><?= $commfiltered['comm_description'] ?></p></td>
                 <th>Writer</th>
                 <td><p><?= $commfiltered['name'] ?></p></td>
-                <?php
-                if($codecheck !=NULL){
-                if(isset($user_id)|| $codecheck['code'] == 'A') {?>
-                <td><a href="../branch_hak/comment_update.php?comment=<?= $commfiltered['comment_id'] ?>">수정</a> </td>
-                <td><a href="../branch_hak/comment_delete_process.php?comment=<?= $commfiltered['comment_id']  ?>">삭제</a> </td>
-              <?php }} ?>
               </tr>
               </table>
             <?php } ?>
 
             <p class="comment">댓글 게시하기</p>
-            <?php
-            if($reviewcheck != NULL) {
-            // review.php에서 뿐만아니라, 서평을 자세히 보는 현재 이 페이지(review_board.php)에서도
-            // 서평을 수정하거나, 삭제할 수 있게 조건문과 기능을 추가했다.
-            if($filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A') {?>
-            <td><a href="./review_update.php?review=<?= $_GET['review'] ?>">수정</a> </td>
-            <td><a href="./review_delete_process.php?review=<?= $filtered['review_id'] ?>">삭제</a> </td>
-            <?php  }
-            } ?>
-            <!-- 댓글을 작성하게 되면 실제 작성 기능은 comment_process.php에서 수행된다. -->
-            <form action="../comment/comment_process.php" method="post">
+            <form action="comment_process.php" method="post">
               <input type="hidden" name="review_id" value="<?= $filtered['review_id'] ?>">
               <input type="hidden" name="user_id" value="<?= $filtered['user_id'] ?>">
               <textarea name="desc" rows="8" cols="80" placeholder="댓글 입력"></textarea>
