@@ -4,13 +4,14 @@
 <!doctype html>
 <head>
 <meta charset="UTF-8">
-<title>행사 정보</title>
+<title>이벤트 정보</title>
+
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 </head>
 <body>
 	<div>
-		<nav id="topMenu"	>
+		<nav id="topMenu">
 			<ul>
 				<li><a class="menuLink" href="/page/main.php">Logo</a></li>
 				<li><a class="menuLink" href="/member/logout.php">북마크</a></li>
@@ -30,7 +31,7 @@
 		$movie_info = $sql->fetch_array();
 	?>
 	
-	<h1>행사 정보</h1>
+	<h1>이벤트 정보</h1>
 	<br>
 	
 		<div id="movie_read">
@@ -39,23 +40,22 @@
 				</div>
 				<br>
 				<div>
-				행사일: <?php echo $movie_info['cont_1']; ?>
+				작성자: <?php echo $movie_info['cont_1']; ?>
 				</div>
 				<br>
 				<div>
-				참가신청일: <?php echo $movie_info['cont_2']; ?>
+				이벤트 기간: <?php echo $movie_info['cont_2']; ?>
 				</div>
 				<br>
 				<div>
-				장소: <?php echo $movie_info['cont_3']; ?>
+				이벤트 내용 <?php echo $movie_info['cont_3']; ?>
 				</div>
 				<div>
 				<br>
-				이미지: <img src="http://localhost/img/poster/<?php echo $movie_info['lo_image_link']; ?>">
+				첨부파일: <img src="http://localhost/img/poster/<?php echo $movie_info['lo_image_link']; ?>">
 				</div>
 				<br>
 				<div id="write_btn">
-       <a href="./hwrite.php"><button>신청하기</button></a>
     </div>
 		</div>
 		
