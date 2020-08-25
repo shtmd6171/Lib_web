@@ -1,0 +1,1 @@
+ALTER TABLE `book_review` ADD `review_rating` INT(1) NOT NULL AFTER `user_id`;
