@@ -22,7 +22,8 @@ $tel = $codecheck['tel'];
 
   </head>
   <body>
-    <div class="container">
+    <h1>MemberShip Page</h1>
+
     <?php if($codecheck['code'] == 'A'):?>
     <?php echo $name."(관리자님) 환영합니다."; ?>
 
@@ -64,11 +65,14 @@ $tel = $codecheck['tel'];
                   <td colspan="9">
                     <input type="text" size="35" name="tel" placeholder="<?php echo $tel ?>" readonly></td>
                 </tr>
+
                 <tr>
                   <td><button class="mine wb"><a href="member_edit.php">회원 수정</a></button>
                   </td>
                   <td> <button class="mine wb"><a href="./member_delete.php">탈퇴 등록</a></button>
                   </td>
+
+
             </table>
           </form>
         </fieldset>
@@ -87,6 +91,5 @@ $tel = $codecheck['tel'];
       window.history.back();
     }
     </script>
-    </div>
   </body>
 </html>

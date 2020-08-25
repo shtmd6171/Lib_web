@@ -34,6 +34,7 @@ include "../lib/db.php";
 </head>
 <body>
 	<div class="container">
+	<header class="blog-header py-3 sticky-top"></header>
 		<div class="row">
 			<div class="col -sm 6 login-section-wrapper">
 				<div class="login-wrapper my -auto">
