@@ -16,18 +16,9 @@ include "../lib/db.php";
     <title></title>
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../css/bootstrap-theme.css">
+  <script src="../css/js/bootstrap.js"></script>
 
-	<style>
-	.flex_container {
-	  display: flex;
-	}
-
-	.flex-item {
-  	flex-grow: 1;
-  	flex-shrink: 1;
-  	flex-basis: auto;
-	}
-</style>
+	<style></style>
 
 </head>
 <body>
@@ -41,19 +32,18 @@ include "../lib/db.php";
 						<div class="form-group">
 							<label for="email">Email address</label>
 							<input type="email" name="email" id="email" class="form-control"
-							placeholder="email@example.com">
+							placeholder="email@example.com" required>
 
 							<label for="pwd">Password</label>
-							<input type="password" name="pwd" id="pwd" class="form-control">
+							<input type="password" name="pwd" id="pwd" class="form-control" required>
 						</div>
 						<div>
 							<input type="submit" value="sign in" class="btn btn-outline-primary">
               </div>
-              </form>
+            </form>
 							<button class="btn btn-outline-primary" onclick="location.href='../log/member.php'">Create account</button>
               <button class="btn btn-outline-primary" onclick="location.href='../branch_hak/password_find.php'">forgot password</button>
-
-
+              
 				</div>
 			</div>
 		</div>
