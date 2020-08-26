@@ -5,19 +5,15 @@ table {
   table-layout: fixed;
 }
 
-/*#login_box {
+#login_box {
   font-family: 'Lobster Two', cursive;
   margin-left: auto;
   margin-right: auto;
   width: 450px;
   text-align: center;
   border: 4px solid #dddddd;
-}*/
-
-<style>
-.flex_container {
-  display: flex;
 }
+
 .line {
   border: 2px solid #dddddd;
   margin-top: 2px;

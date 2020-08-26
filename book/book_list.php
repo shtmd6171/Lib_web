@@ -17,7 +17,8 @@ $name = $codecheck['name'];
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <script src="./booklist_lib/myjs.js"></script>
@@ -222,52 +223,31 @@ $name = $codecheck['name'];
       </a>
     </div>
 
-    <div class="row mb-2">
-    <?php
-    if(isset($_GET['genre'])) {
-      $sql = mq("select * from book where genre='".$_GET['genre']."'");
-       if(isset($_POST['selected'])) {
-        $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    } else {
-      $sql = mq("select * from book");
-      if(isset($_POST['selected'])) {
-       $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    }
-    while($booklist = $sql->fetch_array()){
-      $filtered = array(
-        'book_id' => htmlspecialchars($booklist['book_id']),
-        'title' => htmlspecialchars($booklist['title']),
-        'author' => htmlspecialchars($booklist['author']),
-        'publisher' => htmlspecialchars($booklist['publisher']),
-        'the_date' => htmlspecialchars($booklist['the_date']),
-        'genre' => htmlspecialchars($booklist['genre']),
-        'file' => htmlspecialchars($booklist['file'])
-      );?>
-      <div class="col-sm-12 col-md-6">
-        <div class="card d-flex flex-row mb-4 box-shadow h-md-250">
-          <div class="card-body d-flex flex-column align-items-start">
-            <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
-            <h3 class="mb-0 card-title">
-              <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
-            </h3>
-            <div class="card-subtitle mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
-            <p class="card-subtitle card-text mb-auto "><?=$filtered['publisher']?>사의 신작</p>
-            <span>
-              <a class="card-link" href="../review/review_.php?id=<?= $filtered['book_id']?>">읽어보기</a>
-                <?php if(isset($codecheck)){
-                if($codecheck['code'] == 'A') {?>
-                <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
-                <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
-          <?php }} ?>
-        </span>
-      </div>
-      <img class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
-      </div>
-      </div>
-  <?php } ?>
-  </div>
+    <div class="row mb-2" id="list">
+      <?php if(!(isset($_GET['genre']))){$_GET['genre'] = "NONE";}
+      if(!(isset($_POST['selected']))){$_POST['selected'] = "NONE";}
+      if(!(isset($_POST['search']))){$_POST['search'] = "NONE";} ?>
+
+          <script type="text/javascript">
+            $(function() {
+              $.post("./testing.php",
+                   {page : 1, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>"},
+                   function(data){ $("#list").html(data); });
+            });
+
+            function paging(number) {
+              $.post("./testing.php",
+                   {page : number, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>"},
+                   function(data){ $("#list").html(data); });
+            }
+          </script>
+          </div>
+
+
+
+
+
+
   </div>
 
 </body>
