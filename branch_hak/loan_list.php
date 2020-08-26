@@ -14,49 +14,51 @@ $list = mq("select title,author,publisher, loan_date as 빌린날짜, genre, fil
 // 쿼리를 실행해서 값이 존재하지 않으면  if문 실행
 // 쿼리를 실행했는데 값이 존재하지 않는다는 것은 DB에 데이터가 없다는 라는 말.
 // 고로 대출 한 데이터가 없다라는 것임.
-
-echo "<h1>책 대여 리스트</h1>";
-if ($sql->num_rows > 0) {
-    while($result = $list->fetch_array())
-    {?>
-      <!DOCTYPE html>
-      <html lang="ko" dir="ltr">
-        <head>
-          <meta charset="utf-8">
-          <title></title>
-        </head>
-        <body>
-          <table border="1">
-            <tr>
-              <th>제목</th>
-              <th>저자</th>
-              <th>출판사</th>
-              <th>빌린날짜</th>
-              <th>장르</th>
-          </tr>
-            <tr>
-              <td><?=$result['title'] ?></td>
-              <td><?=$result['author'] ?></td>
-              <td><?=$result['publisher'] ?></td>
-              <td><?=$result['빌린날짜'] ?></td>
-              <td><?=$result['genre'] ?></td>
-          </table>
-        </body>
-      </html>
-
-      <?php
-    }
-
-}
-else {
-    echo "대출 리스트가 존재하지 않습니다.";
- }
 ?>
 
-<button onclick="goBack()">Go Back</button>
+    <!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+      <meta charset="utf-8">
+        <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+      <link rel="stylesheet" href="../css/bootstrap-theme.css">
+      <script src="../css/js/bootstrap.js"></script>
+      <title></title>
+    </head>
+    <body>
+      <div class="container">
+        <div class="row">
 
-<script>
-function goBack() {
-  window.history.back();
-}
+          <h1>책 대여 리스트</h1>
+        </div>
+
+        <?php if ($sql->num_rows > 0) {
+          while($result = $list->fetch_array())
+          {?>
+        <div class="card" style="width: 18rem;"> <!--일단 카드형으로 만들어보긴 했는데, 메인 페이지처럼 갯수별로 불러오는 백엔드 할 수 있을까요?-->
+          <img class="card-img-top" src="../file/<?= $result['file']; ?>" alt="Card image cap" width="250" height="250">
+          <div class="card-body">
+            <h5 class="card-title"><?=$result['title'] ?></h5>
+            <p class="card-text"><?=$result['author'] ?></p>
+            <p class="card-text"><?=$result['publisher'] ?></p>
+            <p class="card-text"><?=$result['빌린날짜'] ?></p>
+            <p class="card-text"><?=$result['genre'] ?></p>
+            <a href="#" class="btn btn-primary">반납하기</a>
+          </div>
+        </div>
+      <?php   }  } else {
+       echo "대출 리스트가 존재하지 않습니다.";
+     } ?>
+
+      </div>
+    </body>
+    </html>
+<div class="row">
+  <button onclick="goBack()">Go Back</button>
+
+  <script>
+  function goBack() {
+    window.history.back();
+  }
 </script>
+</div>
