@@ -84,6 +84,10 @@ $tel = $codecheck['tel'];
       <?php } ?>
 
     </form>
+    <button class="mine wb"><a href="./purchase_list.php">구매 리스트</a></button>
+    <button class="mine wb"><a href="./loan_list.php">대여 리스트</a></button>
+    <button class="mine wb"><a href="./favorite_list.php">찜 리스트</a></button>
+
     <button onclick="goBack()">Go Back</button>
 
     <script>
