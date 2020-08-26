@@ -16,8 +16,6 @@ include "../lib/db.php";
     <title></title>
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../css/bootstrap-theme.css">
-	<!-- <script src="../css/js/bootstrap.js"></script> -->
-	<!-- <script src="../javascr/onClickFunc.js"></script> -->
 
 	<style>
 	.flex_container {
@@ -50,9 +48,12 @@ include "../lib/db.php";
 						</div>
 						<div>
 							<input type="submit" value="sign in" class="btn btn-outline-primary">
-							<a class="btn btn-outline-primary" href="../log/member.php">Create account</a>	
-						</div>
-					</form>
+              </div>
+              </form>
+							<button class="btn btn-outline-primary" onclick="location.href='../log/member.php'">Create account</button>
+              <button class="btn btn-outline-primary" onclick="location.href='../branch_hak/password_find.php'">forgot password</button>
+
+
 				</div>
 			</div>
 		</div>
