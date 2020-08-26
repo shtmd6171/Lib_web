@@ -19,11 +19,17 @@ $tel = $codecheck['tel'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="./javascr/onClickFunc.js"></script>
     <title></title>
+    <style media="screen">
+      .row > table{
+        width : 1280px;
+      }
+    </style>
 
   </head>
   <body>
+    <header class="blog-header py-3 sticky-top"></header>
     <div class="container">
-    <div class="row">
+            <div class="row">
                 <div class="col-md-2 m">
                   <?php if($codecheck['code'] == 'A'):?>
                   <?php echo $name."(관리자님) 환영합니다."; ?>
@@ -32,75 +38,117 @@ $tel = $codecheck['tel'];
                   <?php echo $name."(님) 환영합니다."; ?>
                   <?php endif; ?>
                 </div>
+                <div class="row">
+
+                </div>
                     <div class="col-md-8">
                     </div>
-                <div class="col-md-2 m">
-                    수정수정
+                <div class="col-md-2 mb-3">
+                    <a class="btn btn-outline-primary" href="../branch_hak/user_crystal.php">수정수정</a>
                 </div>
             </div>
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <button class="mine wb"><a href="./purchase_list.php">구매 리스트</a></button>
+              </div>
+              <div class="col-md-3">
+                <button class="mine wb"><a href="./loan_list.php">대여 리스트</a></button>
+              </div>
+                <div class="col-md-3">
+                  <button class="mine wb"><a href="./favorite_list.php">찜 리스트</a></button>
+                </div>
+                <div class="col-md-3">
+                  <button onclick="goBack()">Go Back</button>
 
-
-
-      <form id="mform" method="post">
-
+                <script>
+                function goBack() {
+                  window.history.back();
+                }
+                </script>
+                </div>
+            </div>
         <div class="title-container"></div>
           <fieldset class="line">
-            <legend>회원 정보</legend>
-              <table align="center" border="0" cellspacing="0" width="600">
-                <tr>
-                  <td>email</td>
-                  <td colspan="9">
-                    <input type="email" size="35" name="email" placeholder="<?php echo $email ?>" readonly required>
-                  </td>
-
-                </tr>
-                <tr>
-                  <td>Pwd</td>
-                  <td colspan="9">
-                    <input type="password" size="35" name="pwd" placeholder="비밀번호는 비공개 정보입니다." readonly></td>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td colspan="9">
-                    <input type="text" size="35" name="name" placeholder="<?php echo $name ?>" readonly></td>
-                </tr>
-                <tr>
-                  <td>Address</td>
-                  <td colspan="9">
-                    <input type="text" size="35" name="addr" placeholder="<?php echo $addr ?>" readonly ></td>
-                </tr>
-                <tr>
-                  <td>tell</td>
-                  <td colspan="9">
-                    <input type="text" size="35" name="tel" placeholder="<?php echo $tel ?>" readonly></td>
-                </tr>
-                <tr>
-                  <td><button class="mine wb"><a href="./member_edit.php">회원 수정</a></button>
-                  </td>
-                  <td> <button class="mine wb"><a href="./member_delete.php">탈퇴 등록</a></button>
-                  </td>
-            </table>
-          </form>
+            <div class="row mb-5">
+                <div class="col-md-4">
+                  현재 이용중인 멤버쉽</div>
+                <div class="col-md-5">finished
+                    <div class="row"></div>
+                        다 읽은 책 후기 작성하기
+                    <div class="row">
+                        <img src="../file/nonama.png" alt="">
+                        <img src="../file/nonama.png" alt="">
+                        <img src="../file/nonama.png" alt="">
+                        <img src="../file/nonama.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                조회
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <input type="date">
+                </div>
+                <div class="col-md-1 booter">
+                    ~
+                </div>
+                <div class="col-md-2">
+                    <input type="date">
+                </div>
+                <div class="col-md-5">
+                    <input type="select">
+                    <select>
+                      <option>제목</option>
+                      <option>출판사</option>
+                      <option>저자</option>
+                      <option>주문번호</option>
+                      <option>해당없음</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit">
+                </div>
+            </div>
+            <div class="row mb-5">
+              <div class="row">
+                <table border="1">
+                    <thead>
+                      <tr>
+                        <th>구매 / 대여일</th>
+                        <th>주문번호</th>
+                        <th>상품명</th>
+                        <th>비고</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
         </fieldset>
-
-
       <?php if($codecheck['code'] == 'A') {?>
 
       <button class="mine wb"><a href=""> 관리자 권한 회원 탈퇴등록 하기</a></button>
       <?php } ?>
-
     </form>
-    <button class="mine wb"><a href="./purchase_list.php">구매 리스트</a></button>
-    <button class="mine wb"><a href="./loan_list.php">대여 리스트</a></button>
-    <button class="mine wb"><a href="./favorite_list.php">찜 리스트</a></button>
-
-    <button onclick="goBack()">Go Back</button>
-
-    <script>
-    function goBack() {
-      window.history.back();
-    }
-    </script>
     </div>
   </body>
 </html>
