@@ -36,12 +36,16 @@ if(isset($_SESSION['user_id'])) {
       <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
       <link rel="stylesheet" href="../bootstrap/dist/bttn.min.css">
       <link href="./review_lib/booklist.css" rel="stylesheet">
+
+      <!-- aosjs -->
+      <script src="../aosjs/dist/aos.js"></script>
+      <link href="../aosjs/dist/aos.css" rel="stylesheet">
       <title></title>
     </head>
   </head>
   <body>
     <div class="container">
-      <header class="blog-header py-3 sticky-top w-100">
+      <header class="blog-header py-3 sticky-top">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
             <a class="text-muted mr-2 d-none d-sm-none d-md-inline-block" href="../book/book_list.php">MARK</a>
@@ -63,7 +67,7 @@ if(isset($_SESSION['user_id'])) {
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
              <div class="dropdown show d-none d-md-inline-block" id="selectedop">
-              <a class="glass" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="glass" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-200,10">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
                   <circle cx="10.5" cy="10.5" r="7.5"></circle>
                   <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
@@ -122,17 +126,22 @@ if(isset($_SESSION['user_id'])) {
         'genre' => htmlspecialchars($booklist['genre']),
         'file' => htmlspecialchars($booklist['file']));
       ?>
+      <div class="row">
+        <div class=" offset-3 col-6 nav-scroller bg-white rounded box-shadow my-3  ">
+          <nav class="nav nav-underline mx-auto align-items-center justify-content-around">
+            <a class="nav-link active" href="#">책 조회</a>
+            <a class="nav-link" href="#">
+              Favorite
+              <span class="badge badge-pill bg-light align-text-bottom">27</span>
+            </a>
+            <a class="nav-link" href="#">행사</a>
+          </nav>
+        </div>
+        <div class="col-3">
 
-      <div class="nav-scroller bg-white rounded box-shadow my-3 text-center">
-        <nav class="nav nav-underline mx-auto">
-          <a class="nav-link active" href="#">책 조회</a>
-          <a class="nav-link" href="#">
-            Favorite
-            <span class="badge badge-pill bg-light align-text-bottom">27</span>
-          </a>
-          <a class="nav-link" href="#">행사</a>
-        </nav>
+        </div>
       </div>
+
 
       <!-- tab end -->
 
@@ -142,9 +151,14 @@ if(isset($_SESSION['user_id'])) {
           <div class=" d-flex align-items-center p-3 my-4 rounded box-shadow">
             <div class=" d-flex align-items-center justify-content-center showwindow">
               <img class="card bookimg" src="../book/booklist_lib/1.jpg" alt="">
-              <img class="card-img img-thumbnail rounded book" src="../file/<?=$filtered['file']; ?>" alt="">
+              <img data-aos="zoom-in"
+               data-aos-easing="ease-in-out-back"
+               data-aos-duration="1500" class="card-img img-thumbnail rounded book" src="../file/original/<?=$filtered['file']; ?>" alt="">
             </div>
           </div>
+          <script>
+            AOS.init();
+          </script>
 
           <!-- book cover end  -->
             <div class="d-none d-md-inline my-auto">
@@ -152,34 +166,31 @@ if(isset($_SESSION['user_id'])) {
                 <h4 class="d-sm-inline-flex border-bottom border-gray pb-2 mb-0">책 정보</h4>
                 <div class="text-center align-items-center justify-content-center my-auto">
                     <div class="media text-muted pt-3">
-                      <p class=" pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <p class=" pb-3 mb-0 lh-125 border-bottom border-gray mx-auto">
                         <strong class="d-block text-gray-dark text-center pb-1">제목</strong>
                         <?= $filtered['title']; ?>
                       </p>
                     </div>
 
                     <div class="media text-muted pt-3">
-                      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <p class="pb-3 mb-0 lh-125 border-bottom border-gray mx-auto">
                         <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
                       <?= $filtered['author']; ?>
                       </p>
                     </div>
 
                     <div class="media text-muted pt-3">
-                      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <p class="pb-3 mb-0 lh-125 border-bottom border-gray mx-auto">
                         <strong class="d-block text-gray-dark text-center pb-1">출판사</strong>
                       <?= $filtered['publisher']; ?>
                       </p>
                     </div>
 
                     <div class="my-4">
-                      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+                      <p class="media-body pb-3 mb-0 lh-125 ">
                       <button class="bttn-jelly bttn-sm bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">리뷰쓰기</a></button>
+                        <button class="bttn-jelly bttn-sm bttn-danger redirectioning" data-toggle="modal" ><a href="../branch_hak/favorite.php?id=<?= $filtered['book_id']?>">찜하기</a></button>
                     </p>
-                    </div>
-
-                    <div class="my-4">
-                      <button class="bttn-jelly bttn-md bttn-danger redirectioning" data-toggle="modal" ><a href="../branch_hak/favorite.php?id=<?= $filtered['book_id']?>">찜하기</a></button>
                     </div>
 
                 </div>
