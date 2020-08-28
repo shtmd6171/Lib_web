@@ -1,0 +1,15 @@
+
+.grid__item {
+
+	width: 100%;
+	min-height: 2em;
+	display: -ms-flexbox;
+	-ms-flex-pack: center;
+	-ms-flex-align: center;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-align-items: center;
+
+}
