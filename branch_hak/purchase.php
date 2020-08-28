@@ -35,5 +35,4 @@ if(isset($user_id))
  {
    	echo "<script>alert('로그인 해주세요.'); location.href='../log/login.php';</script>";
  }
-
 ?>
