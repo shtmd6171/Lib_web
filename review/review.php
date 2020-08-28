@@ -40,6 +40,11 @@ if(isset($_SESSION['user_id'])) {
       <!-- aosjs -->
       <script src="../aosjs/dist/aos.js"></script>
       <link href="../aosjs/dist/aos.css" rel="stylesheet">
+
+      <!-- mojs -->
+      <link rel="stylesheet" type="text/css" href="./review_lib/fonts/font-awesome-4.5.0/css/font-awesome.min.css" />
+  		<link rel="stylesheet" type="text/css" href="./review_lib/demo.css"/>
+  		<link rel="stylesheet" type="text/css" href="./review_lib/icons.css" />
       <title></title>
     </head>
   </head>
@@ -130,10 +135,9 @@ if(isset($_SESSION['user_id'])) {
         <div class=" offset-3 col-6 nav-scroller bg-white rounded box-shadow my-3  ">
           <nav class="nav nav-underline mx-auto align-items-center justify-content-around">
             <a class="nav-link active" href="#">책 조회</a>
-            <a class="nav-link" href="#">
-              Favorite
-              <span class="badge badge-pill bg-light align-text-bottom">27</span>
-            </a>
+
+            <button class="bttn-jelly bttn-sm bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">리뷰쓰기</a></button>
+
             <a class="nav-link" href="#">행사</a>
           </nav>
         </div>
@@ -193,10 +197,27 @@ if(isset($_SESSION['user_id'])) {
                       </p>
                     </div>
 
-                    <div class="my-4">
-                      <p class="media-body pb-3 mb-0 lh-125 ">
-                      <button class="bttn-jelly bttn-sm bttn-warning redirectioning "><a href="./review_write.php?id=<?= $filtered['book_id']?>">리뷰쓰기</a></button>
-                        <button class="bttn-jelly bttn-sm bttn-danger redirectioning" data-toggle="modal" ><a href="../branch_hak/favorite.php?id=<?= $filtered['book_id']?>">찜하기</a></button>
+                    <div class="my-4" style="color: #FF5964;">  <?php  if(isset($user_id)) { ?> 찜하기
+                    <?php
+                    $sql = mq("select * from favorite where user_id ='".$user_id."' AND book_id ='".$book_id."'");
+                        if(($favoritecheck = $sql->fetch_array())) { ?>
+                        <div class="grid">
+                        <li class="grid__item">
+                          <!-- 찜 삭제시 여기서 location으로 처리하기 -->
+                          <button class="icobutton icobutton--heart" style="color: #FF5964;">
+                            <span class="fa fa-heart"></span></button>
+                        </li>
+                      </div>
+                    <?php  } else { ?>
+                      <div class="grid">
+                      <li class="grid__item">
+                        <button class="icobutton icobutton--heart" onclick="
+                        setTimeout( function() { location.href = '../branch_hak/favorite.php?id=<?= $filtered['book_id']?>'}, 1000 )"><span class="fa fa-heart"></a></button>
+                      </li>
+                    </div>
+                  <?php  } } ?>
+                      <script src="./review_lib/mo.min.js"></script>
+                      <script src="./review_lib/demo.js"></script>
                     </p>
                     </div>
 
@@ -210,10 +231,61 @@ if(isset($_SESSION['user_id'])) {
 
         <div class="row py-2 mx-2">
 
+          <div class="col-md-4 col-sm-12 d-sm-flex d-md-none d-lg-none d-flex flex-column align-items-center py-2 my-4 mx-auto w-100 bg-white rounded box-shadow bookdesc">
+            <h4 class="d-sm-inline-flex border-bottom border-gray pb-2 mb-0">책 정보</h4>
+            <div class="text-center align-items-center justify-content-center my-auto">
+                <div class="media text-muted pt-3">
+                  <p class=" pb-3 mb-0 lh-125 border-bottom border-gray mx-auto">
+                    <strong class="d-block text-gray-dark text-center pb-1">제목</strong>
+                    <?= $filtered['title']; ?>
+                  </p>
+                </div>
+
+                <div class="media text-muted pt-3">
+                  <p class="pb-3 mb-0 lh-125 border-bottom border-gray mx-auto">
+                    <strong class="d-block text-gray-dark text-center pb-1">작가</strong>
+                  <?= $filtered['author']; ?>
+                  </p>
+                </div>
+
+                <div class="media text-muted pt-3">
+                  <p class="pb-3 mb-0 lh-125 border-bottom border-gray mx-auto">
+                    <strong class="d-block text-gray-dark text-center pb-1">출판사</strong>
+                  <?= $filtered['publisher']; ?>
+                  </p>
+                </div>
+
+                <div class="my-4" style="color: #FF5964;">찜하기
+                  <?php $sql = mq("select * from favorite where user_id ='".$user_id."' AND book_id ='".$book_id."'");
+                    if(($favoritecheck = $sql->fetch_array())) { ?>
+                    <div class="grid">
+                    <li class="grid__item">
+                      <!-- 찜 삭제시 여기서 location으로 처리하기 -->
+                      <button class="icobutton icobutton--heart" style="color: #FF5964;">
+                        <span class="fa fa-heart"></span></button>
+                    </li>
+                  </div>
+                <?php  } else { ?>
+                  <div class="grid">
+                  <li class="grid__item">
+                    <button class="icobutton icobutton--heart" onclick="
+                    setTimeout( function() { location.href = '../branch_hak/favorite.php?id=<?= $filtered['book_id']?>'}, 1000 )"><span class="fa fa-heart"></a></button>
+                  </li>
+                </div>
+                <?php  } ?>
+                  <script src="./review_lib/mo.min.js"></script>
+                  <script src="./review_lib/demo.js"></script>
+                </p>
+                </div>
+            </div>
+          </div>
+
           <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
             <div class="card-header">이 책을 읽어볼까요?</div>
               <div class="row card-body mx-auto">
-              <button class="bttn-jelly bttn-md bttn-warning redirectioning" onclick="location.href='../branch_hak/loan.php?id=<?=$book_id?>'" >대여하기</button>
+              <button data-aos="slide-right"
+               data-aos-easing="ease-in-out-back"
+               data-aos-duration="1000" class="bttn-jelly bttn-md bttn-warning redirectioning" onclick="location.href='../branch_hak/loan.php?id=<?=$book_id?>'" >대여하기</button>
               </div>
             <div class="card-footer text-muted">18일까지 기간 한정!</div>
           </div>
@@ -266,19 +338,13 @@ if(isset($_SESSION['user_id'])) {
             <div class="card text-center col-md-4 col-sm-6 box-shadow px-0">
               <div class="card-header">이 책을 구매 해볼까요?</div>
                 <div class="row card-body mx-auto">
-                  <button class="bttn-jelly bttn-md bttn-warning redirectioning" onclick="location.href='../branch_hak/purchase.php?id=<?=$book_id?>'" >구매하기</a></button>
+                  <button data-aos="slide-left"
+                   data-aos-easing="ease-in-out-back"
+                   data-aos-duration="1000" class="bttn-jelly bttn-md bttn-warning redirectioning" onclick="location.href='../branch_hak/purchase.php?id=<?=$book_id?>'" >구매하기</a></button>
 
                 </div>
               <div class="card-footer text-muted">27명이 이 책을 구입했습니다</div>
             </div>
-
-            <div class="card text-center col-md-4 col-sm-12 d-sm-flex d-md-none d-lg-none box-shadow px-0">
-              <div class="card-header">상세정보</div>
-                <div class="row card-body mx-auto">
-                  <button class="bttn-jelly bttn-md bttn-danger" data-toggle="modal" data-target="#exampleModal">들여보기</button>
-                </div>
-              </div>
-
         </div>
 
         <!-- 서평  -->
