@@ -12,9 +12,16 @@ book_id와 user_id를 모두 필요로 한다.
 그렇기에 이 두 정보를 모두 받고 hidden 타입으로 $_POST 값에 집어넣는다.
 */
 $book_id = $_GET['id'];
-$user_id = $_SESSION['user_id'];
+if(isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+} else { ?>
 
-?>
+  <script>
+    alert("먼저 로그인 해주세요");
+    location.href = "../log/login.php";
+  </script>
+
+<?php } ?>
 
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
