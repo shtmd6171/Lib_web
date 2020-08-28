@@ -25,12 +25,17 @@ $name = $codecheck['name'];
   <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
   <link href="./booklist_lib/booklist.css" rel="stylesheet">
   <link rel="stylesheet" href="../bootstrap/dist/bttn.min.css">
+
+  <!-- aosjs -->
+  <script src="../aosjs/dist/aos.js"></script>
+  <link href="../aosjs/dist/aos.css" rel="stylesheet">
+
   <title></title>
 </head>
 
 <body>
   <div class="container">
-    <header class="blog-header py-3 sticky-top">
+    <header class="blog-header py-3 sticky-top w-100">
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
           <a class="text-muted mr-2 d-none d-sm-none d-md-inline-block" href="./book_list.php">MARK</a>
@@ -87,7 +92,7 @@ $name = $codecheck['name'];
                   <option value="publisher">출판사</option>
                 </select>
                  <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
-                 <input type="submit" class="form-control" value="검색">
+                 <input type="submit" class="form-control" onclick="location.href = '#list'" value="검색">
                </div>
             </form>
           </div>
@@ -163,7 +168,7 @@ $name = $codecheck['name'];
              </div>
                 <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
              <span class="input-group-submit">
-              <input type="submit" class="form-control" value="검색">
+              <input type="submit" class="form-control" onclick="location.href = '#list'" value="검색">
               </span>
           </form>
         </div>
@@ -223,31 +228,27 @@ $name = $codecheck['name'];
       </a>
     </div>
 
+
     <div class="row mb-2" id="list">
       <?php if(!(isset($_GET['genre']))){$_GET['genre'] = "NONE";}
       if(!(isset($_POST['selected']))){$_POST['selected'] = "NONE";}
-      if(!(isset($_POST['search']))){$_POST['search'] = "NONE";} ?>
+      if(!(isset($_POST['search']))){$_POST['search'] = "NONE";}
+      if(!(isset($codecheck['code']))){$codecheck['code'] = "NONE";} ?>
 
           <script type="text/javascript">
             $(function() {
               $.post("./testing.php",
-                   {page : 1, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>"},
+                   {page : 1, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>", code : "<?= $codecheck['code'] ?>"},
                    function(data){ $("#list").html(data); });
             });
 
             function paging(number) {
               $.post("./testing.php",
-                   {page : number, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>"},
+                   {page : number, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>", code : "<?= $codecheck['code'] ?>"},
                    function(data){ $("#list").html(data); });
             }
           </script>
           </div>
-
-
-
-
-
-
   </div>
 
 </body>
