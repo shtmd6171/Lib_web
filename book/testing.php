@@ -45,17 +45,17 @@ while($booklist = $sql->fetch_array()){
       <div class="card-body d-flex flex-column align-items-start" >
         <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
         <h3 class="mb-0 card-title">
-          <a class="text-dark booktitle" href="../review/review_.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
+          <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
         </h3>
         <div class="card-subtitle mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
         <p class="card-subtitle card-text mb-auto "><?=$filtered['publisher']?>사의 신작</p>
         <span>
-          <a class="card-link" href="../review/review_.php?id=<?= $filtered['book_id']?>">읽어보기</a>
+          <a class="card-link" href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기</a>
             <?php if(isset($_POST['code'])){
             if($_POST['code'] == 'A') {?>
             <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
             <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
-      <?php }}else {echo "????";} ?>
+      <?php }} ?>
     </span>
   </div>
   <?php if(isset($filtered['file'])&&$filtered['file']!="")  {
