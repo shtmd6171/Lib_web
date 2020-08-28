@@ -12,7 +12,8 @@ PRIMARY KEY (returned_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 CREATE TABLE loan (
 book_id int(20) NOT NULL,
 user_id int(20) NOT NULL,
-loan_date date NOT NULL,
+loan_date datetime NOT NULL,
+return_date datetime NOT NULL,
 PRIMARY KEY (book_id, user_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE user (
@@ -42,6 +43,7 @@ review_title varchar(20) NOT NULL,
 review_desc varchar(100) NOT NULL,
 book_id int(20) NOT NULL,
 user_id int(20) NOT NULL,
+review_rating INT(1) NOT NULL,
 PRIMARY KEY (review_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE comment (
@@ -67,5 +69,16 @@ user_id int(20) NOT NULL,
 Favorite_date date NOT NULL,
 PRIMARY KEY (book_id, user_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-# book_review 테이블에 review_rating의 필드값을 추가 했습니다.
-ALTER TABLE `book_review` ADD `review_rating` INT(1) NOT NULL AFTER `user_id`;
+# book_review 테이블에 review_rating의 필드값을 46번째 줄에 추가 했습니다.
+# 만약, 기존에 loan테이블이 존재하면 밑에와 같은 방식으로 alter해주세요
+# ALTER TABLE `book_review` ADD `review_rating` INT(1) NOT NULL AFTER `user_id`;
+
+#######################################################################################
+
+# 2020.08.26 14:00
+#loan 테이블 생성할때 return_date를 추가하게 끔 16번째줄에 추가했음
+#만약, 기존에 loan테이블이 존재하면 밑에와 같은 방식으로 alter해주세요
+
+#ALTER TABLE `loan` CHANGE `loan_date` `loan_date` DATETIME NOT NULL;
+#ALTER TABLE `loan` ADD `return_date` INT NULL AFTER `loan_date`;
+#ALTER TABLE `loan` CHANGE `return_date` `return_date` DATETIME NOT NULL;
