@@ -19,34 +19,34 @@ include "../lib/db.php";
 			<div>
 			<tr>
 				<td>id</td>
-				<td><input type="email"></td>
+				<td><input type="email" name="email"></td>
 			</tr>
 			</div>
 			<div>
 			<tr>
 				<td>password</td>
-				<td><input type="password"></td>
+				<td><input type="password" name="pwd"></td>
 			</tr>
 			</div><div>
 			<tr>
 				<td>name</td>
-				<td><input type="text"></td>
+				<td><input type="text" name="name"></td>
 			</tr>
 			</div><div>
 			<tr>
 				<td>address</td>
-				<td><input type="text"></td>
+				<td><input type="text" name="addr"></td>
 			</tr>
 			</div><div>
 			<tr>
 				<td>tell</td>
-				<td><input type="text"></td>
+				<td><input type="text" name="tel"></td>
 			</tr>
 			</div><div>
 			<tr>
 				<td>gender</td>
-				<td><input type="radio" name="male" value="male">male</td>
-				<td><input type="radio" name="female" value="female">female</td>
+				<td><input type="radio" name="gender" value="male">male</td>
+				<td><input type="radio" name="gender" value="female">female</td>
 			</tr>
 			</div><div>
 			<tr>
