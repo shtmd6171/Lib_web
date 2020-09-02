@@ -20,6 +20,10 @@ if(isset($user_id))
       }
       else
       {
+<<<<<<< HEAD
+=======
+        echo "<script>alert('이미 찜한 상품입니다.'); history.back();</script>";
+>>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
       }
 }
  else

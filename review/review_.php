@@ -31,6 +31,11 @@ if(isset($_SESSION['user_id'])) {
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<<<<<<< HEAD
+=======
+      <link rel="stylesheet" href="../css/bootstrap-theme.css">
+      <script src="../css/js/bootstrap.js"></script>
+>>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
       <link href="./review_lib/booklist.css" rel="stylesheet">
       <title></title>
     </head>

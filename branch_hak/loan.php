@@ -18,8 +18,15 @@ if(isset($user_id))
   if (!($codecheck = $sql->fetch_array())) {
 
     $insert = mq("INSERT INTO loan VALUES ('".$book_id."', '".$user_id."', '".$date."') ");
+<<<<<<< HEAD
 
    } else {
+=======
+    echo "<script>alert('성공적으로 대여했습니다.'); history.back();</script>";
+
+   } else {
+      echo "<script>alert('이미 대여한 상품입니다!'); history.back();</script>";
+>>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
    }
  }
  else
