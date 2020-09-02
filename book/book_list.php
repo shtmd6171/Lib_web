@@ -17,19 +17,25 @@ $name = $codecheck['name'];
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <script src="./booklist_lib/myjs.js"></script>
   <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
   <link href="./booklist_lib/booklist.css" rel="stylesheet">
   <link rel="stylesheet" href="../bootstrap/dist/bttn.min.css">
+
+  <!-- aosjs -->
+  <script src="../aosjs/dist/aos.js"></script>
+  <link href="../aosjs/dist/aos.css" rel="stylesheet">
+
   <title></title>
 </head>
 
 <body>
   <div class="container">
-    <header class="blog-header py-3 sticky-top">
+    <header class="blog-header py-3 sticky-top w-100">
       <div class="row flex-nowrap justify-content-between align-items-center">
         <div class="col-4 pt-1">
           <a class="text-muted mr-2 d-none d-sm-none d-md-inline-block" href="./book_list.php">MARK</a>
@@ -72,7 +78,7 @@ $name = $codecheck['name'];
         </div>
         <div class="col-4 d-flex justify-content-end align-items-center">
            <div class="dropdown show d-none d-md-inline-block" id="selectedop">
-            <a class="glass " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="glass " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-125,0">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3">
                 <circle cx="10.5" cy="10.5" r="7.5"></circle>
                 <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
@@ -86,13 +92,13 @@ $name = $codecheck['name'];
                   <option value="publisher">출판사</option>
                 </select>
                  <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
-                 <input type="submit" class="form-control" value="검색">
+                 <input type="submit" class="form-control" onclick="location.href = '#list'" value="검색">
                </div>
             </form>
           </div>
           <?php if(!(isset($_SESSION['user_id']))) { ?>
           <span class="dropdown">
-            <a class="btn mr-1 btn-sm btn-outline-secondary d-none d-md-inline-block sign" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign in</a>
+            <a class="btn mr-1 btn-sm btn-outline-secondary d-none d-md-inline-block sign" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-180,0">Sign in</a>
             <form class="dropdown-menu p-4" method="post" action="../log/login_ok.php">
               <div class="form-group">
                 <label for="exampleDropdownFormEmail2">Email address</label>
@@ -162,7 +168,7 @@ $name = $codecheck['name'];
              </div>
                 <input class="form-control" type="text" name="search" placeholder="Search" aria-label="Search">
              <span class="input-group-submit">
-              <input type="submit" class="form-control" value="검색">
+              <input type="submit" class="form-control" onclick="location.href = '#list'" value="검색">
               </span>
           </form>
         </div>
@@ -222,52 +228,27 @@ $name = $codecheck['name'];
       </a>
     </div>
 
-    <div class="row mb-2">
-    <?php
-    if(isset($_GET['genre'])) {
-      $sql = mq("select * from book where genre='".$_GET['genre']."'");
-       if(isset($_POST['selected'])) {
-        $sql = mq("select * from book where genre='".$_GET['genre']."' AND ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    } else {
-      $sql = mq("select * from book");
-      if(isset($_POST['selected'])) {
-       $sql = mq("select * from book where ".$_POST['selected']." LIKE'%".$_POST['search']."%'");
-        }
-    }
-    while($booklist = $sql->fetch_array()){
-      $filtered = array(
-        'book_id' => htmlspecialchars($booklist['book_id']),
-        'title' => htmlspecialchars($booklist['title']),
-        'author' => htmlspecialchars($booklist['author']),
-        'publisher' => htmlspecialchars($booklist['publisher']),
-        'the_date' => htmlspecialchars($booklist['the_date']),
-        'genre' => htmlspecialchars($booklist['genre']),
-        'file' => htmlspecialchars($booklist['file'])
-      );?>
-      <div class="col-sm-12 col-md-6">
-        <div class="card d-flex flex-row mb-4 box-shadow h-md-250">
-          <div class="card-body d-flex flex-column align-items-start">
-            <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
-            <h3 class="mb-0 card-title">
-              <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
-            </h3>
-            <div class="card-subtitle mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
-            <p class="card-subtitle card-text mb-auto "><?=$filtered['publisher']?>사의 신작</p>
-            <span>
-              <a class="card-link" href="../review/review_.php?id=<?= $filtered['book_id']?>">읽어보기</a>
-                <?php if(isset($codecheck)){
-                if($codecheck['code'] == 'A') {?>
-                <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
-                <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
-          <?php }} ?>
-        </span>
-      </div>
-      <img class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/<?=$filtered['file']?>" alt="Card image cap" width="200px" height="250px">
-      </div>
-      </div>
-  <?php } ?>
-  </div>
+
+    <div class="row mb-2" id="list">
+      <?php if(!(isset($_GET['genre']))){$_GET['genre'] = "NONE";}
+      if(!(isset($_POST['selected']))){$_POST['selected'] = "NONE";}
+      if(!(isset($_POST['search']))){$_POST['search'] = "NONE";}
+      if(!(isset($codecheck['code']))){$codecheck['code'] = "NONE";} ?>
+
+          <script type="text/javascript">
+            $(function() {
+              $.post("./testing.php",
+                   {page : 1, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>", code : "<?= $codecheck['code'] ?>"},
+                   function(data){ $("#list").html(data); });
+            });
+
+            function paging(number) {
+              $.post("./testing.php",
+                   {page : number, genre : "<?= $_GET['genre'] ?>", selectedone : "<?= $_POST['selected'] ?>", searchedone : "<?= $_POST['search'] ?>", code : "<?= $codecheck['code'] ?>"},
+                   function(data){ $("#list").html(data); });
+            }
+          </script>
+          </div>
   </div>
 
 </body>

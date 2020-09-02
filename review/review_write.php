@@ -16,9 +16,6 @@ book_id와 user_id를 모두 필요로 한다.
 =======
 /*2020-08-27~28
 inseon todo
-리뷰 페이지들 구성을 정확히 모르겠음. 후일 설명요망.
-모든 div class row에 mb부여할 것. 다 붙어버렸음
-review_에서 review_write로 들어와 back누르면 review로 돌아오는데 정상인가요?
 참고 - https://bootsnipp.com/snippets/PjPa
 */
 

@@ -12,7 +12,7 @@ $genre = $_POST['genre'];
 $tmpfile = $_FILES['lo_image_link']['tmp_name'];
 $o_name = $_FILES['lo_image_link']['name'];
 $filename = iconv("UTF-8","EUC-KR",$_FILES['lo_image_link']['name']);
-$folder = "../file/".$filename;
+$folder = "../file/original/".$filename;
 $vall = move_uploaded_file($tmpfile,$folder);
 
 if(!($title==""||$author==""||$publisher==""||$date==""||$genre=="")){

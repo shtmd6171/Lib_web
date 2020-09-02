@@ -1,39 +1,27 @@
 <?php
-include "../lib/db.php";
+include_once "../lib/db.php";
+include_once "../lib/resizing.php";
 $page = $_POST['page'];
 $genre = $_POST['genre'];
 if($page == "") {
   $page = 1;
 }
-$from = ($page -1)*3;
-
+$from = ($page -1)*6;
 if($genre != "NONE" && $_POST['selectedone']=="NONE" && $_POST['searchedone']=="NONE") {
-  $sql = mq("select * from book where genre='".$_POST['genre']."' limit $from, 3");
+  $sql = mq("select * from book where genre='".$_POST['genre']."' limit $from, 6");
   $count = mq("select count(*) from book where genre='".$_POST['genre']."'");
-  echo "1";
-  echo $_POST['selectedone'];
-  echo $_POST['searchedone'];
 }
 if($genre != "NONE" && $_POST['selectedone']!="NONE" && $_POST['searchedone']!="NONE")  {
-    $sql = mq("select * from book where genre='".$_POST['genre']."' AND ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%'");
+    $sql = mq("select * from book where genre='".$_POST['genre']."' AND ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%' limit $from, 6");
     $count = mq("select count(*) from book where genre='".$_POST['genre']."' AND ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%'");
-    echo "2";
-    echo $_POST['selectedone'];
-    echo $_POST['searchedone'];
 }
 if($genre == "NONE" && $_POST['selectedone']=="NONE" && $_POST['searchedone']=="NONE") {
-  $sql = mq("select * from book limit $from, 3 ");
+  $sql = mq("select * from book limit $from, 6 ");
   $count = mq("select count(*) from book");
-  echo "3";
-  echo $_POST['selectedone'];
-  echo $_POST['searchedone'];
 }
 if($genre == "NONE" && $_POST['selectedone']!="NONE" && $_POST['searchedone']!="NONE") {
-   $sql = mq("select * from book where ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%' limit $from, 3");
+   $sql = mq("select * from book where ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%' limit $from, 6");
    $count = mq("select count(*) from book where ".$_POST['selectedone']." LIKE'%".$_POST['searchedone']."%'");
-  echo "4";
-  echo $_POST['selectedone'];
-  echo $_POST['searchedone'];
 }
 
 
@@ -49,35 +37,64 @@ while($booklist = $sql->fetch_array()){
     'the_date' => htmlspecialchars($booklist['the_date']),
     'genre' => htmlspecialchars($booklist['genre']),
     'file' => htmlspecialchars($booklist['file'])
-  );
-?>
-  <table class="list" cellpadding="5" border="1" align="center">
+  );?>
+  <div class="col-sm-12 col-md-6">
+    <div data-aos="flip-up"
+     data-aos-easing="ease-in-out-back"
+     data-aos-duration="1000" class="card d-flex flex-row mb-4 box-shadow h-md-250">
+      <div class="card-body d-flex flex-column align-items-start" >
+        <strong class="d-inline-block mb-2 text-secondary"><?=$filtered['genre']?></strong>
+        <h3 class="mb-0 card-title">
+          <a class="text-dark booktitle" href="../review/review.php?id=<?= $filtered['book_id']?>"><?=$filtered['title']?></a>
+        </h3>
+        <div class="card-subtitle mb-1 text-muted bookauthor"><?=$filtered['author']?></div>
+        <p class="card-subtitle card-text mb-auto "><?=$filtered['publisher']?>사의 신작</p>
+        <span>
+          <a class="card-link" href="../review/review.php?id=<?= $filtered['book_id']?>">읽어보기</a>
+            <?php if(isset($_POST['code'])){
+            if($_POST['code'] == 'A') {?>
+            <a class="card-link" href="./book_update.php?id=<?= $filtered['book_id'] ?>">수정하기</a>
+            <a class="card-link" href="./book_delete_process.php?id=<?= $filtered['book_id'] ?>">삭제</a>
+      <?php }} ?>
+    </span>
+  </div>
+  <?php if(isset($filtered['file'])&&$filtered['file']!="")  {
+    $img = $filtered['file'];
+    resize_image("../file/original/$img", "../file/resize/resizing_$img", 200, 250);  ?>
+  <img data-aos="fade"
+   data-aos-easing="ease-in-out"
+   data-aos-duration="1650" class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/resize/resizing_<?=$img?>" alt="Card image cap" width="200" height="250">
+  <?php } else { ?>
+  <img data-aos="fade"
+   data-aos-easing="ease-in-out"
+   data-aos-duration="1650" class="card-img-right img-thumbnail rounded flex-auto d-none d-md-block" src="../file/no_image_session.jpg" width="200" height="250">
+  <?php }?>
+  </div>
+  </div>
 
-  <tr class="tltle">
-    <th>Title </th>
-    <th>Author</th>
-    <th>Publisher</th>
-    <th>The_Day</th>
-    <th>Genre</th>
-    <th>Image</th>
-    <th>이 책의 관한 서평</th>
-  </tr>
-  <tr class="value">
-    <td><p><?= $filtered['title'] ?></p></td>
-    <td><p><?= $filtered['author'] ?></p></td>
-    <td><p><?= $filtered['publisher'] ?></p></td>
-    <td><p><?= $filtered['the_date'] ?></p></td>
-    <td><p><?= $filtered['genre'] ?></p></td>
-    <td><p><img src="../file/<?= $filtered['file'] ?>" alt="이미지 없음" width="200" height="200"></p></td>
-    <td><a href="../review/review.php?id=<?= $filtered['book_id'] ?>">보기</a> </td>
-  <?php  } ?>
-  </tr>
-  </table>
+  <script>
+    AOS.init();
+  </script>
+<?php } ?>
+
+<div class=" row col-12 mx-auto">
+
+
+<div class="d-flex mx-auto">
+  <div class="d-flex justify-content-center align-items-center">
+
+
 
 <?php
  for ($i=1; $i <= $allcount; $i++) {
-    if($i <= ceil($allcount/3)) {
+    if($i <= ceil($allcount/6)) {
    ?>
-   <span onclick="paging('<?=$i?>')"><?=$i?></span>
+   <div class="col">
+      <span onclick="paging('<?=$i?>'); href.location = '#list'"><?=$i?></span>
+   </div>
+
 
  <?php } } ?>
+ </div>
+</div>
+</div>

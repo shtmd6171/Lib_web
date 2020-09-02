@@ -14,6 +14,7 @@ include "../lib/db.php";
 	<div class="container">
 <<<<<<< HEAD
 		<form method="post" action="member_ok.php">
+<<<<<<< HEAD
 			</div>
 			</div>
 =======
@@ -76,6 +77,48 @@ include "../lib/db.php";
 			<button onclick="location.href='member.php'">back</button> <!--이거 안먹힌다 왜일까... 수정요망 -->
 		</div>
 >>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
+=======
+			<h1>Membership Registration</h1>
+			<div>
+			<tr>
+				<td>id</td>
+				<td><input type="email" name="email"></td>
+			</tr>
+			</div>
+			<div>
+			<tr>
+				<td>password</td>
+				<td><input type="password" name="pwd"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>name</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>address</td>
+				<td><input type="text" name="addr"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>tell</td>
+				<td><input type="text" name="tel"></td>
+			</tr>
+			</div><div>
+			<tr>
+				<td>gender</td>
+				<td><input type="radio" name="gender" value="male">male</td>
+				<td><input type="radio" name="gender" value="female">female</td>
+			</tr>
+			</div><div>
+			<tr>
+				<td><button>gogo</button></td>
+				<td><button onclick="location.href='member.php'">back</button></td>
+			</tr>
+			</div>
+		</form>
+>>>>>>> 51fc89b4bfa10aa6fafc31563510bf955f9c88c4
 	</div>
 </body>
 </html>
