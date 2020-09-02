@@ -15,48 +15,8 @@ $list = mq("select title,author,publisher, purchase_date as 구매날짜, genre,
 // 쿼리를 실행했는데 값이 존재하지 않는다는 것은 DB에 데이터가 없다는 라는 말.
 // 고로 대출 한 데이터가 없다라는 것임.
 
-echo "<h1>책 구매 리스트</h1>";
-if ($sql->num_rows > 0) {
-    while($result = $list->fetch_array())
-    {?>
-      <!DOCTYPE html>
-      <html lang="ko" dir="ltr">
-        <head>
-          <meta charset="utf-8">
-          <title></title>
-        </head>
-        <body>
-          <table border="1">
-            <tr>
-              <th>제목</th>
-              <th>저자</th>
-              <th>출판사</th>
-              <th>구매날짜</th>
-              <th>장르</th>
-          </tr>
-            <tr>
-              <td><?=$result['title'] ?></td>
-              <td><?=$result['author'] ?></td>
-              <td><?=$result['publisher'] ?></td>
-              <td><?=$result['구매날짜'] ?></td>
-              <td><?=$result['genre'] ?></td>
-          </table>
-        </body>
-      </html>
 
-      <?php
-    }
-
-}
-else {
-    echo "구매 리스트가 존재하지 않습니다.";
- }
 ?>
 
-<button onclick="goBack()">Go Back</button>
 
-<script>
-function goBack() {
-  window.history.back();
-}
 </script>

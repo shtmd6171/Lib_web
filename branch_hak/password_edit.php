@@ -6,6 +6,7 @@ header('Cache-Control: no-cache, must-revalidate');
   $usercheck = $sql->fetch_array();
   ?>
 
+
   <!DOCTYPE html>
   <html lang="ko" dir="ltr">
     <head>
@@ -19,7 +20,6 @@ header('Cache-Control: no-cache, must-revalidate');
       {   ?>
 
           <form method="post">
-            <table border="1">
                 <input type="hidden" name="email" value="<?=$_POST['email']  ?>">
                 <input type="hidden" name="tel" value="<?=$_POST['tel']  ?>">
                 <tr>
@@ -28,8 +28,6 @@ header('Cache-Control: no-cache, must-revalidate');
                 <tr>
                   <td>다시 비밀번호 : <input type="password" name="repwd" placeholder="비밀번호 확인" required></td>
                 </tr>
-              <table>
-              <input type="submit" name="" value="submit">
             </form>
 
             <?php
@@ -41,7 +39,6 @@ header('Cache-Control: no-cache, must-revalidate');
               $sql = mq("UPDATE user SET pwd ='".$hash_pwd."' WHERE email ='".$_POST['email']."'");
               echo "<script>alert('수정 되었습니다. 다시 로그인해주세요.'); location.href='../log/login.php';</script>";
             }else {
-              echo "<script>alert('입력하신 비밀번호를 똑같이 작성해주세요.'); location.reload(); history.back();  </script>";
                 echo "<script>location.replace('./password_edit.php');</script>";
 
             }
