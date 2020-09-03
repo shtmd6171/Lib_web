@@ -41,17 +41,16 @@ if ($sql->num_rows > 0) {
               <td><?=$result['찜한날짜'] ?></td>
               <td><?=$result['genre'] ?></td>
           </table>
-        </body>
-      </html>
 
-      <?php
-    }
 
-}
-else {
-    echo "찜 리스트가 존재하지 않습니다.";
- }
-?>
+
+      <?php}}else {?>
+        <div class="row">
+          echo "찜한 책이 없습니다.";
+          echo "책을 둘러보러 가시겠습니까?";
+        </div>
+
+      <?php}?>
 
 <button onclick="goBack()">Go Back</button>
 
@@ -60,3 +59,5 @@ function goBack() {
   window.history.back();
 }
 </script>
+        </body>
+      </html>
