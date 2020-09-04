@@ -7,32 +7,15 @@ $user_id = $_SESSION['user_id'];
 $sql = mq("select * from purchase where user_id ='".$user_id."' ");
 $sql->fetch_array();
 
-$list = mq("select title,author,publisher, purchase_date as 구매날짜, genre, file from book, purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id."'");
+$list = mq("select title,author,publisher, purchase_date as 구매날짜, genre, file from book,
+purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id."'");
 
 
 // codecheck 쿼리를 실행해서 값이 존재하면 else 문으로 ..
 // 쿼리를 실행해서 값이 존재하지 않으면  if문 실행
 // 쿼리를 실행했는데 값이 존재하지 않는다는 것은 DB에 데이터가 없다는 라는 말.
 // 고로 대출 한 데이터가 없다라는 것임.
-
-<<<<<<< HEAD
-
 ?>
-
-
-=======
-/*2020-08-27~28
-  inseon todo
-  네비게이션 바 간격 더 주고싶다
-  flex
-  카드 크기 줄이기(가능?)
-  서치창 끝으로 밀기
-  반납하기랑 리뷰쓰기 버튼 양끝으로 밀기
-  카드 배치에 열주기
-*/
-
-?>
-
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 <head>
@@ -107,5 +90,31 @@ $list = mq("select title,author,publisher, purchase_date as 구매날짜, genre,
       window.history.back();
     }
   </script>
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
 </script>
+              <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="BookCover">
+              <div class="card-body">
+                <h5 class="card-title"><?=$result['title'] ?></h5>
+                <p class="card-text"><?=$result['author'] ?></p>
+                <p class="card-text"><?=$result['publisher'] ?></p>
+                <p class="card-text"><?=$result['구매날짜'] ?></p>
+                <p class="card-text"><?=$result['genre'] ?></p>
+                <!-- 버튼 크기 조정하기 -->
+                <a href="#" class="btn btn-primary">바로읽기</a>
+                <!-- 감상페이지로 넘어가기 -->
+                <a href="#" class="btn btn-primary">리뷰작성</a>
+                <!-- ../review/review_write.php?id=n(book_id)-->
+              </div>
+            </div>
+
+            <?php}
+          }else {?>
+            <div class="row">
+              찜한 책이 없습니다.";
+              책을 둘러보러 가시겠습니까?";
+            </div>
+            <?}?>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>

@@ -17,11 +17,9 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
 // 쿼리를 실행했는데 값이 존재하지 않는다는 것은 DB에 데이터가 없다는 라는 말.
 // 고로 대출 한 데이터가 없다라는 것임.
 
-<<<<<<< HEAD
 ?>
 
 
-=======
 /*2020-08-27~28
   inseon todo
   네비게이션 바 간격 더 주고싶다
@@ -31,7 +29,7 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
   반납하기랑 리뷰쓰기 버튼 양끝으로 밀기
   카드 배치에 열주기
 */
-?>
+
 
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -107,5 +105,6 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
       window.history.back();
     }
   </script>
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
 </script>
+        </body>
+      </html>
