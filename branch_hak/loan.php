@@ -10,7 +10,14 @@ $date = new DateTime('NOW');
 $loanDate = date_format($date,'Y-m-d H:i:s');
 date_modify($date,'+3 day');
 $returnDate  = date_format($date,'Y-m-d H:i:s');
+   }
+ }
+ else
+ {
+   	echo "<script>alert('로그인 해주세요.'); location.href='../log/login.php';</script>";
+ }
 
+$result = $loanDate->diff($returnDate);
 // $result = $loanDate->diff($returnDate);
 var_dump($result);
 
