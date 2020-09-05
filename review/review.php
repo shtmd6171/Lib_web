@@ -299,7 +299,7 @@ if(isset($_SESSION['user_id'])) {
                   </p>
                 </div>
 
-                <div class="my-4" style="color: #FF5964;">찜하기
+                <div class="my-4" style="color: #FF5964;"><?php  if(isset($user_id)) { ?> 찜하기
                   <?php $sql = mq("select * from favorite where user_id ='".$user_id."' AND book_id ='".$book_id."'");
                     if(($favoritecheck = $sql->fetch_array())) { ?>
                     <div class="grid">
@@ -316,7 +316,7 @@ if(isset($_SESSION['user_id'])) {
                     setTimeout( function() { location.href = '../branch_hak/favorite.php?id=<?= $filtered['book_id']?>'}, 1000 )"><span class="fa fa-heart"></a></button>
                   </li>
                 </div>
-                <?php  } ?>
+              <?php  } } ?>
                   <script src="./review_lib/mo.min.js"></script>
                   <script src="./review_lib/demo.js"></script>
                 </p>
