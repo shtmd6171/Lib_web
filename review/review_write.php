@@ -12,14 +12,7 @@ book_id와 user_id를 모두 필요로 한다.
 그렇기에 이 두 정보를 모두 받고 hidden 타입으로 $_POST 값에 집어넣는다.
 */
 
-<<<<<<< HEAD
-=======
-/*2020-08-27~28
-inseon todo
-참고 - https://bootsnipp.com/snippets/PjPa
-*/
 
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
 $book_id = $_GET['id'];
 $user_id = $_SESSION['user_id'];
 
@@ -27,8 +20,6 @@ $user_id = $_SESSION['user_id'];
 
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-<<<<<<< HEAD
-=======
 <head>
   <meta charset="utf-8">
   <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -75,5 +66,4 @@ $user_id = $_SESSION['user_id'];
     </div>
   </div>
 </body>
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
 </html>

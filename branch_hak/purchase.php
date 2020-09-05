@@ -20,17 +20,10 @@ if(isset($user_id))
       {
         $insert = mq("INSERT INTO purchase VALUES ('".$book_id."', '".$user_id."', '".$date."') ");
         echo "<script>alert('성공적으로 구매했습니다.'); history.back();</script>";
-      }
-      else
-      {
-<<<<<<< HEAD
-=======
+      } else {
         echo "<script>alert('이미 구매한 상품입니다.'); history.back();</script>";
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
       }
-    }
-      else
-      {
+    } else {
         echo "<script>alert('멤버쉽에 가입하셔야 구매가 가능합니다.'); history.back();</script>";
       }
 }
@@ -78,4 +71,3 @@ if(isset($user_id))
  }
 
 ?>
->>>>>>> before discard

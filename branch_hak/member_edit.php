@@ -19,10 +19,6 @@ inseon todo
 
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-<<<<<<< HEAD
-        <table align="center" border="0" cellspacing="0" width="600">
-
-=======
 <head>
   <meta charset="utf-8">
   <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -104,4 +100,3 @@ inseon todo
 
                 </div>
               </body>
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913

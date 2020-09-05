@@ -31,11 +31,8 @@ header('Cache-Control: no-cache, must-revalidate');
       {   ?>
 
           <form method="post">
-<<<<<<< HEAD
-=======
             <table>
               <div class="row">
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
                 <input type="hidden" name="email" value="<?=$_POST['email']  ?>">
 
               </div>
@@ -51,17 +48,12 @@ header('Cache-Control: no-cache, must-revalidate');
               </div>
               <div class="row">
                 <tr>
-<<<<<<< HEAD
-                  <td>다시 비밀번호 : <input type="password" name="repwd" placeholder="비밀번호 확인" required></td>
-                </tr>
-=======
                 <td>비밀번호 확인 : <input type="password" name="repwd" placeholder="비밀번호 확인" required></td>
               </tr>
 
               </div>
             </table>
               <input type="submit" name="" value="변경하기">
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
             </form>
 
             <?php
@@ -73,19 +65,13 @@ header('Cache-Control: no-cache, must-revalidate');
               $sql = mq("UPDATE user SET pwd ='".$hash_pwd."' WHERE email ='".$_POST['email']."'");
               echo "<script>alert('수정 되었습니다. 다시 로그인해주세요.'); location.href='../log/login.php';</script>";
             }else {
-<<<<<<< HEAD
-=======
               echo "<script>alert('입력하신 비밀번호와 일치하지 않습니다.'); location.reload(); history.back();  </script>";
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
                 echo "<script>location.replace('./password_edit.php');</script>";
-
             }
-          }
-
           } else{
-        echo mysqli_error($db);
-        echo "<script>alert('다시 입력해주세요.'); location.href='./password_find.php';</script>";
-      }
+          echo mysqli_error($db);
+          echo "<script>alert('다시 입력해주세요.'); location.href='./password_find.php';</script>";
+          }
       ?>
 
     </div>

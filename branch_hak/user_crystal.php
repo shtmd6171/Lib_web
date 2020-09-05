@@ -19,15 +19,7 @@ inseon todo
 
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-<<<<<<< HEAD
 
-    <?php if($codecheck['code'] == 'A'):?>
-
-    <?php else : ?>
-    <?php endif; ?>
-
-
-=======
 <head>
   <meta charset="utf-8">
   <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -81,22 +73,12 @@ inseon todo
                 <td>Address</td>
                 <td colspan="9">
                   <input type="text" size="35" name="addr" placeholder="<?php echo $addr ?>" readonly ></td>
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
                 </tr>
                 <tr>
                   <td>tell</td>
                   <td colspan="9">
                     <input type="text" size="35" name="tel" placeholder="<?php echo $tel ?>" readonly></td>
-<<<<<<< HEAD
 
-
-
-
-
-
-
-
-=======
                   </tr>
 
                   <tr>
@@ -104,6 +86,7 @@ inseon todo
                     </td>
                     <td> <button class="mine wb"><a href="./member_delete.php">탈퇴 등록</a></button>
                     </td>
+                    </tr>
 
 
                   </table>
@@ -116,7 +99,6 @@ inseon todo
                 <button class="mine wb"><a href="./wirte.php"> 관리자 권한 회원 탈퇴등록 하기</a></button>
               <?php } ?>
 
-            </form>
             <button onclick="goBack()">Go Back</button>
 
             <script>
@@ -127,4 +109,3 @@ inseon todo
           </div>
         </body>
         </html>
->>>>>>> 6d4aab9c17d91ebf08413ba881ba9b0f723ab913
