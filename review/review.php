@@ -1,5 +1,6 @@
 <?php
 include_once "../lib/db.php";
+include_once "../lib/starRate.php";
 
 $book_id = $_GET['id'];
 if(isset($_SESSION['user_id'])) {
@@ -354,8 +355,41 @@ if(isset($_SESSION['user_id'])) {
         $sql = mq("select ROUND(AVG(review_rating),2) as result from book_review where book_id ='".$book_id."'");
         $review_rating_avg = $sql->fetch_array();?>
 
+
+          <style media="screen">
+          .starR1{
+            background: url('./review_lib/star.png') no-repeat -62px 0;
+            background-size: auto 100%;
+            width: 30px;
+            height: 60px;
+            float:left;
+            text-indent: -9999px;
+            cursor: pointer;
+            color: yellow;
+          }
+          .starR2{
+            background: url('./review_lib/star.png') no-repeat right 0px;
+            background-size: auto 100%;
+            width: 30px;
+            height: 60px;
+            float:left;
+            text-indent: -9999px;
+            cursor: pointer;
+          }
+          .starR1.on{background-position:0px 0;}
+          .starR2.on{background-position:-30px 0;}
+
+          .numbering {
+            font-size: 2em;
+          }
+          </style>
         <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰&nbsp;<small>(<?=$review_rating_avg['result']?>/ 5.00)&nbsp;<small><?=$review_write_check?>명참여</small></samll></h4>
+          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰<small>
+              <div class=" d-flex ml-2 mb-2 align-items-center justify-content-center">
+                <span class="numbering"><?= $filtered['title']; ?></span>&nbsp;도서를 읽은&nbsp;
+                <span class="numbering"><?=$review_write_check?></span>&nbsp;분의 평가</div>
+            <div class="starRev d-flex ml-2 mb-2 align-items-center justify-content-center">
+              <?php echo starrate($review_rating_avg['result']);?></div></samll></h4>
         <?php
           if(isset($book_id)&&(!(isset($_POST['selected'])))) {
           $sql = mq("select * from book_review, user where book_id='".$book_id."'
