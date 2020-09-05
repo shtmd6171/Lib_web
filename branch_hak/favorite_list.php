@@ -19,18 +19,6 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
 
 ?>
 
-
-/*2020-08-27~28
-  inseon todo
-  네비게이션 바 간격 더 주고싶다
-  flex
-  카드 크기 줄이기(가능?)
-  서치창 끝으로 밀기
-  반납하기랑 리뷰쓰기 버튼 양끝으로 밀기
-  카드 배치에 열주기
-*/
-
-
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 <head>
