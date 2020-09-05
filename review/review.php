@@ -37,6 +37,49 @@ if(isset($_SESSION['user_id'])) {
       <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
       <link rel="stylesheet" href="../bootstrap/dist/bttn.min.css">
       <link href="./review_lib/booklist.css" rel="stylesheet">
+      <style media="screen">
+      .starR1{
+        background: url('./review_lib/star.png') no-repeat -62px 0;
+        background-size: auto 100%;
+        width: 30px;
+        height: 60px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR2{
+        background: url('./review_lib/star.png') no-repeat right 0px;
+        background-size: auto 100%;
+        width: 30px;
+        height: 60px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR1.on{background-position:0px 0;}
+      .starR2.on{background-position:-30px 0;}
+
+      .starR1s{
+        background: url('./review_lib/star.png') no-repeat -31px 0;
+        background-size: auto 100%;
+        width: 15px;
+        height: 30px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR2s{
+        background: url('./review_lib/star.png') no-repeat right 0px;
+        background-size: auto 100%;
+        width: 15px;
+        height: 30px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR1s.on{background-position:0px 0;}
+      .starR2s.on{background-position:-15px 0;}
+
+      .numbering {
+        font-size: 2em;
+      }
+      </style>
 
       <!-- aosjs -->
       <script src="../aosjs/dist/aos.js"></script>
@@ -356,40 +399,20 @@ if(isset($_SESSION['user_id'])) {
         $review_rating_avg = $sql->fetch_array();?>
 
 
-          <style media="screen">
-          .starR1{
-            background: url('./review_lib/star.png') no-repeat -62px 0;
-            background-size: auto 100%;
-            width: 30px;
-            height: 60px;
-            float:left;
-            text-indent: -9999px;
-            cursor: pointer;
-            color: yellow;
-          }
-          .starR2{
-            background: url('./review_lib/star.png') no-repeat right 0px;
-            background-size: auto 100%;
-            width: 30px;
-            height: 60px;
-            float:left;
-            text-indent: -9999px;
-            cursor: pointer;
-          }
-          .starR1.on{background-position:0px 0;}
-          .starR2.on{background-position:-30px 0;}
 
-          .numbering {
-            font-size: 2em;
-          }
-          </style>
         <div class="my-3 p-3 bg-white rounded box-shadow">
           <h4 class="border-bottom border-gray pb-2 mb-0">리뷰<small>
-              <div class=" d-flex ml-2 mb-2 align-items-center justify-content-center">
+              <div class="ml-2 mb-2 align-items-center justify-content-center  d-none d-sm-none d-md-flex">
                 <span class="numbering"><?= $filtered['title']; ?></span>&nbsp;도서를 읽은&nbsp;
                 <span class="numbering"><?=$review_write_check?></span>&nbsp;분의 평가</div>
-            <div class="starRev d-flex ml-2 mb-2 align-items-center justify-content-center">
-              <?php echo starrate($review_rating_avg['result']);?></div></samll></h4>
+            <div class="starRev ml-2 mb-2 align-items-center justify-content-center  d-none d-sm-none d-md-flex">
+              <?php echo starrate($review_rating_avg['result']);?></div>
+
+              <div class=" d-flex-column ml-2 mb-2 align-items-center justify-content-center d-md-none">
+                <div class="d-block text-center"><?= $filtered['title']; ?><br>
+                  <?=$review_write_check?>&nbsp;분의 평가</div>
+            <div class="d-flex starRev ml-2 mb-2 align-items-center justify-content-center d-md-none">
+              <?php echo starrateSmall($review_rating_avg['result']);?></div></samll></h4>
         <?php
           if(isset($book_id)&&(!(isset($_POST['selected'])))) {
           $sql = mq("select * from book_review, user where book_id='".$book_id."'
