@@ -7,56 +7,114 @@ $user_id = $_SESSION['user_id'];
 $sql = mq("select * from purchase where user_id ='".$user_id."' ");
 $sql->fetch_array();
 
-$list = mq("select title,author,publisher, purchase_date as 구매날짜, genre, file from book, purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id."'");
+$list = mq("select title,author,publisher, purchase_date as 구매날짜, genre, file from book,
+purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id."'");
 
 
 // codecheck 쿼리를 실행해서 값이 존재하면 else 문으로 ..
 // 쿼리를 실행해서 값이 존재하지 않으면  if문 실행
 // 쿼리를 실행했는데 값이 존재하지 않는다는 것은 DB에 데이터가 없다는 라는 말.
 // 고로 대출 한 데이터가 없다라는 것임.
-
-echo "<h1>책 구매 리스트</h1>";
-if ($sql->num_rows > 0) {
-    while($result = $list->fetch_array())
-    {?>
-      <!DOCTYPE html>
-      <html lang="ko" dir="ltr">
-        <head>
-          <meta charset="utf-8">
-          <title></title>
-        </head>
-        <body>
-          <table border="1">
-            <tr>
-              <th>제목</th>
-              <th>저자</th>
-              <th>출판사</th>
-              <th>구매날짜</th>
-              <th>장르</th>
-          </tr>
-            <tr>
-              <td><?=$result['title'] ?></td>
-              <td><?=$result['author'] ?></td>
-              <td><?=$result['publisher'] ?></td>
-              <td><?=$result['구매날짜'] ?></td>
-              <td><?=$result['genre'] ?></td>
-          </table>
-        </body>
-      </html>
-
-      <?php
-    }
-
-}
-else {
-    echo "구매 리스트가 존재하지 않습니다.";
- }
 ?>
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/bootstrap-theme.css">
+  <script src="../css/js/bootstrap.js"></script>
+  <title></title>
+</head>
+<body>
+  <div class="container">
+    <header class="blog-header py-3 sticky-top"></header>
 
-<button onclick="goBack()">Go Back</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
 
-<script>
-function goBack() {
-  window.history.back();
-}
+          <li class="nav-item">
+            <a class="nav-link" href="./loan_list.php">대여한 책</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./purchase_list.php">구매한 책</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./favorite_list.php">찜 목록</a>
+          </li>
+
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+      </div>
+    </nav>
+    <div class="row">
+      찜 리스트
+    </div>
+    <div class="row">
+    <div class="col-md-3"> <!--카드를 col 3씩 줘서 row당 4개씩 배치하고 싶은데 어렵네요 자문을 구합니다-->
+    <?php if ($sql->num_rows > 0) {
+      while($result = $list->fetch_array())
+      {?>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../file/<?= $result['file']; ?>" alt="Card image cap" width="250" height="250">
+          <div class="card-body">
+            <h5 class="card-title"><?=$result['title'] ?></h5>
+            <p class="card-text"><?=$result['author'] ?></p>
+            <p class="card-text"><?=$result['publisher'] ?></p>
+            <p class="card-text"><?=$result['구매날짜'] ?></p>
+            <p class="card-text"><?=$result['genre'] ?></p>
+            <a href="#" class="btn btn-primary">리뷰 작성하기</a>
+          </div>
+        </div>
+      <?php   }  } else { //이부분 부트스트랩 적용할 수 없을까요? book_list.php로 돌아가는 버튼하나 달아주면 이쁘고 ㄱㅊ을듯 나머지 리스트들도
+        //충분히 할 수 있을거같은데 지금 당장의 제 서치력과 기술력으로는 한계입니다 -Seonar
+        echo "구매한 책이 없습니다.";
+        echo "구매할 책을 둘러보러 가시겠습니까?";
+      } ?>
+    </div>
+    </div>
+    </div>
+  </body>
+  </html>
+  <div class="row">
+    <button onclick="goBack()">Go Back</button>
+
+    <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </script>
+              <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="BookCover">
+              <div class="card-body">
+                <h5 class="card-title"><?=$result['title'] ?></h5>
+                <p class="card-text"><?=$result['author'] ?></p>
+                <p class="card-text"><?=$result['publisher'] ?></p>
+                <p class="card-text"><?=$result['구매날짜'] ?></p>
+                <p class="card-text"><?=$result['genre'] ?></p>
+                <!-- 버튼 크기 조정하기 -->
+                <a href="#" class="btn btn-primary">바로읽기</a>
+                <!-- 감상페이지로 넘어가기 -->
+                <a href="#" class="btn btn-primary">리뷰작성</a>
+                <!-- ../review/review_write.php?id=n(book_id)-->
+              </div>
+            </div>
+
+            <?php}
+          }else {?>
+            <div class="row">
+              찜한 책이 없습니다.";
+              책을 둘러보러 가시겠습니까?";
+            </div>
+            <?}?>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>
