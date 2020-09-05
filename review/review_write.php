@@ -23,9 +23,54 @@ $user_id = $_SESSION['user_id'];
 <head>
   <meta charset="utf-8">
   <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/bootstrap-theme.css">
   <script src="../css/js/bootstrap.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <title></title>
+  <style media="screen">
+  .starR1{
+    background: url('./review_lib/star.png') no-repeat -31px 0;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+    color: yellow;
+  }
+  .starR2{
+    background: url('./review_lib/star.png') no-repeat right 0px;
+    background-size: auto 100%;
+    width: 15px;
+    height: 30px;
+    float:left;
+    text-indent: -9999px;
+    cursor: pointer;
+  }
+  .starR1.on{background-position:0px 0;}
+  .starR2.on{background-position:-15px 0;}
+  </style>
+  <script type="text/javascript">
+    $(function(){
+      $('.starRev span').click(function(){
+    $(this).parent().children('span').removeClass('on');
+    $(this).addClass('on').prevAll('span').addClass('on');
+    return false;
+    });
+
+    $('.starR1').click(function(){
+      var value = $(this).attr('value');
+      console.log(value);
+      $('.review_rating').attr('value',value);
+    });
+    $('.starR2').click(function(){
+      var value = $(this).attr('value');
+      console.log(value);
+      $('.review_rating').attr('value',value);
+    });
+  });
+  </script>
 </head>
 <body>
   <header class="blog-header py-3 sticky-top"></header>
@@ -43,15 +88,25 @@ $user_id = $_SESSION['user_id'];
           <input type="hidden" name="book_id" value="<?= $book_id ?>">
         </div>
 
-        <div class="row">
+        <div class="row d-flex">
           <input type="text" name="review_title" placeholder="title">
-          <select name="review_rating" value="">
-            <option value="5">5점</option>
-            <option value="4">4점</option>
-            <option value="3">3점</option>
-            <option value="2">2점</option>
-            <option value="1">1점</option>
-          </select>
+          <div class="starRev d-flex ml-2 mb-2 align-items-center justify-content-center">
+            <div class="">평점&nbsp:&nbsp</div>
+            <div class="">
+              <span class="starR1 on" value="0.5"></span>
+              <span class="starR2 on" value="1"></span>
+              <span class="starR1" value="1.5"></span>
+              <span class="starR2" value="2"></span>
+              <span class="starR1" value="2.5"></span>
+              <span class="starR2" value="3"></span>
+              <span class="starR1" value="3.5"></span>
+              <span class="starR2" value="4"></span>
+              <span class="starR1" value="4.5"></span>
+              <span class="starR2" value="5"></span>
+            </div>
+
+          </div>
+          <input type="hidden" class="review_rating" name="review_rating" value="1">
         </div>
 
         <div class="row">
