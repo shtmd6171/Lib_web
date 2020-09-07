@@ -20,101 +20,75 @@ purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id
 <html lang="ko" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../css/bootstrap-theme.css">
   <script src="../css/js/bootstrap.js"></script>
   <title></title>
+  <style>
+  #myList{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 23%;
+    flex: 0 0 23%;
+    max-width: 23%;
+  }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header class="blog-header py-3 sticky-top"></header>
+  <header class="blog-header py-3 sticky-top"></header>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./loan_list.php">대여한 책</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./purchase_list.php">구매한 책</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./favorite_list.php">찜 목록</a>
+        </li>
+      </ul>
+      <!-- 돌아가기 복잡해서 붙인버튼 삭제예정 -->
+      <button onclick="goBack()">Go Back</button>
+      <script>function goBack() {window.history.back();}</script>
 
-          <li class="nav-item">
-            <a class="nav-link" href="./loan_list.php">대여한 책</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./purchase_list.php">구매한 책</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./favorite_list.php">찜 목록</a>
-          </li>
-
-        </ul>
-
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-      </div>
+      <form class="form-inline my-2 my-lg-0 text-right" style="margin-left: 58%;">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </nav>
-    <div class="row">
-      찜 리스트
-    </div>
-    <div class="row">
-    <div class="col-md-3"> <!--카드를 col 3씩 줘서 row당 4개씩 배치하고 싶은데 어렵네요 자문을 구합니다-->
-    <?php if ($sql->num_rows > 0) {
-      while($result = $list->fetch_array())
-      {?>
+  </div>
 
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="../file/<?= $result['file']; ?>" alt="Card image cap" width="250" height="250">
-          <div class="card-body">
-            <h5 class="card-title"><?=$result['title'] ?></h5>
-            <p class="card-text"><?=$result['author'] ?></p>
-            <p class="card-text"><?=$result['publisher'] ?></p>
-            <p class="card-text"><?=$result['구매날짜'] ?></p>
-            <p class="card-text"><?=$result['genre'] ?></p>
-            <a href="#" class="btn btn-primary">리뷰 작성하기</a>
-          </div>
-        </div>
-      <?php   }  } else { //이부분 부트스트랩 적용할 수 없을까요? book_list.php로 돌아가는 버튼하나 달아주면 이쁘고 ㄱㅊ을듯 나머지 리스트들도
-        //충분히 할 수 있을거같은데 지금 당장의 제 서치력과 기술력으로는 한계입니다 -Seonar
-        echo "구매한 책이 없습니다.";
-        echo "구매할 책을 둘러보러 가시겠습니까?";
-      } ?>
-    </div>
-    </div>
-    </div>
-  </body>
-  </html>
-  <div class="row">
-    <button onclick="goBack()">Go Back</button>
-
-    <script>
-    function goBack() {
-      window.history.back();
-    }
-  </script>
-</script>
-              <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="BookCover">
+  <div class="container">
+    <div class="row">
+      <?php if ($sql->num_rows > 0) {
+        while($result = $list->fetch_array())
+        {?>
+          <div class="col-3 mb-5">
+            <div class="card mb-1" style="width: 18rem;">
+              <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title"><?=$result['title'] ?></h5>
                 <p class="card-text"><?=$result['author'] ?></p>
                 <p class="card-text"><?=$result['publisher'] ?></p>
                 <p class="card-text"><?=$result['구매날짜'] ?></p>
                 <p class="card-text"><?=$result['genre'] ?></p>
-                <!-- 버튼 크기 조정하기 -->
-                <a href="#" class="btn btn-primary">바로읽기</a>
-                <!-- 감상페이지로 넘어가기 -->
-                <a href="#" class="btn btn-primary">리뷰작성</a>
-                <!-- ../review/review_write.php?id=n(book_id)-->
+                <a href="#" class="btn btn-primary">감상하기</a>
+                <!-- 감상 페이지 링크 -->
+                <a href="#" class="btn btn-primary">리뷰쓰기</a>
+                <!-- 리뷰 페이지 링크 -->
               </div>
             </div>
-
-            <?php}
-          }else {?>
-            <div class="row">
-              찜한 책이 없습니다.";
-              책을 둘러보러 가시겠습니까?";
-            </div>
-            <?}?>
           </div>
+
+        <?php   }  } else {?>
+          <div class="row">
+            구매한 책이 없습니다.&nbsp&nbsp&nbsp&nbsp
+            <a href="../book/book_list.php"> 책 구경하러가기 </a>
+          </div>
+          <<?php  } ?>
         </div>
       </div>
-  </body>
-</html>
+    </body>
+    </html>
