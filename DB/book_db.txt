@@ -71,6 +71,8 @@ PRIMARY KEY (book_id, user_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 # book_review 테이블에 review_rating의 필드값을 46번째 줄에 추가 했습니다.
 # 만약, 기존에 loan테이블이 존재하면 밑에와 같은 방식으로 alter해주세요
+
+※※※ 이 밑의 review_rating 추가 부분을 09.06 날짜 버전으로 고쳐주세요 ※※※
 # ALTER TABLE `book_review` ADD `review_rating` INT(1) NOT NULL AFTER `user_id`;
 
 #######################################################################################
@@ -82,3 +84,13 @@ PRIMARY KEY (book_id, user_id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 #ALTER TABLE `loan` CHANGE `loan_date` `loan_date` DATETIME NOT NULL;
 #ALTER TABLE `loan` ADD `return_date` INT NULL AFTER `loan_date`;
 #ALTER TABLE `loan` CHANGE `return_date` `return_date` DATETIME NOT NULL;
+
+######################################################################################
+# 2020.09.06
+8.25 날짜의 review_rating 부분을 아직 추가하지 않았다면 밑의 것으로 수정해주세요
+# ALTER TABLE `book_review` ADD `review_rating` float(1) NOT NULL AFTER `user_id`;
+
+만약 이미 8.25 날짜의 review_rating 부분을 추가했다면 밑의 것으로 수정해주세요
+ALTER TABLE `book_review` CHANGE `review_rating` `review_rating` FLOAT(1) NOT NULL;
+
+review_rating을 소숫점 표기를 가능하게 하기위해 float타입으로 교체했습니다

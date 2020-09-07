@@ -1,5 +1,6 @@
 <?php
 include_once "../lib/db.php";
+include_once "../lib/starRate.php";
 
 $book_id = $_GET['id'];
 if(isset($_SESSION['user_id'])) {
@@ -30,12 +31,55 @@ if(isset($_SESSION['user_id'])) {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
       <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
       <link rel="stylesheet" href="../bootstrap/dist/bttn.min.css">
       <link href="./review_lib/booklist.css" rel="stylesheet">
+      <style media="screen">
+      .starR1{
+        background: url('./review_lib/star.png') no-repeat -62px 0;
+        background-size: auto 100%;
+        width: 30px;
+        height: 60px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR2{
+        background: url('./review_lib/star.png') no-repeat right 0px;
+        background-size: auto 100%;
+        width: 30px;
+        height: 60px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR1.on{background-position:0px 0;}
+      .starR2.on{background-position:-30px 0;}
+
+      .starR1s{
+        background: url('./review_lib/star.png') no-repeat -31px 0;
+        background-size: auto 100%;
+        width: 15px;
+        height: 30px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR2s{
+        background: url('./review_lib/star.png') no-repeat right 0px;
+        background-size: auto 100%;
+        width: 15px;
+        height: 30px;
+        float:left;
+        text-indent: -9999px;
+      }
+      .starR1s.on{background-position:0px 0;}
+      .starR2s.on{background-position:-15px 0;}
+
+      .numbering {
+        font-size: 2em;
+      }
+      </style>
 
       <!-- aosjs -->
       <script src="../aosjs/dist/aos.js"></script>
@@ -255,7 +299,7 @@ if(isset($_SESSION['user_id'])) {
                   </p>
                 </div>
 
-                <div class="my-4" style="color: #FF5964;">찜하기
+                <div class="my-4" style="color: #FF5964;"><?php  if(isset($user_id)) { ?> 찜하기
                   <?php $sql = mq("select * from favorite where user_id ='".$user_id."' AND book_id ='".$book_id."'");
                     if(($favoritecheck = $sql->fetch_array())) { ?>
                     <div class="grid">
@@ -272,7 +316,7 @@ if(isset($_SESSION['user_id'])) {
                     setTimeout( function() { location.href = '../branch_hak/favorite.php?id=<?= $filtered['book_id']?>'}, 1000 )"><span class="fa fa-heart"></a></button>
                   </li>
                 </div>
-                <?php  } ?>
+              <?php  } } ?>
                   <script src="./review_lib/mo.min.js"></script>
                   <script src="./review_lib/demo.js"></script>
                 </p>
@@ -354,8 +398,21 @@ if(isset($_SESSION['user_id'])) {
         $sql = mq("select ROUND(AVG(review_rating),2) as result from book_review where book_id ='".$book_id."'");
         $review_rating_avg = $sql->fetch_array();?>
 
+
+
         <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰&nbsp;<small>(<?=$review_rating_avg['result']?>/ 5.00)&nbsp;<small><?=$review_write_check?>명참여</small></samll></h4>
+          <h4 class="border-bottom border-gray pb-2 mb-0">리뷰<small>
+              <div class="ml-2 mb-2 align-items-center justify-content-center  d-none d-sm-none d-md-flex">
+                <span class="numbering"><?= $filtered['title']; ?></span>&nbsp;도서를 읽은&nbsp;
+                <span class="numbering"><?=$review_write_check?></span>&nbsp;분의 평가</div>
+            <div class="starRev ml-2 mb-2 align-items-center justify-content-center  d-none d-sm-none d-md-flex">
+              <?php echo starrate($review_rating_avg['result']);?></div>
+
+              <div class=" d-flex-column ml-2 mb-2 align-items-center justify-content-center d-md-none">
+                <div class="d-block text-center"><?= $filtered['title']; ?><br>
+                  <?=$review_write_check?>&nbsp;분의 평가</div>
+            <div class="d-flex starRev ml-2 mb-2 align-items-center justify-content-center d-md-none">
+              <?php echo starrateSmall($review_rating_avg['result']);?></div></samll></h4>
         <?php
           if(isset($book_id)&&(!(isset($_POST['selected'])))) {
           $sql = mq("select * from book_review, user where book_id='".$book_id."'
@@ -376,7 +433,7 @@ if(isset($_SESSION['user_id'])) {
           <div class="media text-muted pt-3">
             <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
             <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark"><?= $filtered['review_title']; ?>&nbsp;<small><?=$filtered['review_rating'];?>점</small></strong>
+              <strong class="d-block text-gray-dark testing"><?= $filtered['review_title']; ?>&nbsp;<small><?=$filtered['review_rating'];?>점</small></strong>
               <?= $filtered['review_desc'];
                 if($reviewcheck != NULL) {
                   if($filtered['user_id'] == $reviewcheck['user_id'] || $codecheck['code'] == 'A'  ) { ?>

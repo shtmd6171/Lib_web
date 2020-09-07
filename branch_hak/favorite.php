@@ -20,14 +20,11 @@ if(isset($user_id))
       }
       else
       {
-        echo "<script>alert('이미 찜 한 상품입니다.'); history.back();</script>";
+        echo "<script>alert('이미 찜한 상품입니다.'); history.back();</script>";
       }
-
 }
-
  else
  {
    	echo "<script>alert('로그인 해주세요.'); location.href='../log/login.php';</script>";
  }
-
 ?>
