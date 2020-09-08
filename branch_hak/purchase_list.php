@@ -52,8 +52,9 @@ purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id
       <!-- 돌아가기 복잡해서 붙인버튼 삭제예정 -->
       <button onclick="goBack()">Go Back</button>
       <script>function goBack() {window.history.back();}</script>
+      <a href="../book/book_list.php">메인</a>
 
-      <form class="form-inline my-2 my-lg-0 text-right" style="margin-left: 58%;">
+      <form class="form-inline my-2 my-lg-0 text-right" style="margin-left: 57%;">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
@@ -68,7 +69,7 @@ purchase where book.book_id = purchase.book_id and purchase.user_id ='".$user_id
           <div class="col-3 mb-5">
             <div class="card mb-1" style="width: 18rem;">
               <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="Card image cap">
-              <div class="card-body">
+              <div class="card-body">f
                 <h5 class="card-title"><?=$result['title'] ?></h5>
                 <p class="card-text"><?=$result['author'] ?></p>
                 <p class="card-text"><?=$result['publisher'] ?></p>

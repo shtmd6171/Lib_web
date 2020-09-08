@@ -21,82 +21,79 @@ inseon todo
 <html lang="ko" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../css/bootstrap-theme.css">
   <script src="../css/js/bootstrap.js"></script>
-  <script src="./javascr/onClickFunc.js"></script>
   <title></title>
 </head>
 <body>
   <header class="blog-header py-3 sticky-top"></header>
+
+  <div class="row">
+    <!-- 돌아가기 복잡해서 붙인버튼 삭제예정 -->
+    <button onclick="goBack()">Go Back</button>
+    <script>function goBack() {window.history.back();}</script>
+    <a href="../book/book_list.php">메인</a>
+  </div>
+
   <div class="container">
     <form id="mform" method="post" action="./member_edit_ok.php">
       <div class="row">
-        <fieldset class="line">
-          <legend>Required</legend>
-        </div>
-        <table align="center" border="0" cellspacing="0" width="600">
-          <div class="row">
-            <tr>
-              <td>email</td>
-              <td colspan="9">
-                <input type="email" size="35" name="email" value="<?php echo $email ?>" readonly>
-              </td>
+        <legend>Required</legend>
+      </div>
+      <table align="center" border="0" cellspacing="0" width="600">
+        <div class="row">
+
+          <tr>
+            <td>email</td>
+            <td colspan="9">
+              <input type="email" size="35" name="email" value="<?php echo $email ?>" readonly>
+            </td>
+          </tr>
+
+        </div><div class="row">
+          <tr>
+            <td>Pwd</td>
+            <td colspan="9">
+              <input type="password" size="35" name="pwd" placeholder="비밀번호" required></td>
             </tr>
 
           </div><div class="row">
             <tr>
-              <td>Pwd</td>
+              <td>Re Pwd</td>
               <td colspan="9">
-                <input type="password" size="35" name="pwd" placeholder="비밀번호" required></td>
+                <input type="password" size="35" name="repwd" placeholder="비밀번호 확인" required></td>
               </tr>
 
             </div><div class="row">
               <tr>
-                <td>Re Pwd</td>
+                <td>Name</td>
                 <td colspan="9">
-                  <input type="password" size="35" name="repwd" placeholder="비밀번호 확인" required></td>
+                  <input type="text" size="35" name="name" value="<?php echo $name ?>" required></td>
                 </tr>
 
               </div><div class="row">
                 <tr>
-                  <td>Name</td>
+                  <td>Address</td>
                   <td colspan="9">
-                    <input type="text" size="35" name="name" value="<?php echo $name ?>" required></td>
+                    <input type="text" size="35" name="addr" value="<?php echo $addr ?>" required></td>
                   </tr>
 
-                </div><div class="row">
                   <tr>
-                    <td>Address</td>
+                  </div><div class="row">
+                    <td>tell</td>
                     <td colspan="9">
-                      <input type="text" size="35" name="addr" value="<?php echo $addr ?>" required></td>
+                      <input type="text" size="35" name="tel" value="<?php echo $tel ?>" ></td>
                     </tr>
-
                     <tr>
+
                     </div><div class="row">
-                      <td>tell</td>
-                      <td colspan="9">
-                        <input type="text" size="35" name="tel" value="<?php echo $tel ?>" ></td>
-                      </tr>
-                      <tr>
-
-
-                      </div><div class="row">
-                        <td>
-                          <input type="submit" name="edit" value="수정 완료">
-                        </td>
-
-                      </div>
-                    </table>
-                  </fieldset>
-
-                  <button onclick="goBack()">Go Back</button>
-
-                  <script>
-                  function goBack() {
-                    window.history.back();
-                  }
-                  </script>
+                      <td>
+                        <input type="submit" name="edit" value="수정하기">
+                      </td>
+                    </div>
+                  </table>
 
                 </div>
               </body>
+              </html>

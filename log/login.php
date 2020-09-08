@@ -14,14 +14,15 @@ include "../lib/db.php";
 <head>
     <meta charset="utf-8"/>
     <title></title>
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<link rel="stylesheet" href="../css/bootstrap-theme.css">
-  <script src="../css/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap-theme.css">
+    <script src="../css/js/bootstrap.js"></script>
 
 	<style></style>
 
 </head>
 <body>
+  <header class="blog-header py-3 sticky-top"></header>
 	<div class="container">
 	<header class="blog-header py-3 sticky-top"></header>
 		<div class="row">
@@ -43,7 +44,7 @@ include "../lib/db.php";
             </form>
 							<button class="btn btn-outline-primary" onclick="location.href='../log/member.php'">Create account</button>
               <button class="btn btn-outline-primary" onclick="location.href='../branch_hak/password_find.php'">forgot password</button>
-              
+
 				</div>
 			</div>
 		</div>
