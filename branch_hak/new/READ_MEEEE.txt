@@ -1,23 +1,6 @@
-CSS
-
-<review>
-review_write.php
-review_update.php
-
-
-<book>
-book_wirte.php
-book_update.php
-
-<new>
-membership.php
-payment.php
-
-
 BACKEND
 <new>
 paymant_ok.php
-
 
 
 1차 - 20.09.07
@@ -34,3 +17,16 @@ comment_update.php (뭐하는 페이지임?)
 
 <review>
 review_board.php
+review_write.php
+review_update.php
+
+<book>
+book_wirte.php
+
+3차 -02.09.09
+<book>
+book_update.php
+
+<new>
+payment.php
+membership.php

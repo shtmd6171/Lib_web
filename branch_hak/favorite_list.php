@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 $sql = mq("select * from favorite where user_id ='".$user_id."' ");
 $sql->fetch_array();
 
-$list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre, file from book, favorite where book.book_id = favorite.book_id and favorite.user_id ='".$user_id."'");
+$list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre, file, book.book_id from book, favorite where book.book_id = favorite.book_id and favorite.user_id ='".$user_id."'");
 
 
 
@@ -68,6 +68,7 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
     <?php if ($sql->num_rows > 0) {
       while($result = $list->fetch_array())
       {?>
+<<<<<<< HEAD
         <div class="col-3 mb-5">
           <div class="card mb-1" style="width: 18rem;">
             <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="Card image cap">
@@ -82,6 +83,20 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
               <a href="#" class="btn btn-primary">대여하기</a>
               <!-- 대여 페이지 링크 -->
             </div>
+=======
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../file/<?= $result['file']; ?>" alt="Card image cap" width="250" height="250">
+          <div class="card-body">
+            <h5 class="card-title"><?=$result['title'] ?></h5>
+            <p class="card-text"><?=$result['author'] ?></p>
+            <p class="card-text"><?=$result['publisher'] ?></p>
+            <p class="card-text"><?=$result['찜한날짜'] ?></p>
+            <p class="card-text"><?=$result['genre'] ?></p>
+            <a href="#" class="btn btn-primary">구매하기</a>
+            <a href="#" class="btn btn-primary">대여하기</a>
+            <a href="./favorite_delete.php?book_id=<?=$result['book_id']?>" class="btn btn-primary">취소하기</a>
+>>>>>>> 95a7d56c6fe5236e7ddb44384efdb4bc8f63e63b
           </div>
         </div>
 

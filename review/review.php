@@ -249,6 +249,7 @@ if(isset($_SESSION['user_id'])) {
                         <li class="grid__item">
                           <!-- 찜 삭제시 여기서 location으로 처리하기 -->
                           <button class="icobutton icobutton--heart" style="color: #FF5964;">
+                            <a href="../branch_hak/favorite_delete.php?book_id=<?=$filtered['book_id']?>"><small><small><small><small>찜취소</small></small></small></small></a>
                             <span class="fa fa-heart"></span></button>
                         </li>
                       </div>
@@ -302,13 +303,16 @@ if(isset($_SESSION['user_id'])) {
                 <div class="my-4" style="color: #FF5964;"><?php  if(isset($user_id)) { ?> 찜하기
                   <?php $sql = mq("select * from favorite where user_id ='".$user_id."' AND book_id ='".$book_id."'");
                     if(($favoritecheck = $sql->fetch_array())) { ?>
+
                     <div class="grid">
+
                     <li class="grid__item">
                       <!-- 찜 삭제시 여기서 location으로 처리하기 -->
                       <button class="icobutton icobutton--heart" style="color: #FF5964;">
                         <span class="fa fa-heart"></span></button>
                     </li>
                   </div>
+                  <a href="../branch_hak/favorite_delete.php?book_id=<?=$filtered['book_id']?>">찜취소</a>
                 <?php  } else { ?>
                   <div class="grid">
                   <li class="grid__item">
