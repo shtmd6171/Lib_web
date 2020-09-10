@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 $sql = mq("select * from favorite where user_id ='".$user_id."' ");
 $sql->fetch_array();
 
-$list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre, file from book, favorite where book.book_id = favorite.book_id and favorite.user_id ='".$user_id."'");
+$list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre, file, book.book_id from book, favorite where book.book_id = favorite.book_id and favorite.user_id ='".$user_id."'");
 
 
 
@@ -74,6 +74,7 @@ $list = mq("select title,author,publisher, favorite_date as 찜한날짜, genre,
             <p class="card-text"><?=$result['genre'] ?></p>
             <a href="#" class="btn btn-primary">구매하기</a>
             <a href="#" class="btn btn-primary">대여하기</a>
+            <a href="./favorite_delete.php?book_id=<?=$result['book_id']?>" class="btn btn-primary">취소하기</a>
           </div>
         </div>
       <?php   }  } else {
