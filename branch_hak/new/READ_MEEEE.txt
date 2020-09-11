@@ -13,7 +13,7 @@ member_edit.php
 
 2차 -20.09.08
 <branch_hak>
-comment_update.php (뭐하는 페이지임?)
+comment_update.php (뭐하는 페이지임?)(삭제)
 
 <review>
 review_board.php
@@ -30,3 +30,8 @@ book_update.php
 <new>
 payment.php
 membership.php
+
+---------------------------------------------------------------------------------------------------------------------
+4차 -20.09.11
+<log>
+login.php
