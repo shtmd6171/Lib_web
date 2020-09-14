@@ -9,6 +9,7 @@ $sql = mq("select * from loan where user_id ='".$user_id."' ");
 
 $list = mq("select title,author,publisher, loan_date as 빌린날짜, genre, file, return_date from book, loan where book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
 
+
 // if(($nowDate - $loancheck['return_date']) == 0 )
 // {
 //   $delete = mq("DELETE FROM loan WHERE book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
@@ -29,33 +30,8 @@ $list = mq("select title,author,publisher, loan_date as 빌린날짜, genre, fil
   카드 배치에 열주기
 */
 ?>
+<?php echo "<h1>대여 리스트</h1>" ?>
 
-
-        <?php $value = $sql->num_rows ;
-        if ($value >= 0 ) {
-          while( $result = $list->fetch_array()) { ?>
-
-        <div class="card" style="width: 18rem;">
-          <!--일단 카드형으로 만들어보긴 했는데, 메인 페이지처럼 갯수별로 불러오는 백엔드 할 수 있을까요?-->
-          <img class="card-img-top" src="../file/resize/resizing_<?=$result['file'];  ?>" alt="Card image cap" width="250" height="250">
-          <div class="card-body">
-            <h5 class="card-title"><?=$result['title'] ?></h5>
-            <p><?php echo $result['file'];  ?></p>
-            <p class="card-text"><?=$result['author'] ?></p>
-            <p class="card-text"><?=$result['publisher'] ?></p>
-            <p class="card-text"><?=$result['빌린날짜'] ?></p>
-            <p class="card-text"><?=$result['genre'] ?></p>
-            <a href="#" class="btn btn-primary">반납하기</a>
-            <a href="#" class="btn btn-primary">리뷰 작성하기</a>
-          </div>
-        </div>
-      <?php  $value--; }  } else {
-       echo "대출 리스트가 존재하지 않습니다.";
-     } ?>
-
-      </div>
-    </body>
-    </html>
 <div class="row">
   <button onclick="goBack()">Go Back</button>
 
@@ -65,3 +41,32 @@ $list = mq("select title,author,publisher, loan_date as 빌린날짜, genre, fil
   }
 </script>
 </div>
+
+
+        <?php $value = $sql->num_rows ;
+        if ($value >= 0 ) {
+          while( $result = $list->fetch_array()) { ?>
+            <p  style="border:1px solid;">
+        <div class="card" style="width: 18rem;">
+          <!--일단 카드형으로 만들어보긴 했는데, 메인 페이지처럼 갯수별로 불러오는 백엔드 할 수 있을까요?-->
+          <img class="card-img-top" src="../file/resize/resizing_<?=$result['file'];  ?>" alt="Card image cap" width="250" height="250">
+          <div class="card-body">
+            <h5 class="card-title"><?=$result['title'] ?></h5>
+            <p><?php echo $result['file'];  ?></p>
+            <p class="card-text"><?=$result['author'] ?></p>
+            <p class="card-text"><?=$result['publisher'] ?></p>
+            <p class="card-text"><strong>빌린 날짜 :</strong><?=$result['빌린날짜'] ?></p>
+            <p class="card-text"><?=$result['genre'] ?></p>
+            <p class="card-text"><strong>자동반납 날짜:</strong><?=$result['return_date'] ?></p>
+            <p class="card-text"><strong>자동반납 날짜:</strong><?=$result['return_date'] ?></p>
+            <?php $diff_result = $result['빌린날짜']->diff($result['return_date']);
+            echo $diff_result->format('Y-m-d H:i:s');?>
+
+            <a href="#" class="btn btn-primary">반납하기</a>
+            <a href="#" class="btn btn-primary">리뷰 작성하기</a>
+          </div>
+        </div>
+      </p>
+      <?php  $value--; }  } else {
+       echo "대출 리스트가 존재하지 않습니다.";
+     } ?>
