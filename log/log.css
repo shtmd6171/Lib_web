@@ -40,7 +40,7 @@
 
     #L_title{
       font-family: 'Gugi', cursive;
-      font-size: 93px;
+      font-size: 75px;
       color: #201A1C;
       text-align: right;
     }
@@ -48,4 +48,8 @@
     #L_login{
       font-family: 'Gugi', cursive;
       color: #DFDACF;
+    }
+
+    .L-btn{
+      font-family: 'Gugi', cursive;
     }
