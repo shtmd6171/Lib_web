@@ -46,10 +46,6 @@
     }
 
     #L_login{
-      font-family: 'Gugi', cursive;
+      font-family: 'Gugi', cursive !important;
       color: #DFDACF;
-    }
-
-    .L-btn{
-      font-family: 'Gugi', cursive;
     }
