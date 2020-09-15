@@ -28,11 +28,11 @@ include "../lib/db.php";
 				<div class="form-row">
 					<div class="col-md-6 col-sm-12 px-0">
 						<label for="email">E-mail address</label>
-						<input type="email" class="form-control" name="email" placeholder="example@email.com">
+						<input type="email" class="form-control" name="email" placeholder="example@email.com" required>
 					</div>
 					<div class="col-md-6 col-sm-12 px-0">
 						<label for="pwd">Password</label>
-						<input type="password" class="form-control" name="pwd" placeholder="Please enter your password">
+						<input type="password" class="form-control" name="pwd" placeholder="Please enter your password" required>
 					</div>
 				</div>
 			</div>

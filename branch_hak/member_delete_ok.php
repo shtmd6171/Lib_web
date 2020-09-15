@@ -6,14 +6,17 @@ $sql = mq("select * from user where user_id ='".$user_id."'");
 $codecheck = $sql->fetch_array();
 
 $email = $_POST['email'];
-$name = $_POST['name'];
+$pwd = $_POST['pwd'];
+//$name = $_POST['name'];
 
 $c_email = $codecheck['email'];
-$c_name = $codecheck['name'];
+$c_pwd = $codecheck['pwd'];
+//$c_name = $codecheck['name'];
 
 
 
-  if($c_email == $email && $c_name == $name) {
+  if($c_email == $email && $c_pwd == $pwd) {
+    //  if($c_email == $email && $c_name == $name) {
 
     echo "데이터 일치확인 완료.<br>";
   } else {
