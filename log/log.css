@@ -48,4 +48,6 @@
     #L_login{
       font-family: 'Gugi', cursive !important;
       color: #DFDACF;
+      font-size: 30px;
+      text-shadow: 2px 2px 2px gray;
     }

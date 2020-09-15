@@ -12,6 +12,7 @@ include "../lib/db.php";
   <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap-theme.css">
   <link rel="stylesheet" href="./log.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="../bootstrap/dist/js/bootstrap.js"></script>
 
   <style>
@@ -22,23 +23,21 @@ include "../lib/db.php";
     width: 100vw;
     height: 100vh;
   }
-
-  input{
-    font-family: 'Gugi', cursive !important;
-
-  }
-
-  button, select, optgroup, textarea, span{
+  button, select, optgroup, textarea, a, input{
     font-family: 'Gugi', cursive !important;
   }
-
   .ml-9{
     margin-left: 9rem !important;
   }
+  .Modal{
+    font-family: 'Gugi', cursive !important;
+  }
+
   </style>
 
 </head>
 <body>
+  <header class="blog-header py-3 sticky-top"></header>
   <div class="container">
     <div class="row">
       <div class="row col-12 mrow">
@@ -65,56 +64,130 @@ include "../lib/db.php";
               </div>
             </form>
 
-            <div class="row Modal">
-              <!-- Button trigger modal -->
-              <button id="myModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-              </button>
+            <div class="row Modal mb-1">
 
+
+              <a class="text-light" data-toggle="modal" data-toggle="modal" data-target="#exampleModalCenter" href="#myModal">Create account</a>
               <!-- Modal -->
               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                      <h4 class="modal-title">Create Account</h4>
+                      <!-- 밑에 클로즈 버튼이 있는데 이걸 살릴지, 클로즈 버튼을 살릴지 상의해보기 -->
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
+
                     <div class="modal-body">
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                      <button id=" Input" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <div class="container">
+
+                        <form method="post" action="member_ok.php">
+                          <div class="form-group">
+                            <label>E-mail address</label>
+                            <input type="email" class="form-control" name="email" placeholder="email@example.com" required>
+                          </div>
+                          <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="pwd" placeholder="●●●●●●●●" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="pwd">Password Check</label>
+                            <input type="password" class="form-control" name="pwd" placeholder="Please enter your password again" required>
+                            <!--비밀번호 확인 백엔드 추가하기-->
+                          </div>
+
+                          <div  class="form-group">
+                            <label for="Uname">User name</label>
+                            <input type="text" class="form-control" name="name" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="Uaddress">Address</label>
+                            <input type="text" class="form-control" name="addr" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="UphoneNum">Phone Number</label>
+                            <input type="text" class="form-control" name="tel" placeholder="010-xxxx-xxxx" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="mt-2 mr-5" for="gender">Gender</label>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="female">
+                              <label class="form-check-label" for="inlineRadio1">female</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
+                              <label class="form-check-label" for="inlineRadio1">male</label>
+                            </div>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button id=" Input" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-dark">Regist in</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="row mb-1">
-              <span><!--계정이 없으신가요?-->
-                <a href="../log/member.php">Create account</a>
-              </span>
-            </div>
-            <div class="row">
-              <span><!--비밀번호를 잃어버리셨나요?-->
-                <a href="../branch_hak/password_find.php">Find your Password</a>
-              </span>
+            <div class="row Modal">
+              <a class="text-light" data-toggle="modal" data-toggle="modal" data-target="#exampleModalCenter2" href="#myModal">Find your Password</a>
+              <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Find your Password</h4>
+                      <!-- 밑에 클로즈 버튼이 있는데 이걸 살릴지, 클로즈 버튼을 살릴지 상의해보기 -->
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="modal-body">
+                      <div class="container">
+                        <span>Have you forgotten your password?<br>
+                          If you remember your email and phone number, you can create a new password.</span>
+
+                          <form method="post" action="../branch_hak/password_edit.php">
+                            <div class="form-group mt-4">
+                              <label>E-mail address</label>
+                              <input type="email" class="form-control" name="email" placeholder="email@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="UphoneNum">Phone Number</label>
+                              <input type="text" class="form-control" name="tel" placeholder="010-xxxx-xxxx" required>
+                            </div>
+
+                            <div class="modal-footer">
+                              <button id=" Input" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-dark">Find</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
-    </div>
-  </div>
 
-  <script>
-    $('#Modal').on('shown.bs.modal', function () {
+      <script>
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+      })
+      </script>
 
-  })
-  </script>
-
-</body>
-</html>
+    </body>
+    </html>

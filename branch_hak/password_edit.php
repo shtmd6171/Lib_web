@@ -4,12 +4,6 @@ header('Cache-Control: no-cache, must-revalidate');
   //  user 테이블의 eamil 필드와 입력받은 email이 같으면 해당 email 필드 값 전부 조회
   $sql = mq("select * FROM user WHERE email ='".$_POST['email']."'");
   $usercheck = $sql->fetch_array();
-  /*2020-08-27~28
-  inseon todo
-  비밀번호 수정이 어디 페이지에서 이어지는지 모르겠어서
-  테스트 제대로 할 수 없었음.
-  보더 너무 못생겨서 없애버림
-  */
   ?>
 
 
@@ -17,9 +11,11 @@ header('Cache-Control: no-cache, must-revalidate');
   <html lang="ko" dir="ltr">
     <head>
       <meta charset="utf-8">
-      <link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-      <link rel="stylesheet" href="../css/bootstrap-theme.css">
-      <script src="../css/js/bootstrap.js"></script>
+      <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
+      <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap-theme.css">
+      <link rel="stylesheet" href="./log.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="../bootstrap/dist/js/bootstrap.js"></script>
       <title></title>
     </head>
     <body>
