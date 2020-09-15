@@ -7,7 +7,8 @@ $user_id = $_SESSION['user_id'];
 $sql = mq("select * from loan where user_id ='".$user_id."' ");
 
 
-$list = mq("select title,author,publisher, loan_date as 대여날짜, genre, file, return_date from book, loan where book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
+$list = mq("select title,author,publisher, loan_date as 대여, genre, file, return_date from book, loan where book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
+
 
 // if(($nowDate - $loancheck['return_date']) == 0 )
 // {
@@ -20,6 +21,7 @@ $list = mq("select title,author,publisher, loan_date as 대여날짜, genre, fil
 // 고로 대출 한 데이터가 없다라는 것임.
 
 ?>
+
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
 <head>
@@ -39,6 +41,17 @@ $list = mq("select title,author,publisher, loan_date as 대여날짜, genre, fil
 </head>
 <body>
   <header class="blog-header py-3 sticky-top"></header>
+
+<div class="row">
+  <button onclick="goBack()">Go Back</button>
+
+  <script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+</div>
+
 
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
@@ -77,8 +90,12 @@ $list = mq("select title,author,publisher, loan_date as 대여날짜, genre, fil
                 <h5 class="card-title"><?=$result['title'] ?></h5>
                 <p class="card-text"><?=$result['author'] ?></p>
                 <p class="card-text"><?=$result['publisher'] ?></p>
-                <p class="card-text"><?=$result['대여날짜'] ?></p>
+                <p class="card-text"><?=$result['대여일'] ?></p>
                 <p class="card-text"><?=$result['genre'] ?></p>
+                <p class="card-text">자동반납 날짜:<?=$result['return_date'] ?></p>
+                <p class="card-text">자동반납 날짜:<?=$result['return_date'] ?></p>
+                <?php $diff_result = $result['대여일']->diff($result['return_date']);
+                echo $diff_result->format('Y-m-d H:i:s');?>
                 <a href="#" class="btn btn-primary">감상하기</a>
                 <!-- 감상 페이지 링크 -->
                 <a href="#" class="btn btn-primary">구매하기</a>
@@ -88,8 +105,8 @@ $list = mq("select title,author,publisher, loan_date as 대여날짜, genre, fil
               </div>
             </div>
           </div>
-
-        <?php   }  } else {?>
+      
+        <?php $value--;  }  } else {?>
           <div class="row">
             대여한 책이 없습니다.&nbsp&nbsp&nbsp&nbsp
             <a href="../book/book_list.php"> 책 구경하러가기 </a>
