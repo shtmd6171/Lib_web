@@ -1,24 +1,15 @@
 <?php
 /* 이 곳은 책을 대여받은  리스트 보여주기 위한 사이트. */
 include "../lib/db.php";
+date_default_timezone_set('Asia/Seoul');
 $user_id = $_SESSION['user_id'];
+$nowDate = (new DateTime('NOW'));
 
 //LOAN 테이블에서 유저아이디를 하나의 행으로 조회한다.
 $sql = mq("select * from loan where user_id ='".$user_id."' ");
 
 
-$list = mq("select title,author,publisher, loan_date as 대여, genre, file, return_date from book, loan where book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
-
-
-// if(($nowDate - $loancheck['return_date']) == 0 )
-// {
-//   $delete = mq("DELETE FROM loan WHERE book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
-// }
-
-// codecheck 쿼리를 실행해서 값이 존재하면 else 문으로 ..
-// 쿼리를 실행해서 값이 존재하지 않으면  if문 실행
-// 쿼리를 실행했는데 값이 존재하지 않는다는 것은 DB에 데이터가 없다는 라는 말.
-// 고로 대출 한 데이터가 없다라는 것임.
+$list = mq("select title,author,publisher, loan_date as 대여, genre, file, return_date, book.book_id as bk_id from book, loan where book.book_id = loan.book_id and loan.user_id ='".$user_id."'");
 
 ?>
 
@@ -82,20 +73,42 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
     <div class="row">
       <?php if ($sql->num_rows > 0) {
         while($result = $list->fetch_array())
-        {?>
+        {
+          // diff 오브젝트를 사용하려면, DateTime() 클래스에서 diff 오브젝트를 사용해야한다.
+          // diff 오브젝트는 DateInterval 오브젝트 또는 false를 나타낸다.
+          // DateInterval 의 format table은 아래와 같다.
+          // https://www.php.net/manual/en/dateinterval.format.php
+          // %r는 음수의 경우 "-""를 나타낸다.
+          // %D는 00일 을 나타낸다. ex 01일, 13일
+          // %H는 00시간, %I는 00분, %S는 00초
+
+         $substr_resultDate = substr($result['return_date'],0);
+         $resultDate = new DateTime($substr_resultDate);
+
+         $remainDate = $nowDate->diff($resultDate);
+         $interval_remainDate = $remainDate->format('%r%D%H%I%S');
+
+         // interval format 의 형태가 0보다 크다면, 그대로 진행
+         // 0이거나 0보다 작다면, 해당 데이터 loan 테이블에서 삭제. (자동 반납)
+         if($interval_remainDate>0)
+         {
+
+         }
+         else{
+            $delete = mq("DELETE FROM loan WHERE book_id ='".$result['bk_id']."' AND user_id ='".$user_id."'");
+          }?>
+
           <div class="col-3 mb-5">
             <div class="card mb-1" style="width: 18rem;">
               <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="Card image cap">
-              <div class="card-body">f
+              <div class="card-body"><!--f-->
                 <h5 class="card-title"><?=$result['title'] ?></h5>
                 <p class="card-text"><?=$result['author'] ?></p>
                 <p class="card-text"><?=$result['publisher'] ?></p>
-                <p class="card-text"><?=$result['대여일'] ?></p>
+                <p class="card-text"><?=$result['대여'] ?></p>
                 <p class="card-text"><?=$result['genre'] ?></p>
                 <p class="card-text">자동반납 날짜:<?=$result['return_date'] ?></p>
-                <p class="card-text">자동반납 날짜:<?=$result['return_date'] ?></p>
-                <?php $diff_result = $result['대여일']->diff($result['return_date']);
-                echo $diff_result->format('Y-m-d H:i:s');?>
+                <p class="card-text">반납까지 남은 날짜:<?=$remainDate->format('%r%D일 %H시간 %I분 %S초');?></p>
                 <a href="#" class="btn btn-primary">감상하기</a>
                 <!-- 감상 페이지 링크 -->
                 <a href="#" class="btn btn-primary">구매하기</a>
@@ -105,7 +118,6 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
               </div>
             </div>
           </div>
-      
         <?php $value--;  }  } else {?>
           <div class="row">
             대여한 책이 없습니다.&nbsp&nbsp&nbsp&nbsp
