@@ -35,15 +35,28 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
 
 <div class="row">
   <button onclick="goBack()">Go Back</button>
-
   <script>
   function goBack() {
     window.history.back();
   }
 </script>
+
+<!-- 아래 스크립트는 ajax 기능의 스크립트, 125번째 줄,"<p id="text"></p>"의 내용임 < -->
+<script>
+		function sendRequest() {
+			var httpRequest = new XMLHttpRequest();
+			httpRequest.onreadystatechange = function() {
+				if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200 ) {
+					document.getElementById("text").innerHTML = httpRequest.responseText;
+				}
+			};
+			httpRequest.open("GET", "./realExtraTime.php");
+			httpRequest.send();
+		}
+		window.setInterval("sendRequest()", 500);	// 매 0.5초마다 Ajax 요청을 보냄.
+	</script>
+
 </div>
-
-
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
       <ul class="navbar-nav">
@@ -98,6 +111,8 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
             $delete = mq("DELETE FROM loan WHERE book_id ='".$result['bk_id']."' AND user_id ='".$user_id."'");
           }?>
 
+
+
           <div class="col-3 mb-5">
             <div class="card mb-1" style="width: 18rem;">
               <img class="card-img-top" src="../file/resize/<?= $result['file']; ?>" alt="Card image cap">
@@ -108,7 +123,7 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
                 <p class="card-text"><?=$result['대여'] ?></p>
                 <p class="card-text"><?=$result['genre'] ?></p>
                 <p class="card-text">자동반납 날짜:<?=$result['return_date'] ?></p>
-                <p class="card-text">반납까지 남은 날짜:<?=$remainDate->format('%r%D일 %H시간 %I분 %S초');?></p>
+                <p class="card-text">반납까지 남은 날짜:<p id="text"></p></p> <!-- 44번째 줄 주석  참고 -->
                 <a href="#" class="btn btn-primary">감상하기</a>
                 <!-- 감상 페이지 링크 -->
                 <a href="#" class="btn btn-primary">구매하기</a>
