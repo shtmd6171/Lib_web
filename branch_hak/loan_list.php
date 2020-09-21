@@ -41,7 +41,10 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
   }
 </script>
 
+<<<<<<< HEAD
 <!-- 아래 스크립트는 ajax 기능의 스크립트, 125번째 줄,"<p id="text"></p>"의 내용임 < -->
+=======
+>>>>>>> 766d07cb36178b9cd1014443e196300067bfeb4b
 <script>
 		function sendRequest() {
 			var httpRequest = new XMLHttpRequest();
@@ -123,7 +126,11 @@ $list = mq("select title,author,publisher, loan_date as 대여, genre, file, ret
                 <p class="card-text"><?=$result['대여'] ?></p>
                 <p class="card-text"><?=$result['genre'] ?></p>
                 <p class="card-text">자동반납 날짜:<?=$result['return_date'] ?></p>
+<<<<<<< HEAD
                 <p class="card-text">반납까지 남은 날짜:<p id="text"></p></p> <!-- 44번째 줄 주석  참고 -->
+=======
+                <p class="card-text">반납까지 남은 날짜:<p id="text"></p></p>
+>>>>>>> 766d07cb36178b9cd1014443e196300067bfeb4b
                 <a href="#" class="btn btn-primary">감상하기</a>
                 <!-- 감상 페이지 링크 -->
                 <a href="#" class="btn btn-primary">구매하기</a>
